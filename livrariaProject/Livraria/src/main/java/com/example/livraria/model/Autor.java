@@ -16,7 +16,7 @@ public class Autor {
 	private Integer id;
 	private String nome;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "autor")
 	private List<Livro> livros;
 	
 	public String getNome() {

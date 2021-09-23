@@ -4,21 +4,30 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 public class Pedido {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Temporal(TemporalType.DATE)
 	private Date data;
+	@ManyToOne
 	private Usuario usuario;
-	
+	@ManyToMany
 	private List<Livro> livros;
 	private float valorTotal;
 	private Integer quantidadeLivro;
 	private String formaDePagamento; 
+	@ManyToOne
 	private Endereco localDeEntrega; 
 	@Temporal(TemporalType.DATE)
 	private Date dataDefechamento;

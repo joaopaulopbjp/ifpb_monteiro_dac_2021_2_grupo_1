@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
@@ -14,7 +15,10 @@ public class Usuario {
 	private String nome;
 	private String senha;
 	private String CPF;
+	
+	@OneToMany
 	private List<Endereco> endereco;
+	@OneToMany
 	private List<Pedido> pedidos;
 	
 	public String getEmail() {

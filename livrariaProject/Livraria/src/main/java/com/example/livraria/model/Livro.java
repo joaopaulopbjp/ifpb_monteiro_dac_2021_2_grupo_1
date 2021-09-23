@@ -4,21 +4,25 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Livro {
 
+	@Id
+	private String ISBN;
 	private String categoria;
 	
 	@ManyToMany
 	private List<Autor> autor;
 	private String titulo;
 	private String descricao;
-	@Id
-	private String ISBN;
 	private String edicao;
 	private Integer ano;
+	@ManyToOne
 	private Editora editora;
 	private float preco;
 	
