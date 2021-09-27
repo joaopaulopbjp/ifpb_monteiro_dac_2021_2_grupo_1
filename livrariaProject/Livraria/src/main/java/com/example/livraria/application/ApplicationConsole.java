@@ -1,25 +1,252 @@
 package com.example.livraria.application;
 
-import com.example.livraria.service.UsuarioService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.example.livraria.service.AutorService;
+import com.example.livraria.service.LivroService;
+import com.example.livraria.service.UsuarioService;
+
 @Component
 public class ApplicationConsole implements CommandLineRunner {
     @Autowired
     UsuarioService usuarioService;
+    
+    @Autowired
+    AutorService autorService;
+    
+    @Autowired
+    LivroService livroService;
+
+	private List<Integer> autoresIDs = new ArrayList<Integer>();
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("\nNome: " + usuarioService.getUsuario("joao@gmail.com").getNome());
-		// Usuario user = new Usuario();
-		// user.setNome("Joao");
-		// user.setCPF("156153");
-		// user.setEmail("joao4@gmail.com");
-		// user.setSenha("joao123");
-		// usuarioService.salvar(user);
+    	
+    	System.out.println("acabou");
+        
+    	Scanner entrada = new Scanner(System.in);
+        
+	    boolean continua = true;
+    	
+	    while(continua) {
+	    	System.out.print("\nEscolha o número correspondente a funcionalidade ->"
+	    	        + "\n1 - Registrar novo usuário"
+	    	        + "\n2 - Consultar usuário pelo email"
+	    	        + "\n3 - Cadastrar autor"
+	    	        + "\n4 - Alterar autor"
+	    	        + "\n5 - Cadastrar livro"
+	    	        + "\n6 - Alterar livro"
+	    	        + "\n7 - Excluir livro"
+	    	        + "\n8 - Cadastrar um livro do catálogo ao estoque"
+	    	        + "\n9 - Consultar os 5 livros mais baratos disponíveis no estoque"
+	    	        + "\n10 - Consultar todos os livros"
+	    	        + "\n11 - Adicionar um livro a um pedido do cliente"
+	    	        + "\n0 - Sair"
+	    	        + "\nDigite a opção escolhida: ");
+	    	int op = entrada.nextInt();
+	    	
+	    	String email;
+	    	String isbn;
+	    	Integer autorID;
+	    	
+	    	
+	    	switch (op) {
+	    		//Novo usuário 
+	 			case 1:
+	 				System.out.print("Digite o nome: ");
+	 				entrada.nextLine();
+	 		    	String nome = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite o CPF: ");
+	 		    	String cpf = entrada.nextLine();
+
+	 		    	System.out.print("Digite o email: ");
+	 		    	email = entrada.nextLine();
+
+	 		    	System.out.print("Digite o senha: ");
+	 		    	String senha = entrada.nextLine();
+	 		    	
+	 		    	//System.out.print("Digite o seu endereço: ");
+	 		    	//String endereco = entrada.nextLine();
+	 			
+	 				usuarioService.salvar(nome, cpf, email, senha);
+	 				break;
+	 			//buscar por email
+	 			case 2:
+	 		    	System.out.print("Digite o email: ");
+	 				entrada.nextLine();
+	 		    	email = entrada.nextLine();
+ 
+	 		    	System.out.print("\n"+usuarioService.getUsuario(email) +"\n");
+	 				break;
+	 			//Cadastrar autor
+	 			case 3:
+	 		    	System.out.print("Digite o nome: ");
+	 				entrada.nextLine();
+	 		    	nome = entrada.nextLine();
+ 
+	 				autorService.salvar(nome);
+	 				break;
+	 			//Alterar autor
+	 			case 4:
+	 				System.out.println("Todos os autores: ");
+	 				for(int i = 0; i < autorService.getAll().size(); i++) {
+	 					System.out.println(autorService.getAll().get(i).toString());
+	 				}
+	 				System.out.print("Digite o ID do autor que quer alterar: ");
+ 		    		autorID = entrada.nextInt();
+ 		    		
+ 		    		System.out.print("Digite o nome: ");
+	 				entrada.nextLine();
+	 		    	nome = entrada.nextLine();
+	 		    	
+	 		    	autorService.update(autorID, nome); 		    		
+	 				break;
+	 			//Cadastrar livro
+	 			case 5:
+	 				System.out.print("Digite o ISBN do livro: ");
+	 				entrada.nextLine();
+	 				isbn = entrada.nextLine();
+	 		    	
+	 				System.out.print("Digite a categoria: ");
+	 		    	String categoria = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite o título: ");
+	 		    	String titulo = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite a descrição: ");
+	 		    	String descricao = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite a edição: ");
+	 		    	String edicao = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite o ano: ");
+	 		    	Integer ano = entrada.nextInt();
+	 		    	
+	 		    	System.out.print("Digite o preço: ");
+	 		    	float preco = entrada.nextFloat();
+	 		    	
+	 		    	System.out.print("Digite o nome da Editora: ");
+	 				entrada.nextLine();
+	 		    	String nomeEditora = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite a cidade da Editora: ");
+	 		    	String cidadeEditora = entrada.nextLine(); 		
+	 		    	
+	 		    	System.out.print("Digite a quantidade de autores que este livro possui: ");
+	 		    	int num = entrada.nextInt(); 
+	 		    					    
+	 		    	for(int i = 1; i <= num; i++) {    		
+	 		    		System.out.print("Digite o ID do " + i+ "º autor: ");
+	 		    		autorID = entrada.nextInt(); 
+		 		    	    autoresIDs.add(autorID);
+	 		    	}
+	 		    	
+	 		    	for(int i = 0; i < autoresIDs.size(); i++) { 
+	 		    		System.out.println(autoresIDs.get(i));
+	 		    	}
+	 		    	
+	 		    	livroService.salvar(isbn, categoria, titulo, descricao, edicao, ano, preco, nomeEditora, cidadeEditora, autoresIDs);
+	 				break;
+	 			//Alterar livro
+	 			case 6:
+	 				System.out.println("Todos os livros: ");
+	 				for(int i = 0; i < livroService.getAll().size(); i++) {
+	 					System.out.println(livroService.getAll().get(i).toString());
+	 				}
+	 				System.out.print("Digite o ISBN do livro que quer alterar: ");
+	 				entrada.nextLine();
+ 		    		isbn = entrada.nextLine();
+ 		    		
+	 				System.out.print("1 - Categoria"
+	 						+ "\n2 - Título"
+	 						+ "\n3 - Descrição"
+	 						+ "\n4 - Edição"
+	 						+ "\n5 - Ano"
+	 						+ "\n6 - Preço"
+	 						+ "\nDigite a opção que deseja alterar:");
+ 		    		int opcao = entrada.nextInt();
+	 				
+	 				switch(opcao) {
+	 					case 1:
+	 						System.out.print("Digite a categoria: ");
+	 		 				entrada.nextLine();
+	 		 		    	categoria = entrada.nextLine();	    
+	 		 		    	livroService.updateCategoria(isbn, categoria); 	
+	 		 		    	break;
+	 					case 2:
+	 		 		    	System.out.print("Digite a título: ");
+	 		 				entrada.nextLine();
+	 		 		    	titulo = entrada.nextLine();
+	 		 		    	livroService.updateTitulo(isbn, titulo); 	
+	 		 		    	break;
+	 					case 3:	
+	 		 		    	System.out.print("Digite a descrição: ");
+	 		 				entrada.nextLine();
+	 		 		    	descricao = entrada.nextLine();
+	 		 		    	livroService.updateDescricao(isbn, descricao); 	
+	 		 		    	break;
+	 					case 4:	
+	 		 		    	System.out.print("Digite a edicao: ");
+	 		 				entrada.nextLine();
+	 		 		    	edicao = entrada.nextLine();
+	 		 		    	livroService.updateEdicao(isbn, edicao); 	
+	 		 		    	break;
+	 					case 5:	
+	 		 		    	System.out.print("Digite o ano: ");
+	 		 				entrada.nextLine();
+	 		 		    	ano = entrada.nextInt();
+	 		 		    	livroService.updateAno(isbn, ano); 	
+	 		 		    	break;
+	 					case 6:	
+	 		 		    	System.out.print("Digite o preco: ");
+	 		 				entrada.nextLine();
+	 		 		    	preco = entrada.nextInt();
+	 		 		    	livroService.updatePreco(isbn, preco); 	
+	 		 		    	break;
+	 				}
+	 				break;
+	 		    	
+	 			//Excluir livro
+	 			case 7:
+	 		    	System.out.print("Digite o ISBN do livro: ");
+	 				entrada.nextLine();
+	 		    	isbn = entrada.nextLine();
+ 
+	 				livroService.remover(isbn);
+	 				break;
+	 			//Cadastrar um livro do catálogo ao estoque
+	 			case 8:
+	 		    
+	 				break;
+	 			//Consultar os 5 livros mais baratos disponíveis no estoque
+	 			case 9:
+	 		    
+	 				break;
+	 			//Consultar todos os livros
+	 			case 10:
+	 		    	
+	 				break;
+	 			//Adicionar um livro a um pedido do cliente
+	 			case 11:
+	 		   
+	 				break;
+	 			case 0:
+	 				continua = false;
+	 				System.out.print("Você saiu.");
+	 				break;
+	 			default:
+	 				System.out.print("Opção inválida");
+	 				break;
+	 		}
+	    }
+	    entrada.close();
     }
     
 }
