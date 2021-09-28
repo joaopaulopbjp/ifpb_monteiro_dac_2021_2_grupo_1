@@ -2,6 +2,10 @@ package com.example.livraria.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.livraria.model.ItemPedido;
 import com.example.livraria.model.Livro;
@@ -12,42 +16,54 @@ import com.example.livraria.repository.LivroRepository;
 import com.example.livraria.repository.PedidoRepository;
 import com.example.livraria.repository.UsuarioRepository;
 
+@Service
 public class PedidoService {
-	
+	@Autowired
 	PedidoRepository pedidoRepository;
+	@Autowired
 	UsuarioRepository usuarioRepository;
+	@Autowired
 	LivroRepository livroRepository;
+	@Autowired
 	ItemPedidoRepository itemPedidoRepository;
 	
-	public void criarPedido(String email) {
+	public Pedido criarPedido(String email) {
 		Usuario usuario = usuarioRepository.getById(email); 
 		Pedido pedido = new Pedido();
 		pedido.setData(new Date());
 		pedido.setUsuario(usuario);
-		pedidoRepository.save(pedido);
+		return pedidoRepository.save(pedido);
 	}
 	
-	public boolean adicionarLivroNoPedido(Integer idPedido, String ISBN, Integer quantidade) {
-		Pedido pedido = pedidoRepository.getById(idPedido);
-		if(pedido != null && pedido.getDataDefechamento() == null ) {
+	public void adicionarLivroNoPedido(String email, Integer idPedido, String ISBN, Integer quantidade) {
+		Optional<Pedido> pedidoOptional = pedidoRepository.findById(idPedido);
+		
+		if(pedidoOptional.isPresent() && pedidoOptional.get().getDataDefechamento() == null ) {
+			boolean adicionado = false;
+			Pedido pedido = pedidoOptional.get();
 			List<ItemPedido> itens = pedido.getItemPedido();
 			for(ItemPedido i: itens) {
 				if(i.getLivro().getISBN().equals(ISBN)) {
 					i.setQuantidade(i.getQuantidade()+quantidade);
-				}else {
-					ItemPedido ip = new ItemPedido();
-					Livro livro = livroRepository.getById(ISBN);
-					ip.setLivro(livro);
-					ip.setQuantidade(quantidade);
-					itens.add(ip);
-					itemPedidoRepository.save(ip);
+					adicionado = true;
 				}
+			}
+			if(!adicionado) {
+				ItemPedido ip = new ItemPedido();
+				Livro livro = livroRepository.getById(ISBN);
+				ip.setLivro(livro);
+				ip.setQuantidade(quantidade);
+				itens.add(ip);
+				itemPedidoRepository.save(ip);
 			}
 			pedido.setItemPedido(itens);
 			pedidoRepository.save(pedido);
 			
-			return true;
-		}else
-			return false;
+		}else {
+			Pedido pedido = criarPedido(email);
+			adicionarLivroNoPedido(email, pedido.getId(), ISBN, quantidade);
+			
+		}
+			
 	}
 }

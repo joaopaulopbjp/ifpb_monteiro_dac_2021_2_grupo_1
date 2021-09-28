@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.example.livraria.model.Livro;
 import com.example.livraria.service.AutorService;
+import com.example.livraria.service.EstoqueService;
 import com.example.livraria.service.LivroService;
+import com.example.livraria.service.PedidoService;
 import com.example.livraria.service.UsuarioService;
 
 @Component
@@ -22,6 +25,12 @@ public class ApplicationConsole implements CommandLineRunner {
     
     @Autowired
     LivroService livroService;
+    
+    @Autowired
+    EstoqueService estoqueService;
+    
+    @Autowired
+    PedidoService pedidoService;
 
 	private List<Integer> autoresIDs = new ArrayList<Integer>();
 
@@ -55,6 +64,10 @@ public class ApplicationConsole implements CommandLineRunner {
 	    	String email;
 	    	String isbn;
 	    	Integer autorID;
+	    	Integer quantidade;
+	    	String ISBN;
+	    	Integer idPedido;
+	    
 	    	
 	    	
 	    	switch (op) {
@@ -224,20 +237,49 @@ public class ApplicationConsole implements CommandLineRunner {
 	 				break;
 	 			//Cadastrar um livro do catálogo ao estoque
 	 			case 8:
-	 		    
+	 				System.out.print("Digite o ISBN do livro: ");
+	 				entrada.nextLine();
+	 		    	isbn = entrada.nextLine();
+	 		    	System.out.print("Digite a quantidade do livro: ");
+//	 		    	entrada.nextInt();
+	 		    	quantidade = entrada.nextInt();
+	 		    	
+	 		    	estoqueService.criarEstoque(isbn, quantidade);
+
 	 				break;
 	 			//Consultar os 5 livros mais baratos disponíveis no estoque
 	 			case 9:
-	 		    
+	 				for(Livro l :estoqueService.consultarLivrosBaratos()) {
+	 					System.out.println(l);;
+	 				}
 	 				break;
 	 			//Consultar todos os livros
 	 			case 10:
-	 		    	
+	 				System.out.print("Digite a pagina a ser consultada: ");
+	 				Integer pagina = entrada.nextInt();
+	 		    	for(Livro l: livroService.consultarPorPagina(pagina)) {
+	 					System.out.println(l);
+	 		    	}
 	 				break;
 	 			//Adicionar um livro a um pedido do cliente
 	 			case 11:
-	 		   
+	 				System.out.print("Digite seu email: ");
+	 				entrada.nextLine();
+	 				email = entrada.nextLine();
+	 				if(usuarioService.verificarEmail(email)) {
+	 					
+	 					System.out.print("Digite o id do pedido: ");
+	 					idPedido = entrada.nextInt();
+	 					System.out.print("Digite o ISBN do livro a ser adicionado: ");
+	 					entrada.nextLine();
+	 					ISBN = entrada.nextLine();
+	 					System.out.print("Informe a quantidade do livro a ser adicionado: ");
+	 					quantidade =  entrada.nextInt();
+	 					pedidoService.adicionarLivroNoPedido(email, idPedido, ISBN, quantidade);
+	 					
+	 				}
 	 				break;
+	 				
 	 			case 0:
 	 				continua = false;
 	 				System.out.print("Você saiu.");

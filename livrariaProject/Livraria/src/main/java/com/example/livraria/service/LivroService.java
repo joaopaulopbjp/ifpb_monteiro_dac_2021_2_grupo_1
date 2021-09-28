@@ -33,9 +33,9 @@ public class LivroService {
 	@Autowired
 	AutorRepository autorRepository;
 	
-	public Page<Livro> consultarPorPagina(Integer page){
+	public List<Livro> consultarPorPagina(Integer page){
 		Pageable pageable = PageRequest.of(page, 5, Sort.by("titulo"));
-		Page<Livro> livros = livroRepository.findAll(pageable);
+		List<Livro> livros = livroRepository.findAll(pageable).getContent();
 		return livros;
 	}
 

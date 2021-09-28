@@ -23,6 +23,10 @@ public class UsuarioService {
     	user.setSenha(senha);
         usuarioRepository.save(user);
     }
+    
+    public boolean verificarEmail(String email){
+    	return usuarioRepository.existsById(email);
+    }
 
     public void remover(Usuario user) {
         usuarioRepository.delete(user);

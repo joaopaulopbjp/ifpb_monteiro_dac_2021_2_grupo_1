@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ public class Pedido {
 	private Date data;
 	@ManyToOne
 	private Usuario usuario;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<ItemPedido> itemPedido;
 	private float valorTotal;
 	private String formaDePagamento; 
