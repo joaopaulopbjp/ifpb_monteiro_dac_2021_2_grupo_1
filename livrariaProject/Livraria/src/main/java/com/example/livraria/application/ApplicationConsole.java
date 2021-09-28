@@ -13,7 +13,7 @@ public class ApplicationConsole implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("\nNome: " + usuarioService.getUsuario("joao@gmail.com").getNome());
+//        System.out.println("\nNome: " + usuarioService.getUsuario("joao@gmail.com").getNome());
 		// Usuario user = new Usuario();
 		// user.setNome("Joao");
 		// user.setCPF("156153");

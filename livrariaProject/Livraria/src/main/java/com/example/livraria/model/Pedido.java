@@ -23,9 +23,8 @@ public class Pedido {
 	@ManyToOne
 	private Usuario usuario;
 	@ManyToMany
-	private List<Livro> livros;
+	private List<ItemPedido> itemPedido;
 	private float valorTotal;
-	private Integer quantidadeLivro;
 	private String formaDePagamento; 
 	@ManyToOne
 	private Endereco localDeEntrega; 
@@ -50,23 +49,17 @@ public class Pedido {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public List<Livro> getLivros() {
-		return livros;
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
 	}
-	public void setLivros(List<Livro> livros) {
-		this.livros = livros;
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 	public float getValorTotal() {
 		return valorTotal;
 	}
 	public void setValorTotal(float valorTotal) {
 		this.valorTotal = valorTotal;
-	}
-	public Integer getQuantidadeLivro() {
-		return quantidadeLivro;
-	}
-	public void setQuantidadeLivro(Integer quantidadeLivro) {
-		this.quantidadeLivro = quantidadeLivro;
 	}
 	public String getFormaDePagamento() {
 		return formaDePagamento;
