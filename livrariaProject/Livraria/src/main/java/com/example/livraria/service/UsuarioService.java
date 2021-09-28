@@ -1,6 +1,7 @@
 package com.example.livraria.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.livraria.model.Usuario;
 import com.example.livraria.repository.UsuarioRepository;
@@ -14,7 +15,12 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public void salvar(Usuario user) {
+    public void salvar(String nome, String cpf, String email, String senha) {
+    	Usuario user = new Usuario();
+    	user.setNome(nome);
+    	user.setCPF(cpf);
+    	user.setEmail(email);
+    	user.setSenha(senha);
         usuarioRepository.save(user);
     }
 
@@ -23,10 +29,11 @@ public class UsuarioService {
     }
 
     public Usuario getUsuario(String email) {
-        return usuarioRepository.findById(email).get();
+    	Optional<Usuario> user = usuarioRepository.findById(email);
+        return user.isPresent() ? user.get() : null;
     }
 
-    public List<Usuario> getAll() {
+	public List<Usuario> getAll() {
         List<Usuario> usuarios = usuarioRepository.findAll();
         return usuarios;
     }

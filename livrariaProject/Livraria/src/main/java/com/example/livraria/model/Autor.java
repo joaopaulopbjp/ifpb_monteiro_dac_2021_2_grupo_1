@@ -16,7 +16,7 @@ public class Autor {
 	private Integer id;
 	private String nome;
 	
-	@ManyToMany(mappedBy = "autor")
+	@ManyToMany
 	private List<Livro> livros;
 	
 	public String getNome() {
@@ -32,5 +32,9 @@ public class Autor {
 		this.livros = livros;
 	}
 	
+	@Override
+	public String toString() {
+		return "Autor [id=" + id + ", nome=" + nome + "]";
+	}
 	
 }

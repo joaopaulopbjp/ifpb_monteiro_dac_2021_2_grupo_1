@@ -15,7 +15,7 @@ public class Livro {
 	private String categoria;
 	
 	@ManyToMany
-	private List<Autor> autor;
+	private List<Autor> autores;
 	private String titulo;
 	private String descricao;
 	private String edicao;
@@ -31,11 +31,12 @@ public class Livro {
 		this.categoria = categoria;
 	}
 	public List<Autor> getAutor() {
-		return autor;
+		return autores;
 	}
 	public void setAutor(List<Autor> autor) {
-		this.autor = autor;
+		this.autores = autor;
 	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -78,7 +79,11 @@ public class Livro {
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}
-
-	
+	@Override
+	public String toString() {
+		return "Livro [ISBN=" + ISBN + ", categoria=" + categoria + ", titulo=" + titulo
+				+ ", descricao=" + descricao + ", edicao=" + edicao + ", ano=" + ano
+				+ ", preco=" + preco + "]";
+	}
 	
 }

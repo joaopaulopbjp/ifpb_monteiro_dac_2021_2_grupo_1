@@ -18,8 +18,6 @@ public class Usuario {
 	
 	@OneToMany
 	private List<Endereco> endereco;
-	@OneToMany
-	private List<Pedido> pedidos;
 	
 	public String getEmail() {
 		return email;
@@ -51,14 +49,9 @@ public class Usuario {
 	public void setEndereco(List<Endereco> endereco) {
 		this.endereco = endereco;
 	}
-	public List<Pedido> getPedidos() {
-		return pedidos;
+	@Override
+	public String toString() {
+		return "Usuario [email=" + email + ", nome=" + nome + "]";
 	}
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-	
-	
-	
 	
 }
