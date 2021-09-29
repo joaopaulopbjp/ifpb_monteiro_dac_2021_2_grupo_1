@@ -1,7 +1,9 @@
 package com.example.livraria.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -38,8 +40,8 @@ public class Usuario {
 	@Column(length = 13, nullable = false)
 	private PapelUsuario papelUsuario;
 	
-	@OneToMany
-	private List<Endereco> endereco;
+	@OneToMany(cascade = {CascadeType.ALL})
+	private List<Endereco> endereco = new ArrayList<>();
 	
 	public String getEmail() {
 		return email;
@@ -70,6 +72,9 @@ public class Usuario {
 	}
 	public void setEndereco(List<Endereco> endereco) {
 		this.endereco = endereco;
+	}
+	public void addEndereco(Endereco endereco) {
+		this.endereco.add(endereco);
 	}
 	public PapelUsuario getPapelUsuario() {
 		return papelUsuario;
