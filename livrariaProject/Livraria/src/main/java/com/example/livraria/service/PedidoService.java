@@ -1,7 +1,5 @@
 package com.example.livraria.service;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,44 +24,47 @@ public class PedidoService {
 	LivroRepository livroRepository;
 	@Autowired
 	ItemPedidoRepository itemPedidoRepository;
+	@Autowired
+	EstoqueService estoqueService;
 	
 	public Pedido criarPedido(String email) {
 		Usuario usuario = usuarioRepository.getById(email); 
 		Pedido pedido = new Pedido();
-		pedido.setData(new Date());
 		pedido.setUsuario(usuario);
 		return pedidoRepository.save(pedido);
 	}
 	
 	public void adicionarLivroNoPedido(String email, Integer idPedido, String ISBN, Integer quantidade) {
 		Optional<Pedido> pedidoOptional = pedidoRepository.findById(idPedido);
-		
-		if(pedidoOptional.isPresent() && pedidoOptional.get().getDataDefechamento() == null ) {
-			boolean adicionado = false;
+		Optional<Livro> livroO = livroRepository.findById(ISBN);
+		if(!livroO.isPresent()) {
+			throw new RuntimeException("Livro nao esta cadastrado");
+		}
+
+		if(pedidoOptional.isPresent() && pedidoOptional.get().isAberto()) {
 			Pedido pedido = pedidoOptional.get();
-			List<ItemPedido> itens = pedido.getItemPedido();
-			ItemPedido ip = null;
-			for( ItemPedido i: itens) {
-				if(i.getLivro().getISBN().equals(ISBN)) {
-					i.setQuantidade(i.getQuantidade()+quantidade);
-					ip = i;
-					adicionado = true;
-				}
-			}
-			if(!adicionado) {
-				ip = new ItemPedido();
-				Livro livro = livroRepository.findById(ISBN).get();
-				ip.setLivro(livro);
-				ip.setQuantidade(quantidade);
-				ip.setPedido(pedido);
-				itens.add(ip);
-			}
-			pedidoRepository.save(itemPedidoRepository.save(ip).getPedido());
+			
+			ItemPedido ip = new ItemPedido();
+			ip.setLivro(livroO.get());
+			ip.setQuantidade(quantidade);
+			ip.setPedido(pedido);
+
+			ip = pedido.adicionarItem(ip);
+			this.verificarEstoque(ISBN, ip.getQuantidade());
+
+			pedidoRepository.save(pedido);
+			itemPedidoRepository.save(ip);
 		}else {
 			Pedido pedido = criarPedido(email);
 			adicionarLivroNoPedido(email, pedido.getId(), ISBN, quantidade);
 			
 		}
 			
+	}
+
+	public void verificarEstoque(String ISBN, int quantidade) {
+		if(!estoqueService.verificarLivroEstoque(ISBN, quantidade)) {
+			throw new RuntimeException("Nao ha livros suficiente no estoque ");
+		}
 	}
 }

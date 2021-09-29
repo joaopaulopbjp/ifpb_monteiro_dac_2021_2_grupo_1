@@ -41,10 +41,20 @@ public class EstoqueService {
 	public List<Livro> consultarLivrosBaratos(){
 		Pageable OrdenadoPorPreco = PageRequest.of(0, 5, Sort.by("preco"));
 		return estoqueRepository.findAllLivrosMaisBaratosNoEstoque(OrdenadoPorPreco).getContent();
-//		Page<Estoque> estoques = estoqueRepository.findAll(OrdenadoPorPreco);
-//		List<Livro> livros = new List<Livro>();
-//		estoques.forEach(estoque -> livros.add(estoque.getLivro()));
-//		return livros;
+	}
+
+	public boolean verificarLivroEstoque(String ISBN, int quantidade) {
+		Livro livro = livroRepository.getById(ISBN);
+		List<Estoque> livrosEstoque = estoqueRepository.findByLivro(livro);
+		if(livrosEstoque.isEmpty()) {
+			return false;
+		} else {
+			int quantEstoque = 0;
+			for (Estoque estoque : livrosEstoque) {
+				quantEstoque += estoque.getQuantidade();
+			}
+			return quantidade <= quantEstoque;
+		}
 	}
 
 }

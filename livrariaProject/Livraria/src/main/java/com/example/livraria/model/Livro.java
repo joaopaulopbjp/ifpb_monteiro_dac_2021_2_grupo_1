@@ -8,17 +8,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.ISBN;
 
 @Entity
 public class Livro {
-
+	@ISBN(message = "ISBN invalido")
 	@Id
-	@Column(length = 20)
+	@Column(length = 50)
 	private String ISBN;
 	private String categoria;
 	
-	@NotNull
+	@NotEmpty
 	@ManyToMany
 	private List<Autor> autores;
 	@NotBlank
@@ -43,7 +45,6 @@ public class Livro {
 	public void setAutor(List<Autor> autor) {
 		this.autores = autor;
 	}
-	
 	public String getTitulo() {
 		return titulo;
 	}
