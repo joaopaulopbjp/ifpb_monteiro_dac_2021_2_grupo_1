@@ -20,12 +20,12 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Temporal(TemporalType.DATE)
-	private Date data;
+	private Date data = new Date();
 	@ManyToOne
 	private Usuario usuario;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
 	private List<ItemPedido> itemPedido;
-	private float valorTotal;
+	private float valorTotal = 0;
 	private String formaDePagamento; 
 	@ManyToOne
 	private Endereco localDeEntrega; 
@@ -80,5 +80,39 @@ public class Pedido {
 	public void setDataDefechamento(Date dataDefechamento) {
 		this.dataDefechamento = dataDefechamento;
 	}
-	
+	public boolean isAberto() {
+		return dataDefechamento == null;
+	}
+	public void finalizar() {
+		this.dataDefechamento = new Date();
+		for (ItemPedido ip : itemPedido) {
+			ip.finalizar();
+			this.valorTotal += ip.obterValorTotal();
+		}
+	}
+	public ItemPedido adicionarItem(ItemPedido itemPedido) {
+		if (!isAberto()) {
+			throw new RuntimeException("Pedido esta fechado!");
+		}
+		boolean adicionado = false;
+		ItemPedido ip = null;
+		for( ItemPedido i: this.itemPedido) {
+			if(i.getLivro().getISBN().equals(itemPedido.getLivro().getISBN())) {
+				i.setQuantidade(i.getQuantidade()+itemPedido.getQuantidade());
+				ip = i;
+				adicionado = true;
+			}
+		}
+		if(!adicionado) {
+			this.itemPedido.add(itemPedido);
+			ip = itemPedido;
+		}
+		this.atualizarValorTotal();
+		return ip;
+	}
+	public void atualizarValorTotal() {
+		for (ItemPedido ip : itemPedido) {
+			this.valorTotal += ip.obterValorTotal();
+		}
+	}
 }

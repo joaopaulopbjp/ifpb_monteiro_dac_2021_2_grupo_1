@@ -291,7 +291,12 @@ public class ApplicationConsole implements CommandLineRunner {
 	 					ISBN = entrada.nextLine();
 	 					System.out.print("Informe a quantidade do livro a ser adicionado: ");
 	 					quantidade =  entrada.nextInt();
-	 					pedidoService.adicionarLivroNoPedido(email, idPedido, ISBN, quantidade);
+						try {
+							pedidoService.adicionarLivroNoPedido(email, idPedido, ISBN, quantidade);
+						} catch (Exception e) {
+							System.out.println();
+							System.out.println(e.getMessage());
+						}
 	 					
 	 				}
 	 				break;

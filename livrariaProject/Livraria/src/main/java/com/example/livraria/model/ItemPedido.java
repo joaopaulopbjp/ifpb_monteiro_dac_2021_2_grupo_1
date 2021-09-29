@@ -37,6 +37,7 @@ public class ItemPedido {
 	}
 	public void setLivro(Livro livro) {
 		this.livro = livro;
+		valorUnidade = livro.getPreco();
 	}
 	public Integer getQuantidade() {
 		return quantidade;
@@ -51,10 +52,24 @@ public class ItemPedido {
 		this.pedido = pedido;
 	}
 	public float getValorUnidade() {
-		return valorUnidade;
+		if(pedido.isAberto()) {
+			return livro.getPreco();
+		} else {
+			return valorUnidade;
+		}
 	}
 	public void setValorUnidade(float valorUnidade) {
 		this.valorUnidade = valorUnidade;
+	}
+	public float obterValorTotal() {
+		if(pedido.isAberto()) {
+			return livro.getPreco() * quantidade;
+		} else {
+			return valorUnidade * quantidade;
+		}
+	}
+	public void finalizar() {
+		valorUnidade = livro.getPreco();
 	}
 	
 	
