@@ -37,9 +37,6 @@ public class ApplicationConsole implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-    	
-    	System.out.println("acabou");
-        
     	Scanner entrada = new Scanner(System.in);
         
 	    boolean continua = true;
@@ -86,10 +83,30 @@ public class ApplicationConsole implements CommandLineRunner {
 	 		    	System.out.print("Digite o senha: ");
 	 		    	String senha = entrada.nextLine();
 	 		    	
-	 		    	//System.out.print("Digite o seu endereço: ");
-	 		    	//String endereco = entrada.nextLine();
+	 		    	//Endereço
+	 		    	System.out.print("Digite o CEP: ");
+	 		    	String cep = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite o estado: ");
+	 		    	String estado = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite a cidade: ");
+	 		    	String cidade = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite a rua: ");
+	 		    	String rua = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite o número: ");
+	 		    	Integer numero = entrada.nextInt();
+	 		    	
+	 		    	System.out.print("Digite o bairro: ");
+	 				entrada.nextLine();
+	 		    	String bairro = entrada.nextLine();
+	 		    	
+	 		    	System.out.print("Digite o complemento (opcional): ");
+	 		    	String complemento = entrada.nextLine();
 	 			
-	 				usuarioService.salvar(nome, cpf, email, senha);
+	 				usuarioService.salvar(nome, cpf, email, senha, cep, estado, cidade, rua, numero, bairro, complemento);
 	 				break;
 	 			//buscar por email
 	 			case 2:
