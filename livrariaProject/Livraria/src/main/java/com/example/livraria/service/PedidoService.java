@@ -42,23 +42,23 @@ public class PedidoService {
 			boolean adicionado = false;
 			Pedido pedido = pedidoOptional.get();
 			List<ItemPedido> itens = pedido.getItemPedido();
-			for(ItemPedido i: itens) {
+			ItemPedido ip = null;
+			for( ItemPedido i: itens) {
 				if(i.getLivro().getISBN().equals(ISBN)) {
 					i.setQuantidade(i.getQuantidade()+quantidade);
+					ip = i;
 					adicionado = true;
 				}
 			}
 			if(!adicionado) {
-				ItemPedido ip = new ItemPedido();
-				Livro livro = livroRepository.getById(ISBN);
+				ip = new ItemPedido();
+				Livro livro = livroRepository.findById(ISBN).get();
 				ip.setLivro(livro);
 				ip.setQuantidade(quantidade);
+				ip.setPedido(pedido);
 				itens.add(ip);
-				itemPedidoRepository.save(ip);
 			}
-			pedido.setItemPedido(itens);
-			pedidoRepository.save(pedido);
-			
+			pedidoRepository.save(itemPedidoRepository.save(ip).getPedido());
 		}else {
 			Pedido pedido = criarPedido(email);
 			adicionarLivroNoPedido(email, pedido.getId(), ISBN, quantidade);

@@ -2,26 +2,33 @@ package com.example.livraria.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Livro {
 
 	@Id
+	@Column(length = 20)
 	private String ISBN;
 	private String categoria;
 	
+	@NotNull
 	@ManyToMany
 	private List<Autor> autores;
+	@NotBlank
 	private String titulo;
 	private String descricao;
 	private String edicao;
 	private Integer ano;
 	@ManyToOne
 	private Editora editora;
+	@Column(nullable = false)
 	private float preco;
 	
 	public String getCategoria() {

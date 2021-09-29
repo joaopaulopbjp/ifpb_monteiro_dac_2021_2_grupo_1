@@ -241,7 +241,6 @@ public class ApplicationConsole implements CommandLineRunner {
 	 				entrada.nextLine();
 	 		    	isbn = entrada.nextLine();
 	 		    	System.out.print("Digite a quantidade do livro: ");
-//	 		    	entrada.nextInt();
 	 		    	quantidade = entrada.nextInt();
 	 		    	
 	 		    	estoqueService.criarEstoque(isbn, quantidade);
@@ -290,6 +289,7 @@ public class ApplicationConsole implements CommandLineRunner {
 	 		}
 	    }
 	    entrada.close();
+		System.exit(0);
     }
     
 }

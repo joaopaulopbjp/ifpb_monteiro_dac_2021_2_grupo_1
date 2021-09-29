@@ -3,6 +3,7 @@ package com.example.livraria.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.livraria.model.PapelUsuario;
 import com.example.livraria.model.Usuario;
 import com.example.livraria.repository.UsuarioRepository;
 
@@ -21,6 +22,7 @@ public class UsuarioService {
     	user.setCPF(cpf);
     	user.setEmail(email);
     	user.setSenha(senha);
+        user.setPapelUsuario(PapelUsuario.CLIENTE);
         usuarioRepository.save(user);
     }
     
