@@ -40,7 +40,7 @@ public class Usuario {
 	@Column(length = 13, nullable = false)
 	private PapelUsuario papelUsuario;
 	
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.MERGE})
 	private List<Endereco> endereco = new ArrayList<>();
 	
 	public String getEmail() {
