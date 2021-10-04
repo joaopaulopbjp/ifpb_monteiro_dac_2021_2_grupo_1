@@ -15,20 +15,59 @@ import com.example.livraria.service.LivroService;
 import com.example.livraria.service.PedidoService;
 import com.example.livraria.service.UsuarioService;
 
+/**
+ * Classe usada para mostrar o menu da aplicação da livraria no console, contendo todas 
+ * as opções que poderão ser escolhidas pelo usuário.
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
 @Component
 public class ApplicationConsole implements CommandLineRunner {
+	
+	/*
+	 * Atributo do tipo UsuarioService que vai possibilitar o uso da mesma sem precisar
+	 * acessar diretamente o model.
+	 * Contém a anotação @Autowired para que quando a classe AplicationConsole for usada o 
+	 * Spring chame usuarioService.
+	 */
     @Autowired
     UsuarioService usuarioService;
     
+    /*
+	 * Atributo do tipo AutorService que vai possibilitar o uso da mesma sem precisar 
+	 * acessar diretamente o model.
+	 * Contém a anotação @Autowired para que quando a classe AplicationConsole for usada o 
+	 * Spring chame usuarioService.
+	 */
     @Autowired
     AutorService autorService;
     
+    /*
+	 * Atributo do tipo LivroService que vai possibilitar o uso da mesma sem precisar 
+	 * acessar diretamente o model.
+	 * Contém a anotação @Autowired para que quando a classe AplicationConsole for usada o 
+	 * Spring chame autorService.
+	 */
     @Autowired
     LivroService livroService;
     
+    /*
+	 * Atributo do tipo EstoqueService que vai possibilitar o uso da mesma sem precisar 
+	 * acessar diretamente o model.
+	 * Contém a anotação @Autowired para que quando a classe AplicationConsole for usada o 
+	 * Spring chame livroService.
+	 */
     @Autowired
     EstoqueService estoqueService;
     
+    /*
+	 * Atributo do tipo PedidoService que vai possibilitar o uso da mesma sem precisar 
+	 * acessar diretamente o model.
+	 * Contém a anotação @Autowired para que quando a classe AplicationConsole for usada o 
+	 * Spring chame estoqueService.
+	 */
     @Autowired
     PedidoService pedidoService;
 

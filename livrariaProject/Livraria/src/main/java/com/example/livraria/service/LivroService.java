@@ -20,24 +20,66 @@ import com.example.livraria.model.Editora;
 import com.example.livraria.repository.AutorRepository;
 import com.example.livraria.repository.EditoraRepository;
 
+/**
+ * Classe que representa os serviços do Livro, esta vai poder acessar o devido repositório,
+ * no caso o LivroRepository.
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
+
 @Service
 public class LivroService {
 
+	/*
+	 * Contém a anotação @Autowired para que quando a classe LivroService for usada o 
+	 * Spring chame livroRepository.
+	 */
 	@Autowired
     LivroRepository livroRepository;
 	
+	/*
+	 * Contém a anotação @Autowired para que quando a classe LivroService for usada o 
+	 * Spring chame editoraRepository, já que todos os livros precisam ter uma editora.
+	 */
 	@Autowired
 	EditoraRepository editoraRepository;
 	
+	/*
+	 * Contém a anotação @Autowired para que quando a classe LivroService for usada o 
+	 * Spring chame autorRepository, já que todos os livros precisam ter pelo menos um autor.
+	 */
 	@Autowired
 	AutorRepository autorRepository;
 	
+	/**
+	 * Comentario de Victor
+	 * @param page
+	 * @return
+	 */
 	public List<Livro> consultarPorPagina(Integer page){
 		Pageable pageable = PageRequest.of(page, 5, Sort.by("titulo"));
 		List<Livro> livros = livroRepository.findAll(pageable).getContent();
 		return livros;
 	}
 
+	/**
+	 *  Método feito pra receber os valores passados lá no menu para depois serem 'setados'
+     * e consequentemente virar um objeto para assim poder ser salvo o livro usando o método 
+     * 'save' da interface CrudRepository que é estendida pela interface LivroRepository.
+     * 
+	 * @param isbn
+	 * @param categoria
+	 * @param titulo
+	 * @param descricao
+	 * @param edicao
+	 * @param ano
+	 * @param preco
+	 * @param nomeEditora
+	 * @param cidadeEditora
+	 * @param autoresIDs
+	 */
     public void salvar(String isbn, String categoria, String titulo, String descricao, String edicao, 
     		Integer ano, float preco, String nomeEditora, String cidadeEditora, List<Integer> autoresIDs) {    
     	
@@ -79,21 +121,43 @@ public class LivroService {
         livroRepository.save(livro);
     }
 
+    /**
+     * Metódo que vai remover um livro quando for passado o 'isbn' por parametro existente na base de dados.
+     * 
+     * @param isbn
+     */
     public void remover(String isbn) {
     	Livro livro = getLivro(isbn);
     	livroRepository.delete(livro);
     }
 
+    /**
+     * Método usado para procurar um livro que pode existir ou não na base de dados.
+     * 
+     * @param isbn
+     * @return o próprio livro encontrado ou null
+     */
     public Livro getLivro(String isbn) {
     	Optional<Livro> livro = livroRepository.findById(isbn);
         return livro.isPresent() ? livro.get() : null;
     }
 
+    /**
+     * Método usado para retornar todos livros existentes na base de dados.
+     * 
+     * @return todos os livros
+     */
 	public List<Livro> getAll() {
         List<Livro> livros = livroRepository.findAll();
         return livros;
     }
 	
+	/**
+	 * Método utilizado para editar/atualizar dado da categoria de um determindado livro.
+	 * 
+	 * @param isbn
+	 * @param dado
+	 */
 	public void updateCategoria (String isbn, String dado) {	
 		Optional<Livro> livro = livroRepository.findById(isbn);
 		Livro existe = livro.isPresent() ? livro.get() : null;
@@ -103,6 +167,12 @@ public class LivroService {
 		livroRepository.save(existe);
 	}
 	
+	/**
+	 * Método utilizado para editar/atualizar dado do titulo de um determindado livro.
+	 * 
+	 * @param isbn
+	 * @param dado
+	 */
 	public void updateTitulo (String isbn, String dado) {	
 		Optional<Livro> livro = livroRepository.findById(isbn);
 		Livro existe = livro.isPresent() ? livro.get() : null;
@@ -112,6 +182,12 @@ public class LivroService {
 		livroRepository.save(existe);
 	}
 	
+	/**
+	 * Método utilizado para editar/atualizar dado da descrição de um determindado livro.
+	 * 
+	 * @param isbn
+	 * @param dado
+	 */
 	public void updateDescricao (String isbn, String dado) {	
 		Optional<Livro> livro = livroRepository.findById(isbn);
 		Livro existe = livro.isPresent() ? livro.get() : null;
@@ -121,6 +197,12 @@ public class LivroService {
 		livroRepository.save(existe);
 	}
 	
+	/**
+	 * Método utilizado para editar/atualizar dado da edição de um determindado livro.
+	 * 
+	 * @param isbn
+	 * @param dado
+	 */
 	public void updateEdicao (String isbn, String dado) {	
 		Optional<Livro> livro = livroRepository.findById(isbn);
 		Livro existe = livro.isPresent() ? livro.get() : null;
@@ -130,6 +212,12 @@ public class LivroService {
 		livroRepository.save(existe);
 	}
 	
+	/**
+	 * Método utilizado para editar/atualizar dado do ano de um determindado livro.
+	 *
+	 * @param isbn
+	 * @param dado
+	 */
 	public void updateAno (String isbn, Integer dado) {	
 		Optional<Livro> livro = livroRepository.findById(isbn);
 		Livro existe = livro.isPresent() ? livro.get() : null;
@@ -139,6 +227,12 @@ public class LivroService {
 		livroRepository.save(existe);
 	}
 	
+	/**
+	 * Método utilizado para editar/atualizar dado do preço de um determindado livro.
+	 * 
+	 * @param isbn
+	 * @param dado
+	 */
 	public void updatePreco (String isbn, Float dado) {	
 		Optional<Livro> livro = livroRepository.findById(isbn);
 		Livro existe = livro.isPresent() ? livro.get() : null;
