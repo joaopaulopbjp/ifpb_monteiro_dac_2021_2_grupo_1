@@ -21,28 +21,43 @@ public class EstoqueService {
 	@Autowired
 	LivroRepository livroRepository;
 		
-	
-	public boolean criarEstoque(String ISBN, Integer quantidade){
+	/**
+	 * Cria um estoque para o livro escolhido com a quantidade do livro a ser disponibilizada indormada.
+	 * se ja houver um estoque do livro criado a quantidade informada será somada ao estoque existente.
+	 * @param id do livro
+	 * @param quantidade de livro a ser asicionado no estoque
+	 */
+	public void criarEstoque(String ISBN, Integer quantidade){
 		Livro livro = livroRepository.getById(ISBN);
+		Estoque estoque;
 		
 		if(estoqueRepository.findByLivro(livro).isEmpty()) {
 			
-			Estoque estoque = new Estoque();
+			estoque = new Estoque();
 			estoque.setLivro(livro);
-			estoque.setQuantidade(quantidade);
-			estoqueRepository.save(estoque);
-			return true;
 			
-		}else
-			return false;
+		}else {
+			
+			estoque = estoqueRepository.findByLivro(livro).get(0);
+			
+		}
+		
+		estoque.setQuantidade(estoque.getQuantidade()+quantidade);
+		estoqueRepository.save(estoque);
+		
 	}
 
-	
+	/**
+	 * Retorna os 5 licvros mais baratos do banco de dados em estoque
+	 */
 	public List<Livro> consultarLivrosBaratos(){
 		Pageable OrdenadoPorPreco = PageRequest.of(0, 5, Sort.by("preco"));
 		return estoqueRepository.findAllLivrosMaisBaratosNoEstoque(OrdenadoPorPreco).getContent();
 	}
 
+	/**
+	 * Verifica se a quantidade de livros requerida contem no estoque
+	 */
 	public boolean verificarLivroEstoque(String ISBN, int quantidade) {
 		Livro livro = livroRepository.getById(ISBN);
 		List<Estoque> livrosEstoque = estoqueRepository.findByLivro(livro);
