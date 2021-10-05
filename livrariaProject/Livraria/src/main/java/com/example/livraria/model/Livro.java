@@ -12,6 +12,13 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.ISBN;
 
+/**
+ * Classe Livro mapeada para a persistencia no banco de dados.
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
 @Entity
 public class Livro {
 	@ISBN(message = "ISBN invalido")

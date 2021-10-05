@@ -17,7 +17,13 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-
+/**
+ * Classe Usuario mapeada para a persistencia no banco de dados.
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
 @Entity
 public class Usuario {
 	
@@ -40,6 +46,10 @@ public class Usuario {
 	@Column(length = 13, nullable = false)
 	private PapelUsuario papelUsuario;
 	
+	/*
+	 * Atributo de lista de endereços que usuário pode ter.
+	 * Anotação um para muitos com propriedade cascade usando o tipo Merge.
+	 */
 	@OneToMany(cascade = {CascadeType.MERGE})
 	private List<Endereco> endereco = new ArrayList<>();
 	

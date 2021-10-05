@@ -12,6 +12,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Interface que representa o repositório do estoque 
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
+
 @Repository
 public interface EstoqueRepository extends JpaRepository<Estoque, Integer> {
 	

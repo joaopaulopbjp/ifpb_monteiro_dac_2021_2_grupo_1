@@ -73,6 +73,7 @@ public class ApplicationConsole implements CommandLineRunner {
 
 	private List<Integer> autoresIDs = new ArrayList<Integer>();
 
+	
     @Override
     public void run(String... args) throws Exception {
 
