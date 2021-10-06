@@ -13,6 +13,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * Classe Pedido mapeada para a persistencia no banco de dados.
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
 @Entity
 public class Pedido {
 	
