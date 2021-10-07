@@ -1,5 +1,6 @@
 package com.example.livraria.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -38,7 +39,7 @@ public class Livro {
 	@ManyToOne
 	private Editora editora;
 	@Column(nullable = false)
-	private float preco;
+	private BigDecimal preco;
 	
 	public String getCategoria() {
 		return categoria;
@@ -88,10 +89,10 @@ public class Livro {
 	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
-	public float getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
-	public void setPreco(float preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 	@Override

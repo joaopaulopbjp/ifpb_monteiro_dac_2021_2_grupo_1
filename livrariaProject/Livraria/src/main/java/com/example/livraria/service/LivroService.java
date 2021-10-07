@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import com.example.livraria.model.Livro;
 import com.example.livraria.repository.LivroRepository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -96,7 +97,7 @@ public class LivroService {
     	livro.setDescricao(descricao);
     	livro.setEdicao(edicao);
     	livro.setAno(ano);
-    	livro.setPreco(preco);
+    	livro.setPreco(BigDecimal.valueOf(preco));
     	livro.setEditora(editora); 
     	
     	List<Autor> autores = new ArrayList<Autor>();
@@ -237,7 +238,7 @@ public class LivroService {
 		Optional<Livro> livro = livroRepository.findById(isbn);
 		Livro existe = livro.isPresent() ? livro.get() : null;
 		
-		existe.setPreco(dado);
+		existe.setPreco(BigDecimal.valueOf(dado));
 		
 		livroRepository.save(existe);
 

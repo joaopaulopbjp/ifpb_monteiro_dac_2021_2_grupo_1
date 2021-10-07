@@ -1,5 +1,7 @@
 package com.example.livraria.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,7 +29,7 @@ public class ItemPedido {
 	private Livro livro;
 	private Integer quantidade;
 
-	private float valorUnidade;
+	private BigDecimal valorUnidade;
 
 	@NotNull
 	@ManyToOne
@@ -58,21 +60,21 @@ public class ItemPedido {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	public float getValorUnidade() {
+	public BigDecimal getValorUnidade() {
 		if(pedido.isAberto()) {
 			return livro.getPreco();
 		} else {
 			return valorUnidade;
 		}
 	}
-	public void setValorUnidade(float valorUnidade) {
+	public void setValorUnidade(BigDecimal valorUnidade) {
 		this.valorUnidade = valorUnidade;
 	}
-	public float obterValorTotal() {
+	public BigDecimal obterValorTotal() {
 		if(pedido.isAberto()) {
-			return livro.getPreco() * quantidade;
+			return livro.getPreco().multiply(BigDecimal.valueOf(quantidade));
 		} else {
-			return valorUnidade * quantidade;
+			return valorUnidade.multiply(BigDecimal.valueOf(quantidade));
 		}
 	}
 	public void finalizar() {

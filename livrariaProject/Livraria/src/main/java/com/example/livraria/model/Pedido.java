@@ -1,5 +1,6 @@
 package com.example.livraria.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class Pedido {
 	private Usuario usuario;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
 	private List<ItemPedido> itemPedido;
-	private float valorTotal = 0;
+	private BigDecimal valorTotal = new BigDecimal(0);
 	private String formaDePagamento; 
 	@ManyToOne
 	private Endereco localDeEntrega; 
@@ -63,10 +64,10 @@ public class Pedido {
 	public void setItemPedido(List<ItemPedido> itemPedido) {
 		this.itemPedido = itemPedido;
 	}
-	public float getValorTotal() {
+	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
-	public void setValorTotal(float valorTotal) {
+	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	public String getFormaDePagamento() {
@@ -94,7 +95,7 @@ public class Pedido {
 		this.dataDefechamento = new Date();
 		for (ItemPedido ip : itemPedido) {
 			ip.finalizar();
-			this.valorTotal += ip.obterValorTotal();
+			this.valorTotal.add(ip.obterValorTotal());
 		}
 	}
 	public ItemPedido adicionarItem(ItemPedido itemPedido) {
@@ -118,8 +119,9 @@ public class Pedido {
 		return ip;
 	}
 	public void atualizarValorTotal() {
+		this.valorTotal = new BigDecimal(0);
 		for (ItemPedido ip : itemPedido) {
-			this.valorTotal += ip.obterValorTotal();
+			this.valorTotal = this.valorTotal.add(ip.obterValorTotal());
 		}
 	}
 }
