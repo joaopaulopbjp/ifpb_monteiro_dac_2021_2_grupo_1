@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import com.example.livraria.model.Livro;
 import com.example.livraria.service.AutorService;
@@ -23,7 +22,7 @@ import com.example.livraria.service.UsuarioService;
  * @author Jordielson Silva
  * @author Victor Macêdo
  */
-@Component
+// @Component
 public class ApplicationConsole implements CommandLineRunner {
 	
 	/*

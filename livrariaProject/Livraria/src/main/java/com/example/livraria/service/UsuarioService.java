@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.livraria.model.Endereco;
-import com.example.livraria.model.PapelUsuario;
 import com.example.livraria.model.Usuario;
+import com.example.livraria.repository.RoleRepository;
 import com.example.livraria.repository.UsuarioRepository;
 
 /**
@@ -29,6 +29,9 @@ public class UsuarioService {
 	 */
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     /**
      * Método feito pra receber os valores passados lá no menu para depois serem 'setados'
@@ -53,7 +56,7 @@ public class UsuarioService {
     	user.setCPF(cpf);
     	user.setEmail(email);
     	user.setSenha(senha);
-        user.setPapelUsuario(PapelUsuario.CLIENTE);
+        user.addPapel(roleRepository.findById("ROLE_USER").get());
         
         Endereco endereco = new Endereco();
         endereco.setCep(cep);

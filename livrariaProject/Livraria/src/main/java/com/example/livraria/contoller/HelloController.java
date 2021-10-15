@@ -10,4 +10,9 @@ public class HelloController {
 	public String hello() {
 		return "index";
 	}
+
+	@GetMapping("/cadastrar-endereco")
+	public String cadastrarEndereco() {
+		return "cadastro_endereco";
+	}
 }
