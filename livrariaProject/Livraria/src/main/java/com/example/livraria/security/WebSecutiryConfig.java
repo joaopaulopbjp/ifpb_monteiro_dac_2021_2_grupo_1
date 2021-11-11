@@ -25,8 +25,8 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
 			.antMatchers(HttpMethod.GET, "/home").permitAll()
-			.antMatchers("/cadastrar-livro").hasRole("ADMIN")
-			.anyRequest().authenticated()
+//			.antMatchers("/cadastrar-livro").hasRole("ADMIN")
+//			.anyRequest().authenticated()
 			.and()
 			.formLogin().defaultSuccessUrl("/home", true).permitAll()
 			.and()

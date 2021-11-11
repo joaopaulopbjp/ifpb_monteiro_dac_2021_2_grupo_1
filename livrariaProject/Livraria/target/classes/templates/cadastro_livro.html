@@ -9,8 +9,81 @@
 <body>
     
     <div>
-        <h1>Cadastro Livro</h1>
+        <h1>Cadastro de Livro</h1>
     </div>
+        <form class="form-cadastro" method="post" th:action="@{/adicionar-livro}" th:object="${livro}">
+        	<div class="form-line">
+        		<label for="nome" >ISBN: </label>
+        		<input type="text" required id="isbn" th:field="*{ISBN}" > <br/>
+<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
+        	</div>
+        	<div class="form-line">
+        		<label for="categoria">Categoria: </label>
+
+				<select name="categoria" id="categoria" th:field="*{categoria}">
+				  <option value="ficcao">Ficção</option>
+				  <option value="fantasia">Fantasia</option>
+				  <option value="romance">Romance</option>
+				  <option value="comedia">Comédia</option>
+				</select>
+				
+<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}">Erros</div> -->
+        	</div>
+        	
+        	<div class="form-line">
+        		<label for="edicao" >Edição: </label>
+        		<input type="text" required  th:field="*{edicao}" > <br/>
+<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
+        	</div>
+        	
+        	<div class="form-line">
+        		<label for="ano" >Ano: </label>
+        		<input type="number" required  th:field="*{ano}" > <br/>
+<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
+        	</div>
+        	
+        	<div class="form-line">
+        		<label for="autor">autor: </label>
+
+				<select id="autor" th:field="*{autores}">
+	    			<option value="">Selecione o autor</option>
+	    			<option th:each="autor : ${autores}" th:value="${autor.id}"> <span th:text="${autor.nome}"></option>
+	    		</select>
+				
+<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}">Erros</div> -->
+        	</div>
+        	
+        	<div class="form-line">
+        		<label for="titulo" >Titulo: </label>
+        		<input type="text" required id="titulo" th:field="*{titulo}" > <br/>
+<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
+        	</div>
+        	
+        	<div class="form-line">
+        		<label for="descricao" >Descrição: </label>
+        		<input type="text" required id="descricao" th:field="*{descricao}" > <br/>
+<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
+        	</div>
+        	
+        	<div class="form-line">
+        		<label for="preco" >Preço: </label>
+        		<input type="number" required id="preco" th:field="*{preco}" > <br/>
+<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
+        	</div>
+        	
+<!--        	<div class="form-line">
+        		<label for="editora">Editora: </label>
+
+				<select id="editora" th:field="*{editoras}">
+	    			<option value="">Selecione a editora</option>
+	    			<option th:each="editora : ${editoras}" th:value="${editora.id}"> <span th:text="${editora.nome}"></option>
+	    		</select> 
+-->
+				
+<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}">Erros</div> -->
+        	</div>
+        	
+        </form>
 
 </body>
 </html>

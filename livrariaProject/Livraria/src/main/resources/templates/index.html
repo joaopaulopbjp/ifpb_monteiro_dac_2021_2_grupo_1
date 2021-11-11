@@ -7,10 +7,19 @@
     <title>livrarista</title>
 </head>
 <body>
-    
-    <div>
-        <h1>Teste</h1>
-    </div>
-
+   <main class="container">
+        <div>
+        <h1>Autores</h1>
+            <div class="autor" th:each="autor : ${autores}">
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <div> Nome: <span th:text="${autor.nome}"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

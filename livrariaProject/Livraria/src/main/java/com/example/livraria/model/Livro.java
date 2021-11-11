@@ -47,10 +47,10 @@ public class Livro {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	public List<Autor> getAutor() {
+	public List<Autor> getAutores() {
 		return autores;
 	}
-	public void setAutor(List<Autor> autor) {
+	public void setAutores(List<Autor> autor) {
 		this.autores = autor;
 	}
 	public String getTitulo() {

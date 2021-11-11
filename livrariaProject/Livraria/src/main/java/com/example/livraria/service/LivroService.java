@@ -115,7 +115,7 @@ public class LivroService {
         		System.out.println("O ID "+ id + " do autor está inválido!");
         	}
         	
-    		livro.setAutor(autores);
+    		livro.setAutores(autores);
 
 		}
  
