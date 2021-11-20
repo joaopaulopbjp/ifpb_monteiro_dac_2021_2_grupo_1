@@ -1,5 +1,6 @@
 package com.example.livraria.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,6 @@ public class PedidoService {
 				ip.setPedido(pedido);
 	
 				ip = pedido.adicionarItem(ip);
-//				this.verificarEstoque(ISBN, ip.getQuantidade());
 				pedidoRepository.save(pedido);
 				itemPedidoRepository.save(ip);
 				if(estoque.getQuantidade()==0) {
@@ -84,21 +84,31 @@ public class PedidoService {
 			
 	}
 
-//	public void verificarEstoque(String ISBN, int quantidade) {
-//		if(!estoqueService.verificarLivroEstoque(ISBN, quantidade)) {
-//			throw new RuntimeException("Nao ha livros suficiente no estoque ");
-//		}
-//	}
+	public List<Pedido> obterPedidos(Usuario user) {
+		return pedidoRepository.findByUsuario(user);
+	}
+
+	public void cancelarPedido(Pedido pedido) {
+
+	}
+
+	public Pedido alterarPedido(Pedido pedido) {
+		return pedidoRepository.save(pedido);
+	}
+
+	public Pedido consultarCarrinhoCompras(Usuario user) {
+		List<Pedido> pedidos = obterPedidos(user);
+		for (Pedido pedido : pedidos) {
+			if(pedido.getDataDefechamento() == null) {
+				return pedido;
+			}
+		}
+		return null;
+	}
+
+	public Pedido fecharPedido(Pedido pedido) {
+		pedido.finalizar();
+		return pedidoRepository.save(pedido);
+	}
+
 }
-
-
-/**
- * consultar pedidos 
- * cancelar pedido
- * alterar pedido
- * consultar carrinhos de compras
- * fechar pedido
- * adicionar livro ao pedido
- * 
- * criar tabela categoria
- */

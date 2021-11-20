@@ -1,5 +1,8 @@
 package com.example.livraria.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.example.livraria.model.Categoria;
 import com.example.livraria.repository.CategoriaRepository;
 
@@ -28,6 +31,22 @@ public class CategoriaService {
     public Categoria buscarCategoriaPorNome(String nome) {
         Categoria categoria = categoriaRepository.findByName(nome);
         return categoria;
+    }
+
+    public List<Categoria> obterCategorias() {
+        return categoriaRepository.findAll();
+    }
+
+    public Optional<Categoria> obterCategoria(int id) {
+        return categoriaRepository.findById(id);
+    }
+
+    public void deletarCategoria(Categoria categoria) {
+        categoriaRepository.delete(categoria);
+    }
+
+    public Categoria alterarCategoria(Categoria categoria) {
+        return categoriaRepository.save(categoria);
     }
 
 }
