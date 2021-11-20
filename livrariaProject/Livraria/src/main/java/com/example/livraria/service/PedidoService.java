@@ -90,3 +90,15 @@ public class PedidoService {
 //		}
 //	}
 }
+
+
+/**
+ * consultar pedidos 
+ * cancelar pedido
+ * alterar pedido
+ * consultar carrinhos de compras
+ * fechar pedido
+ * adicionar livro ao pedido
+ * 
+ * criar tabela categoria
+ */

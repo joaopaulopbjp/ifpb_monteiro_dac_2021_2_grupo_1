@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.livraria.model.Autor;
-import com.example.livraria.model.Livro;
 import com.example.livraria.service.AutorService;
 
 @Controller

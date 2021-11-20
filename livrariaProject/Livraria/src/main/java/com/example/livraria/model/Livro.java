@@ -26,7 +26,8 @@ public class Livro {
 	@Id
 	@Column(length = 50)
 	private String ISBN;
-	private String categoria;
+	@ManyToOne
+	private Categoria categoria;
 	
 	@NotEmpty
 	@ManyToMany
@@ -41,10 +42,10 @@ public class Livro {
 	@Column(nullable = false)
 	private BigDecimal preco;
 	
-	public String getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 	public List<Autor> getAutores() {

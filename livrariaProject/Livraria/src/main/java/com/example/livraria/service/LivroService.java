@@ -53,6 +53,9 @@ public class LivroService {
 	 */
 	@Autowired
 	AutorRepository autorRepository;
+
+	@Autowired
+	CategoriaService categoriaService;
 	
 	/**
 	 * Comentario de Victor
@@ -92,7 +95,7 @@ public class LivroService {
     	
     	Livro livro = new Livro();
     	livro.setISBN(isbn);
-    	livro.setCategoria(categoria);
+    	livro.setCategoria(categoriaService.salvarCategoriaPorNome(categoria));
     	livro.setTitulo(titulo);
     	livro.setDescricao(descricao);
     	livro.setEdicao(edicao);
@@ -159,11 +162,11 @@ public class LivroService {
 	 * @param isbn
 	 * @param dado
 	 */
-	public void updateCategoria (String isbn, String dado) {	
+	public void updateCategoria (String isbn, String dado) {
 		Optional<Livro> livro = livroRepository.findById(isbn);
 		Livro existe = livro.isPresent() ? livro.get() : null;
-		
-		existe.setCategoria(dado);
+
+		existe.setCategoria(categoriaService.salvarCategoriaPorNome(dado));
 		
 		livroRepository.save(existe);
 	}
