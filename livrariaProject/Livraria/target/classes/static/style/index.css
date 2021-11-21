@@ -154,7 +154,7 @@ main{
 }
 
 .livro{
-    background-color: #fafafa;
+    background-color: #fdfdfd;
     cursor: pointer;
     display: flex;
     flex-direction: column;
