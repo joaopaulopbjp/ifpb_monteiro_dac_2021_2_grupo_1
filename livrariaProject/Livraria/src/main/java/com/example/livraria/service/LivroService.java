@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.livraria.model.Autor;
+import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Editora;
 import com.example.livraria.repository.AutorRepository;
 import com.example.livraria.repository.EditoraRepository;
@@ -39,6 +40,7 @@ public class LivroService {
 	 */
 	@Autowired
     LivroRepository livroRepository;
+	
 	
 	/*
 	 * Contém a anotação @Autowired para que quando a classe LivroService for usada o 
@@ -66,6 +68,10 @@ public class LivroService {
 		Pageable pageable = PageRequest.of(page, 5, Sort.by("titulo"));
 		List<Livro> livros = livroRepository.findAll(pageable).getContent();
 		return livros;
+	}
+	
+	public List<Livro> findByTitulo(String titulo){
+		return livroRepository.findByTitulo(titulo);
 	}
 
 	/**
@@ -245,6 +251,11 @@ public class LivroService {
 		
 		livroRepository.save(existe);
 
+	}
+	
+	public List<Livro> findByCategoria(String nome){
+		Categoria categoria =categoriaService.buscarCategoriaPorNome(nome);
+		return livroRepository.findByCategoria(categoria);
 	}
     
 }

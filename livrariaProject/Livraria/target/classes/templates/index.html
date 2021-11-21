@@ -23,11 +23,10 @@
 	                    <li class="menu-nav"> 
 	                    <span class="menu-nav"  onclick="mostrar('pai')" href="" >CATEGORIAS</span>
 	                    <ul class="submenu" id="pai" >
-	                    	<li><a  href="">categoria A</a></li>
-	                    	<li><a  href="">categoria B</a></li>
+	                    	<li><a  href="" th:each="categoria: ${categorias}" th:text="${categoria.nome}">categoria A</a></li>
                         </ul>
                     	</li>
-                    	<li class="menu-nav"><a class="menu-nav" href="">MEU PERFIL</a></li>
+                    	<li class="menu-nav"><a class="menu-nav" href="" >MEU PERFIL</a></li>
                 	</ul>
             	</div>
             	<li class="login">
@@ -36,9 +35,9 @@
 			</div>
 		</header>
 		
-		<form class="cabecalho" action="" method="get" th:fragment="index-form">
+		<form class="cabecalho" action="/search" method="get" th:fragment="index-form">
 	        <div class="search-box">
-	            <input class="search-bar" type="text" name="" placeholder=" Pesquisar livro"></input>
+	            <input class="search-bar" type="text" name="pesquisa" placeholder=" Pesquisar livro"></input>
 	            <button class="search-button" type="submit" ><i class="fas fa-search"></i></button>
 	        </div>
     	</form>
