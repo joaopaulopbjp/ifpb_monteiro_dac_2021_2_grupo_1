@@ -28,7 +28,7 @@ public class Livro {
 	private String ISBN;
 	@ManyToOne
 	private Categoria categoria;
-	
+	private String capa;
 	@NotEmpty
 	@ManyToMany
 	private List<Autor> autores;
@@ -95,6 +95,13 @@ public class Livro {
 	}
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+	
+	public String getCapa() {
+		return capa;
+	}
+	public void setCapa(String capa) {
+		this.capa = capa;
 	}
 	@Override
 	public String toString() {
