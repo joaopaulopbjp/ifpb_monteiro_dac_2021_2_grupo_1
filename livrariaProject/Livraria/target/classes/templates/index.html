@@ -1,25 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>livrarista</title>
-</head>
-<body>
-   <main class="container">
-        <div>
-        <h1>Autores</h1>
-            <div class="autor" th:each="autor : ${autores}">
-                <div class="card">
-                    <div class="card-header">
-                    </div>
-                    <div class="card-body">
-                        <div> Nome: <span th:text="${autor.nome}"></span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-</body>
-</html>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <script>src="https://kit.fontawesome.com/le592b5726.js"</script>
+	    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+	    <link rel="stylesheet" th:href="@{/style/index.css}">
+	    <title>Livraria</title>
+	</head>
+	<body>
+		<header>
+			<div class="sidebar">
+				<div class="logo">
+                	<i class="fas fa-book-open"></i>
+                	<h1>Livraria</h1>
+            	</div>
+            	
+            	<div class="menu">
+                	<ul>
+	                    <li class="menu-nav"><a class="menu-nav" href="">INÍCIO</a></li>
+	                    <li class="menu-nav"> 
+	                    <span class="menu-nav"  onclick="mostrar('pai')" href="" >CATEGORIAS</span>
+	                    <ul class="submenu" id="pai" >
+	                    	<li><a  href="">categoria A</a></li>
+	                    	<li><a  href="">categoria B</a></li>
+                        </ul>
+                    	</li>
+                    	<li class="menu-nav"><a class="menu-nav" href="">MEU PERFIL</a></li>
+                	</ul>
+            	</div>
+            	<li class="login">
+                	<a href="" class="entrar-button"><i class="fal fa-sign-in"></i> Entrar</a>
+            	</li>
+			</div>
+		</header>
+		
+		<form class="cabecalho" action="" method="get">
+	        <div class="search-box">
+	            <input class="search-bar" type="text" name="" placeholder=" Pesquisar livro"></input>
+	            <button class="search-button" type="submit" ><i class="fas fa-search"></i></button>
+	        </div>
+    	</form>
+    	
+    	<main> 
+	        <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div> 
+	        <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div>
+	         <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div> 
+	        <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div> 
+	        <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div>
+	         <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div> 
+	        <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div> 
+	        <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div>
+	         <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div> 
+	        <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div> 
+	        <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div>
+	         <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div> 
+	        <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div>
+	         <div class="livro">
+	            <img class="capa" src="http://livrariaconcreta.com.br/wp-content/uploads/2017/01/livro-vermelho_andrew-lang_CAPA_FINAL_CURVAS-01.jpg" alt="">
+	            <span class="titulo">Titulo do Livro</span>
+	            <span class="preco">RS:00.00</span>
+	        </div> 
+    	</main>
+	
+		<a class="carrinho-button" href=""><i class="fas fa-shopping-cart"></i></a>
+		
+		<script>
+	        function mostrar(el){
+	           var display = document.getElementById(el).style.display;
+	          
+	            if(display == "none" || display == "")
+	                document.getElementById(el).style.display = 'block';
+	            else
+	                document.getElementById(el).style.display = 'none';
+	        }
+    	</script>
+	
+	</body>

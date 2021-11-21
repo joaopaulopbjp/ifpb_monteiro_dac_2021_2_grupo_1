@@ -1,3 +1,182 @@
-h1 {
-    color: aqua;
+*{
+    text-decoration: none;
+    list-style: none;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    background: #fff;
+    min-height: 100vh;
+}
+
+.cabecalho{
+    margin-left: 250px;
+}
+
+.search-box{
+    padding-top: 1%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar{
+    border: 0px;
+    box-shadow: 0px 0px 0.3em #666;
+    background: none;
+    outline: none;
+    border-radius: 6px;
+    width: 28%;
+    height: 35px;
+    font-size: 15px;
+}
+
+.search-button{
+    margin-left: 1%;
+    width: 3%;
+    background: none;
+    border-radius: 6px;
+    box-shadow: 0px 0px 0.3em #666;
+    border: 0px;
+}
+
+.search-button:hover{
+    background: yellow;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.sidebar{
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    background: #17394a;
+    z-index: 1;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: #fff;
+}
+.logo i{
+    color: #fff;
+    font-size: 20px;
+    margin-right: 2%;
+}
+
+.menu a{
+    color: #fff;
+    display: block;
+    padding: 12px 10px 12px 32px;
+}
+
+.menu span{
+    color: #fff;
+    display: block;
+    padding: 12px 10px 12px 32px;
+}
+.menu span:hover{
+    cursor: pointer;
+    color: #17394a;
+    background-color: yellow;
+    border-radius: 10px 0 0 10px;
+}
+.menu a:hover{
+    color: #17394a;
+    background-color: yellow;
+    border-radius: 10px 0 0 10px;
+}
+#pai {
+    display: none;  
+}
+.submenu .active{
+    display: block;
+}
+.login{
+    display: flex;
+    color: #17394a;
+    font-size: 20px;
+    position: fixed;
+    right: 50px;
+    top: 11px;
+    padding: 0.3%;
+    /* background-color: yellow; */
+    border-radius: 5px;
+    /* box-shadow: 0px 0px 0.2em #666; */
+    margin-left: 4%;
+}
+
+.login a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #17394a;
+    font-weight: bold;
+}
+
+.login a:hover{
+  color: black;
+}
+
+.login a i{
+	padding-right: 2px;
+}
+.login:hover{
+    background-color: #fff;
+    transition: 0.1s;
+
+}
+
+.carrinho-button{
+    color: #17394a;
+    font-size: 25px;
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+    padding: 1%;
+    margin: 2%;
+    background: yellow;
+    border-radius: 50%;
+    box-shadow: 0px 0px 0.3em #666;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    height: 100%;
+    padding-left:275px;
+    margin-top: 100px;
+    margin-left: 20px;
+}
+
+.livro{
+    background-color: #fafafa;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.capa{
+    width: 120px;
+    height: 168px;
+    padding: 10px;
+}
+.capa:hover{
+    width: 140px;
+    height: 188px;
+    padding: 0;
+}
+
+.preco{
+    color: green;
 }

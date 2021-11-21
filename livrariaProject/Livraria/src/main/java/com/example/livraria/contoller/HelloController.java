@@ -20,7 +20,7 @@ public class HelloController {
 	public String hello(Model model) {
 		List<Autor> listaAutores = autorService.getAll();
 		model.addAttribute("autores", listaAutores);
-		return "fragments";
+		return "index";
 	}
 
 	@GetMapping("/cadastrar-endereco")
