@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{index :: index-head}">
+</head>
+<body>
+    <header th:replace="~{index :: index-header}"></header>
+    <form th:replace="~{index :: index-form}"></form>
+    <script th:replace="~{index :: index-script}"></script>
+    <a th:replace="~{index :: index-carrinho}"></a>
+	<main>
+		<h1 th:inline="text">[[${livro.titulo}]]</h1>
+	</main>
+</body>
+</html>
