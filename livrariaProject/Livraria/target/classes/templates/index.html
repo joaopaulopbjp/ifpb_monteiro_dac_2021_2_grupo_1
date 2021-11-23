@@ -12,8 +12,8 @@
 	<body>
 		<header th:fragment="index-header">
 			<div class="sidebar">
-				<div class="logo" href="/home" >
-                	<i class="fas fa-book-open"></i>
+				<div class="logo">
+                	<i class="fas fa-book-open" ></i>
                 	<h1>Livraria</h1>
             	</div>
             	
@@ -29,9 +29,6 @@
                     	<li class="menu-nav"><a class="menu-nav" href="" >MEU PERFIL</a></li>
                 	</ul>
             	</div>
-            	<li class="login">
-                	<a href="" class="entrar-button"><i class="fal fa-sign-in"></i> Entrar</a>
-            	</li>
 			</div>
 		</header>
 		
@@ -40,6 +37,9 @@
 	            <input class="search-bar" type="text" name="pesquisa" placeholder=" Pesquisar livro"></input>
 	            <button class="search-button" type="submit" ><i class="fas fa-search"></i></button>
 	        </div>
+	        <li class="login">
+                	<a href="/cadastrar-usuario" class="entrar-button"><i class="fal fa-sign-in"></i> Entrar</a>
+            	</li>
     	</form>
     	
     	<main> 

@@ -57,7 +57,7 @@ public class Usuario implements UserDetails {
 			referencedColumnName = "papel"
 		)
 	)
-	private List<Role> papeis;
+	private List<Role> papeis = new ArrayList<Role>();
 	
 	/*
 	 * Atributo de lista de endereços que usuário pode ter.
