@@ -8,10 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.livraria.model.Autor;
 import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Livro;
-import com.example.livraria.service.AutorService;
 import com.example.livraria.service.CategoriaService;
 import com.example.livraria.service.LivroService;
 

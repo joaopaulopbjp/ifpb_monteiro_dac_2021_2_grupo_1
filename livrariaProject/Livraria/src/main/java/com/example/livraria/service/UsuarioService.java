@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.livraria.model.Endereco;
 import com.example.livraria.model.Usuario;
 import com.example.livraria.repository.RoleRepository;
 import com.example.livraria.repository.UsuarioRepository;
@@ -50,7 +49,7 @@ public class UsuarioService {
      * @param bairro
      * @param complemento
      */
-    public void salvar(String nome, String cpf, String email, String senha, String cep, String estado, String cidade, String rua, Integer numero, String bairro, String complemento) {
+    public void salvar(String nome, String cpf, String email, String senha/*, String cep, String estado, String cidade, String rua, Integer numero, String bairro, String complemento*/) {
     	Usuario user = new Usuario();
     	user.setNome(nome);
     	user.setCPF(cpf);
@@ -58,7 +57,7 @@ public class UsuarioService {
     	user.setSenha(senha);
         user.addPapel(roleRepository.findById("ROLE_USER").get());
         
-        Endereco endereco = new Endereco();
+        /*Endereco endereco = new Endereco();
         endereco.setCep(cep);
         endereco.setEstado(estado);
         endereco.setCidade(cidade);
@@ -66,7 +65,7 @@ public class UsuarioService {
         endereco.setNumero(numero);
         endereco.setBairro(bairro);
         endereco.setComplemento(complemento);
-        user.addEndereco(endereco);
+        user.addEndereco(endereco);*/
         
         usuarioRepository.save(user);
     }

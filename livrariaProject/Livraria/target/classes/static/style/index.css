@@ -68,6 +68,7 @@ body{
 }
 
 .menu a{
+
 	border-radius: 10px 0 0 10px;
 	background-color: #3f80a1;
     color: #fff;
@@ -85,13 +86,22 @@ body{
     padding: 12px 10px 12px 32px;
     margin-bottom: 5px
 }
+
+.menu span{
+border-radius: 10px 0 0 10px;
+    background-color: #3f80a1;
+    color: #fff;
+    display: block;
+    padding: 12px 10px 12px 32px;
+    margin-bottom: 5px;
+}
 .menu span:hover{
     cursor: pointer;
     color: #17394a;
     background-color: yellow;
     border-radius: 10px 0 0 10px;
 }
-.menu a:hover{
+	.menu a:hover{
     color: #17394a;
     background-color: yellow;
     border-radius: 10px 0 0 10px;

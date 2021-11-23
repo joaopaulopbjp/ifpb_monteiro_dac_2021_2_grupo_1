@@ -13,7 +13,7 @@
 		<header th:fragment="index-header">
 			<div class="sidebar">
 				<div class="logo">
-                	<i class="fas fa-book-open"></i>
+                	<i class="fas fa-book-open" ></i>
                 	<h1>Livraria</h1>
             	</div>
             	
@@ -23,15 +23,12 @@
 	                    <li class="menu-nav"> 
 	                    <span class="menu-nav"  onclick="mostrar('pai')" href="" >CATEGORIAS</span>
 	                    <ul class="submenu" id="pai" >
-	                    	<li><a  href="" th:each="categoria: ${categorias}" th:text="${categoria.nome}">categoria A</a></li>
+	                    	<li><a  th:href="@{/search/categoria(categoria=${categoria.nome})}" th:each="categoria: ${categorias}" th:text="${categoria.nome}">categoria A</a></li>
                         </ul>
                     	</li>
                     	<li class="menu-nav"><a class="menu-nav" href="" >MEU PERFIL</a></li>
                 	</ul>
             	</div>
-            	<li class="login">
-                	<a href="" class="entrar-button"><i class="fal fa-sign-in"></i> Entrar</a>
-            	</li>
 			</div>
 		</header>
 		
@@ -40,12 +37,17 @@
 	            <input class="search-bar" type="text" name="pesquisa" placeholder=" Pesquisar livro"></input>
 	            <button class="search-button" type="submit" ><i class="fas fa-search"></i></button>
 	        </div>
+	        <li class="login">
+                	<a href="/cadastrar-usuario" class="entrar-button"><i class="fal fa-sign-in"></i> Entrar</a>
+            	</li>
     	</form>
     	
     	<main> 
     	
 	        <div class="livro" th:each="livro: ${livros}">
-	            <img class="capa" th:src="${livro.capa}"  alt="">
+				<a th:href="@{/livro-info(ISBN=${livro.ISBN})}">
+					<img class="capa" th:src="${livro.capa}" alt="">
+				</a>
 	            <span class="titulo"th:text="${livro.titulo}" >Titulo do Livro</span>
 	            <div class="preco">
 	            	<span class="rs">R$:</span>
@@ -56,7 +58,7 @@
 
     	</main>
 	
-		<a th:fragment="index-carrinho" class="carrinho-button" href=""><i class="fas fa-shopping-cart"></i></a>
+		<a th:fragment="index-carrinho" class="carrinho-button" th:href="@{/carrinho-compras}"><i class="fas fa-shopping-cart"></i></a>
 		
 		<script th:fragment="index-script">
 	        function mostrar(el){

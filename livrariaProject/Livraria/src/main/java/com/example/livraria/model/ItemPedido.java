@@ -64,7 +64,7 @@ public class ItemPedido {
 		if(pedido.isAberto()) {
 			return livro.getPreco();
 		} else {
-			return valorUnidade;
+			return valorUnidade.setScale(2);
 		}
 	}
 	public void setValorUnidade(BigDecimal valorUnidade) {

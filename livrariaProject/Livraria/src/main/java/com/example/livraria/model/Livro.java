@@ -91,7 +91,7 @@ public class Livro {
 		this.editora = editora;
 	}
 	public BigDecimal getPreco() {
-		return preco;
+		return preco.setScale(2);
 	}
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;

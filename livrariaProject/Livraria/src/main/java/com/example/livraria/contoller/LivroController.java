@@ -10,10 +10,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.livraria.model.Autor;
+import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Livro;
 import com.example.livraria.service.AutorService;
+import com.example.livraria.service.CategoriaService;
 import com.example.livraria.service.LivroService;
 
 
@@ -23,6 +26,9 @@ public class LivroController {
     @Autowired
 	LivroService livroService;
     
+    @Autowired
+    CategoriaService categoriaService;
+
     @Autowired
     AutorService autorService;
     
@@ -36,7 +42,7 @@ public class LivroController {
 //    	model.addAttribute("editoras",listaEditoras);
     	model.addAttribute("autores",listaAutores);
     	model.addAttribute("livro", new Livro());
-        return "cadastro_livro";
+        return "livro/cadastro_livro";
     }
     
     @PostMapping("/adicionar-livro")
@@ -49,6 +55,15 @@ public class LivroController {
 			
 		}
     	
-        return "cadastro_livro";
+        return "livro/cadastro_livro";
     }
+
+    @GetMapping("/livro-info")
+    public String findLivro(@RequestParam(name="ISBN") String ISBN, Model model) {
+		List<Categoria> listaCategorias = categoriaService.obterCategorias();
+		Livro livro = livroService.getLivro(ISBN);
+		model.addAttribute("livro", livro);
+		model.addAttribute("categorias",listaCategorias);
+		return "livro/livro_info";
+	}
 }

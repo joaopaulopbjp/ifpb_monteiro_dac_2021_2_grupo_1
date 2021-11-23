@@ -145,7 +145,7 @@ public class ApplicationConsole implements CommandLineRunner {
 	 		    	System.out.print("Digite o complemento (opcional): ");
 	 		    	String complemento = entrada.nextLine();
 	 			
-	 				usuarioService.salvar(nome, cpf, email, senha, cep, estado, cidade, rua, numero, bairro, complemento);
+	 				// usuarioService.salvar(nome, cpf, email, senha, cep, estado, cidade, rua, numero, bairro, complemento);
 	 				break;
 	 			//buscar por email
 	 			case 2:
