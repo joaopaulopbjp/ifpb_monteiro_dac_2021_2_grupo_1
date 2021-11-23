@@ -24,10 +24,11 @@ public class HelloController {
 	@Autowired
 	CategoriaService categoriaService;
 	
+	
 	@GetMapping("/home")
 	public String hello(Model model) {
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
-		List<Livro> listaLivros = livroService.getAll();
+		List<Livro> listaLivros = livroService.consultarPorPaginaAleatoria(0);
 		model.addAttribute("livros", listaLivros);
 		model.addAttribute("categorias",listaCategorias);
 		return "index";
@@ -41,7 +42,7 @@ public class HelloController {
 	@GetMapping("/search")
 	public String search(@RequestParam(name="pesquisa") String pesquisa, Model model) {
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
-		List<Livro> listaLivros = livroService.findByTitulo(pesquisa);
+		List<Livro> listaLivros = livroService.findByTitulo(pesquisa,0);
 		model.addAttribute("livros", listaLivros);
 		model.addAttribute("categorias",listaCategorias);
 		return "index";

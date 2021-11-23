@@ -65,13 +65,21 @@ public class LivroService {
 	 * @return
 	 */
 	public List<Livro> consultarPorPagina(Integer page){
-		Pageable pageable = PageRequest.of(page, 5, Sort.by("titulo"));
+		Pageable pageable = PageRequest.of(page, 21, Sort.by("titulo"));
 		List<Livro> livros = livroRepository.findAll(pageable).getContent();
 		return livros;
 	}
 	
-	public List<Livro> findByTitulo(String titulo){
-		return livroRepository.findByTitulo(titulo);
+	public List<Livro> consultarPorPaginaAleatoria(Integer page){
+		Pageable pageable = PageRequest.of(page, 21, Sort.by("ano").descending());
+		List<Livro> livros = livroRepository.findAll(pageable).getContent();
+		return livros;
+	}
+	
+	public List<Livro> findByTitulo(String titulo,Integer page){
+		Pageable pageable = PageRequest.of(page, 21, Sort.by("titulo"));
+		List<Livro> livros = livroRepository.findByTitulo(pageable, titulo).getContent();
+		return livros;
 	}
 
 	/**
