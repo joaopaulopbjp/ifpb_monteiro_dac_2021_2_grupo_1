@@ -1,0 +1,47 @@
+.campo{
+    padding-top: 2%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(216, 215, 215);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 5px;
+    padding: 10px;
+}
+
+div{
+	display: inline-block;
+}
+
+.area1{
+    position:relative;
+    left:25%;
+    top:5em;
+    height: 100px;
+    width:400px;
+}
+
+.area2{
+    position:relative;
+    left:25%;
+    top:-62px;
+    height: 100px;
+    width:400px;
+}
+
+.titulo{
+	position:fixed;
+	width: 100%;
+	height: 50px;
+	background: blue;
+}
+
+.titulo a{
+	display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 13px;
+    color: #fff;
+}
