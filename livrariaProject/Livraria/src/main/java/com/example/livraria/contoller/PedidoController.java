@@ -20,7 +20,7 @@ public class PedidoController {
     @GetMapping("/carrinho-compras")
     public String carrinhoCompras(Model model) {
 
-        Pedido pedido = pedidoService.consultarCarrinhoCompras(usuarioService.getUsuario("carlos@gmail.com"));
+        Pedido pedido = pedidoService.consultarCarrinhoCompras(usuarioService.getUsuario("victor.macedo110697@gmail.com"));
         model.addAttribute("pedido", pedido);
         return "pedido/carrinho_compra";
     }

@@ -4,9 +4,10 @@
 }
 
 body{
+	
     padding: 0;
     margin: 0;
-    background: #fff;
+    background: #f1f1f1;
     min-height: 100vh;
 }
 
@@ -29,12 +30,13 @@ body{
     width: 28%;
     height: 35px;
     font-size: 15px;
+    background-color: #fff;
 }
 
 .search-button{
     margin-left: 1%;
     width: 3%;
-    background: none;
+    background: #fff;
     border-radius: 6px;
     box-shadow: 0px 0px 0.3em #666;
     border: 0px;
@@ -160,14 +162,26 @@ border-radius: 10px 0 0 10px;
     box-shadow: 0px 0px 0.3em #666;
 }
 
-main{
-    display: flex;
+.main{
+	display: flex;
     flex-wrap: wrap;
+}
+
+main{
+	background-color: #fff;
     width: 80%;
     height: 100%;
-    padding-left:275px;
+    padding-left: 0px;
+    padding-right: 30px;
     margin-top: 100px;
-    margin-left: 20px;
+    margin-left: 295px;
+    box-shadow: 0px 0px 0.8em #dedede;
+}
+
+main h3{
+	display: block;
+	padding: 1%;
+	font-size: 28px;
 }
 
 .livro{

@@ -43,17 +43,21 @@
     	</form>
     	
     	<main> 
-    	
-	        <div class="livro" th:each="livro: ${livros}">
-				<a th:href="@{/livro-info(ISBN=${livro.ISBN})}">
-					<img class="capa" th:src="${livro.capa}" alt="">
-				</a>
-	            <span class="titulo"th:text="${livro.titulo}" >Titulo do Livro</span>
-	            <div class="preco">
-	            	<span class="rs">R$:</span>
-	            	<span class="preco" th:text="${livro.preco}">RS:00.00</span>
-	            </div>
-	        </div> 
+    		
+	    	<h3>Recentemente adicionados:</h3>
+    		<div class="main">    		
+		        <div class="livro" th:each="livro: ${livros}">
+					<a th:href="@{/livro-info(ISBN=${livro.ISBN})}">
+						<img class="capa" th:src="${livro.capa}" alt="">
+					</a>
+		            <span class="titulo"th:text="${livro.titulo}" >Titulo do Livro</span>
+		            <div class="preco">
+		            	<span class="rs">R$:</span>
+		            	<span class="preco" th:text="${livro.preco}">RS:00.00</span>
+		            </div>
+		        </div> 
+    		</div>
+    			
 
 
     	</main>
