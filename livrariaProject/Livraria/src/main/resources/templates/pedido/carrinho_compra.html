@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head th:replace="~{index :: index-head}">
+</head>
+<head>
+    <link rel="stylesheet" th:href="@{/style/pedido/carrinho.css}">
+</head>
+<body>
+
+    <header th:replace="~{index :: index-header}"></header>
+    <form th:replace="~{index :: index-form}"></form>
+    <script th:replace="~{index :: index-script}"></script>
+    <a th:replace="~{index :: index-carrinho}"></a>
+	<main>
+        <h1>Carrinho de Compras</h1>
+
+        <div class="itens" th:each="item: ${pedido.itemPedido}">
+            <a th:href="@{/livro-info(ISBN=${item.livro.ISBN})}">
+                <img class="capa" th:src="${item.livro.capa}" alt="">
+            </a>
+            <div class="details">
+                <span class="titulo" th:text="${item.livro.titulo}" id="titulo-livro">Titulo do Livro</span>
+                <div class="preco">
+                    <p> R$: <span th:text="${item.livro.preco}" ></span></p>
+                    
+                </div>
+                <div class="qtd">
+                    <p>Quantidade: <span th:text="${item.quantidade}"></span></p>
+                </div>
+            </div>
+        </div> 
+	</main>
+</body>
+</html>

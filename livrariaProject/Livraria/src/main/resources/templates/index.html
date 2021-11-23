@@ -12,7 +12,7 @@
 	<body>
 		<header th:fragment="index-header">
 			<div class="sidebar">
-				<div class="logo">
+				<div class="logo" href="/home" >
                 	<i class="fas fa-book-open"></i>
                 	<h1>Livraria</h1>
             	</div>
@@ -57,7 +57,7 @@
 
     	</main>
 	
-		<a th:fragment="index-carrinho" class="carrinho-button" href=""><i class="fas fa-shopping-cart"></i></a>
+		<a th:fragment="index-carrinho" class="carrinho-button" th:href="@{/carrinho-compras}"><i class="fas fa-shopping-cart"></i></a>
 		
 		<script th:fragment="index-script">
 	        function mostrar(el){

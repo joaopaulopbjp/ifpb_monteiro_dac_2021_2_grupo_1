@@ -1,0 +1,17 @@
+main {
+    display: block;
+}
+
+div.itens {
+    display: flex;
+}
+
+div.details {
+    margin-left: 1%;
+}
+
+#titulo-livro {
+    font-size: x-large;
+    font-weight: bold;
+}
+

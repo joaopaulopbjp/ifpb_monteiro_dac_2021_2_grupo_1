@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head th:replace="~{index :: index-head}">
 </head>
 <body>
@@ -9,6 +9,10 @@
     <a th:replace="~{index :: index-carrinho}"></a>
 	<main>
 		<h1 th:inline="text">[[${livro.titulo}]]</h1>
+
+        <div>
+            <button class="btn-compra" th:href="@{/adicionar-ao-pedido}" type="submit" > Adicionar ao Pedido</button>
+        </div>
 	</main>
 </body>
 </html>
