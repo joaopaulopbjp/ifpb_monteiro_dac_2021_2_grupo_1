@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head th:replace="~{index :: index-head}">
+<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <script>src="https://kit.fontawesome.com/le592b5726.js"</script>
+	    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+	    <link rel="stylesheet" th:href="@{/style/index.css}">
+	    <title>Livraria</title>
+		<link rel="stylesheet" th:href="@{/style/livro-detalhe.css}">
 </head>
 <body>
     <header th:replace="~{index :: index-header}"></header>
@@ -8,11 +19,30 @@
     <script th:replace="~{index :: index-script}"></script>
     <a th:replace="~{index :: index-carrinho}"></a>
 	<main>
-		<h1 th:inline="text">[[${livro.titulo}]]</h1>
+		<div class="livro-detalhes">
+			<div class="livro-base">
+				<img class="capa-detalhe" th:src="${livro.capa}"></span>
+				<h1 th:inline="text">[[${livro.titulo}]]</h1>
+			</div>
+			<div class="livro-info">
+				<h1>Detalhes do livro:</h1>
+				<span th:inline="text">Descrição: [[${livro.descricao}]]</span><br/>
+				<span th:inline="text">Categoria: [[${livro.categoria.nome}]]</span><br/>
+				<span th:inline="text">Autor(es): [[${livro.autores}]]</span><br/>
+				<span th:inline="text">Edição: [[${livro.edicao}]]</span><br/>
+				<span th:inline="text">Ano: [[${livro.ano}]]</span><br/>
+				<span th:inline="text">Editora: [[${livro.editora.nome}]]</span><br/>
+			
+			</div>
+	        <div class="livro-compra">
+		        <div class="preco-estoque">
+					<span class="valor" th:inline="text">R$ [[${livro.preco}]]</span>
+					<span class="estoque">Em estoque</span>
+		        </div>
+	            <button class="btn-compra" th:href="@{/adicionar-ao-pedido}" type="submit" > Adicionar ao Pedido</button>
+	        </div>
+		</div>
 
-        <div>
-            <button class="btn-compra" th:href="@{/adicionar-ao-pedido}" type="submit" > Adicionar ao Pedido</button>
-        </div>
 	</main>
 </body>
 </html>

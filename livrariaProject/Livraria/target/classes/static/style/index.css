@@ -1,6 +1,7 @@
 *{
     text-decoration: none;
     list-style: none;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body{
@@ -176,15 +177,18 @@ main{
     margin-top: 100px;
     margin-left: 295px;
     box-shadow: 0px 0px 0.8em #dedede;
+    padding-bottom: 30px;
+    margin-bottom: 60px;
 }
 
 main h3{
 	display: block;
 	padding: 1%;
-	font-size: 28px;
+	font-size: 24px;
 }
 
 .livro{
+	font-size: 12px;
 	border:solid 1px;
     background-color: #fff;
     cursor: pointer;
@@ -197,6 +201,14 @@ main h3{
     margin-top: 20px;
     padding: 9px;
 }
+
+.titulo{
+	max-width: 120px; 
+	white-space: nowrap; 
+	overflow: hidden;
+	text-overflow: ellipsis; 
+}
+
 
 .capa{
     width: 120px;
@@ -211,4 +223,5 @@ main h3{
 
 .preco{
     color: green;
+    font-size: 15px;
 }
