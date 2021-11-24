@@ -1,47 +1,113 @@
-.campo{
-    padding-top: 2%;
-    display: flex;
-    justify-content: center;
-    background-color: rgb(216, 215, 215);
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    font-size: 20px;
-    margin: 5px;
-    padding: 10px;
-}
 
-div{
-	display: inline-block;
-}
 
-.area1{
-    position:relative;
-    left:25%;
-    top:5em;
-    height: 100px;
-    width:400px;
-}
-
-.area2{
-    position:relative;
-    left:25%;
-    top:-62px;
-    height: 100px;
-    width:400px;
-}
-
-.titulo{
-	position:fixed;
-	width: 100%;
-	height: 50px;
-	background: blue;
-}
-
-.titulo a{
+.btn-titulo{
 	display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    font-size: 13px;
-    color: #fff;
+	justify-content: center;
+	align-items: center;
+    width: 100%;
+    height: 50px;
+   	background-color: #17394a;
+
 }
+
+.btn-titulo .titulo{
+	color: #fff;
+	font-size: 20px;
+	width: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+btn-titulo .titulo i{
+	width: 600px;
+	size: 50px;
+}
+
+.btn-titulo a{
+	margin-left: 2px;
+	color: #fff;
+	font-size: 30px;
+}
+
+.campo-form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 700px;
+}
+
+.form{
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+	height: 70%;
+	box-shadow: 0px 0px 0.8em #dedede;
+	border-radius: 15px;
+}
+
+.area-cadastro{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 70%;
+	padding: 2%;
+	padding-left: 8%;
+	padding-right: 8%;
+}
+
+.area-login{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 70%;
+	padding: 2%;
+	border-left: 1px solid #000;
+	padding-left:8%;
+	padding-right: 8%;
+}
+
+.campo{
+	box-shadow: 0px 0px 0.1em #000;
+	border-radius: 5px;
+	border-style: none;
+	height: 30px;
+}
+
+.form-line{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10%;
+}
+
+button{
+	border-style: none;
+	color: #fff;
+    font-size: 20px;
+    padding: 8px;
+    width: 150px;
+    background: #17394a;
+    border-radius: 5%;
+    box-shadow: 0px 0px 0.3em #dedede;
+}
+button:hover{
+	border-style: none;
+	color: #17394a;
+    font-size: 20px;
+    padding: 8px;
+    width: 150px;
+    background: yellow;
+    border-radius: 5%;
+    box-shadow: 0px 0px 0.3em #dedede;
+}
+
+.btn-login{
+	margin-left: 20%;
+}
+.btn-cadastrar{
+	margin-left: 18%;
+}
+
