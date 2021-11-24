@@ -49,7 +49,7 @@
     		
 	    	<h3>Recentemente adicionados:</h3>
     		<div class="main">    		
-		        <div class="livro" th:each="livro: ${livros}">
+		        <div class="livro" th:each="livro: ${livros}" th:title="${livro.titulo}">
 					<a th:href="@{/livro-info(ISBN=${livro.ISBN})}">
 						<img class="capa" th:src="${livro.capa}" alt="">
 					</a>

@@ -37,9 +37,11 @@
 	        <div class="livro-compra">
 		        <div class="preco-estoque">
 					<span class="valor" th:inline="text">R$ [[${livro.preco}]]</span>
-					<span class="estoque">Em estoque</span>
+					<span th:if="${estoque == true}" class="estoque">Em estoque</span>
+					<span th:if="${estoque == false}" class="estoque-zero">Sem estoque</span>
 		        </div>
-	            <button class="btn-compra" th:href="@{/adicionar-ao-pedido}" type="submit" > Adicionar ao Pedido</button>
+	            <button th:if="${estoque == true}" class="btn-compra" th:href="@{/adicionar-ao-pedido}" type="submit" > Adicionar ao Pedido</button>
+	            <button th:if="${estoque == false}" class="btn-compra-block" type="submit" > Adicionar ao Pedido</button>
 	        </div>
 		</div>
 

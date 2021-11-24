@@ -78,25 +78,19 @@ body{
     display: block;
     padding: 12px 10px 12px 32px;
     margin-bottom: 5px;
+	border-right: 5px double #17394a;
 
 }
+
 
 .menu span{
 	border-radius: 10px 0 0 10px;
-	background-color: #3f80a1;
-    color: #fff;
-    display: block;
-    padding: 12px 10px 12px 32px;
-    margin-bottom: 5px
-}
-
-.menu span{
-border-radius: 10px 0 0 10px;
     background-color: #3f80a1;
     color: #fff;
     display: block;
     padding: 12px 10px 12px 32px;
     margin-bottom: 5px;
+    border-right: 5px double #17394a;
 }
 .menu span:hover{
     cursor: pointer;

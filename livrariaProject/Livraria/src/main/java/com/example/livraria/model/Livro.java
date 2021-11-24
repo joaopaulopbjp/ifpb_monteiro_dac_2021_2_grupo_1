@@ -3,15 +3,19 @@ package com.example.livraria.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.ISBN;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * Classe Livro mapeada para a persistencia no banco de dados.
@@ -34,6 +38,8 @@ public class Livro {
 	private List<Autor> autores;
 	@NotBlank
 	private String titulo;
+	@Lob
+	@Column(length=3500)
 	private String descricao;
 	private String edicao;
 	private Integer ano;

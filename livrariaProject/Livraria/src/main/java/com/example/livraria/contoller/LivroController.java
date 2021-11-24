@@ -17,6 +17,7 @@ import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Livro;
 import com.example.livraria.service.AutorService;
 import com.example.livraria.service.CategoriaService;
+import com.example.livraria.service.EstoqueService;
 import com.example.livraria.service.LivroService;
 
 
@@ -28,6 +29,9 @@ public class LivroController {
     
     @Autowired
     CategoriaService categoriaService;
+    
+    @Autowired
+    EstoqueService estoqueService;
 
     @Autowired
     AutorService autorService;
@@ -62,8 +66,10 @@ public class LivroController {
     public String findLivro(@RequestParam(name="ISBN") String ISBN, Model model) {
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
 		Livro livro = livroService.getLivro(ISBN);
+		boolean estoque = estoqueService.verificarLivroEstoque(ISBN, 1);
 		model.addAttribute("livro", livro);
 		model.addAttribute("categorias",listaCategorias);
+		model.addAttribute("estoque", estoque);
 		return "livro/livro_info";
 	}
 }

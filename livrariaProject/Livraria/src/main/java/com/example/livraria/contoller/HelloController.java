@@ -43,7 +43,7 @@ public class HelloController {
 		List<Livro> listaLivros = livroService.findByTitulo(pesquisa,0);
 		model.addAttribute("livros", listaLivros);
 		model.addAttribute("categorias",listaCategorias);
-		return "index";
+		return "livro-search";
 	}
 	
 	@GetMapping("/search/categoria")
