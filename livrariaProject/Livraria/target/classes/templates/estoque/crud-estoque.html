@@ -20,26 +20,28 @@
     <a th:replace="~{index :: index-carrinho}"></a>
     
 	<main>
-		<h3>Gerenciamento de autores</h3>
+		<h3>Gerenciamento de estoque</h3>
     		<div class="main">    		
     			<div>
-    				<form class="autor-form" method="post" th:action="@{/adicionar-autor}" th:object="${autor}">
+    				<form class="autor-form" method="post" th:action="@{/adicionar-estoque}" th:object="${estoque}">
 				  		<div class="form-line">
-				        		<label for="nome" >Nome: </label>
-				        		<input class="campo" type="text" placeholder="Digite o nome do Autor" required id="nome" th:field="*{nome}" >
+				        		<label for="id" >ISBN: </label>
+				        		<input class="campo" type="number" placeholder="Digite o ISBN do livro" required id="id" th:field="*{id}" >
+				        		<label for="quantidade" >Quantidade: </label>
+				        		<input class="campo" type="number" placeholder="Digite a quantidade do livro" required id="quantidade" th:field="*{quantidade}" >
 				        </div>
 				      
 				        <button class="btn-adicionar" type="submit" value="adicionar">Adicionar</button>	
 			 		</form>
     			</div>
 		            
-		        <div class="autor-lista" th:each="autor: ${listaAutores}">
-					<span class="autor-id" th:text="${autor.id}" >ID do autor</span>
-		            <span class="autor-nome" th:text="${autor.nome}" >nome do autor</span>
-		            <a class="alterar" href="">Alterar</a>
-		            <a class="excluir" th:href="@{/excluir(id=${autor.id})}">Excluir</a>
-		        </div> 
-    		</div>
+<!--		        <div class="autor-lista" th:each="estoque: ${lista-estoques}">
+						<span class="autor-id" th:text="${estoque.livro.ISBN}" >ISBN do livro</span>
+			            <span class="autor-nome" th:text="${estoque.quantidade}" >quantidade do livror</span>
+			            <a class="alterar" href="">Alterar</a>
+			            <a class="excluir" th:href="@{/excluir-estoque(id=${estoque.id})}">Excluir</a>
+			    </div> 
+	    	</div>  -->
 	</main>
 	
 </body>

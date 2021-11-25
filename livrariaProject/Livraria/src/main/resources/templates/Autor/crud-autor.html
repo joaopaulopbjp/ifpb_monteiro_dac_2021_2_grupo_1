@@ -33,7 +33,7 @@
 			 		</form>
     			</div>
 		            
-		        <div class="autor" th:each="autor: ${listaAutores}">
+		        <div class="autor-lista" th:each="autor: ${listaAutores}">
 					<span class="autor-id" th:text="${autor.id}" >ID do autor</span>
 		            <span class="autor-nome" th:text="${autor.nome}" >nome do autor</span>
 		            <a class="alterar" href="">Alterar</a>

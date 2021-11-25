@@ -35,7 +35,7 @@ public class HelloController {
 		autorService.salvar(autor.getNome());
 		List<Autor> autores = autorService.getAll(0);
 		model.addAttribute("listaAutores", autores);
-		return "Autor/crud-autor";
+		return "redirect:gerenciar-autores";
 	}
 	
 	@GetMapping("/excluir")
@@ -44,7 +44,8 @@ public class HelloController {
 		autorService.remover(autor);
 		List<Autor> autores = autorService.getAll(0);
 		model.addAttribute("listaAutores", autores);
-		return "Autor/crud-autor";
+		model.addAttribute("autor", new Autor());
+		return "redirect:gerenciar-autores";
 	}
 	
 	@GetMapping("/gerenciar-autores")

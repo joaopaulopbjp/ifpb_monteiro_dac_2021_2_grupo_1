@@ -46,6 +46,10 @@ public class EstoqueService {
 		estoqueRepository.save(estoque);
 		
 	}
+	
+	public void deleteById(Integer id) {
+		estoqueRepository.deleteById(id);
+	}
 
 	/**
 	 * Retorna os 5 licvros mais baratos do banco de dados em estoque
@@ -70,6 +74,13 @@ public class EstoqueService {
 			}
 			return quantidade <= quantEstoque;
 		}
+	}
+	
+	public List<Estoque> findAll(Integer page) {
+		Pageable pageable = PageRequest.of(page, 21, Sort.by("id").descending());
+			
+			
+		return estoqueRepository.findAll(pageable).getContent();
 	}
 
 }

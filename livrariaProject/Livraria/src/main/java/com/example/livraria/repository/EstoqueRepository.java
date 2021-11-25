@@ -27,5 +27,9 @@ public interface EstoqueRepository extends JpaRepository<Estoque, Integer> {
 	
 	@Query("SELECT l FROM Livro  l, Estoque e WHERE l.ISBN = e.livro ORDER BY l.preco ASC")
 	Page<Livro> findAllLivrosMaisBaratosNoEstoque(Pageable pageable);
+	
+	Page<Estoque> findAll(Pageable pageable);
+	
+	
 
 }
