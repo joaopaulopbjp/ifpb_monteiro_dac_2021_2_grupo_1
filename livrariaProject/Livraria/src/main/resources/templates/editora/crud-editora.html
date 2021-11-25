@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <script>src="https://kit.fontawesome.com/le592b5726.js"</script>
+	    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+	    <link rel="stylesheet" th:href="@{/style/index.css}">
+	    <title>Livraria</title>
+		<link rel="stylesheet" th:href="@{/style/editora/crud-editora.css}">
+</head>
+<body>
+    <header th:replace="~{index :: index-header}"></header>
+    <form th:replace="~{index :: index-form}"></form>
+    <script th:replace="~{index :: index-script}"></script>
+    <a th:replace="~{index :: index-carrinho}"></a>
+    
+	<main>
+		<h3>Gerenciamento de editoras</h3>
+    	<div class="main">    		
+    			<div>
+    				<form class="editora-form" method="post" th:action="@{/adicionar-editora}" th:object="${editora}">
+				  		<div class="form-line">
+				        		<label for="nome" >Nome: </label>
+				        		<input class="campo" type="text" placeholder="Digite o nome da editora" required id="nome" th:field="*{nome}" >
+				        		<label for="nome" >Cidade: </label>
+				        		<input class="campo" type="text" placeholder="Digite a cidade da editora" required id="cidade" th:field="*{cidade}" >
+				        </div>
+				      
+				        <button class="btn-adicionar" type="submit" value="adicionar">Adicionar</button>	
+			 		</form>
+    			</div>
+		            
+		        <div class="editora" th:each="editora: ${listaEditoras}">
+					<span class="editora-id" th:text="${editora.id}" >ID da editora</span>
+		            <span class="editora-nome" th:text="${editora.nome}" >nome da editora</span>
+		            <span class="editora-cidade" th:text="${editora.cidade}">cidade da editora</span>
+		            <a class="alterar" href="">Alterar</a>
+		            <a class="excluir" th:href="@{/excluir-editora(id=${editora.id})}">Excluir</a>
+		        </div>
+    	</div>	
+	</main>
+	
+</body>
+</html>

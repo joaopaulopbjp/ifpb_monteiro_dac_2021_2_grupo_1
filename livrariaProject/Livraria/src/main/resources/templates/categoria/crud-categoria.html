@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <script>src="https://kit.fontawesome.com/le592b5726.js"</script>
+	    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+	    <link rel="stylesheet" th:href="@{/style/index.css}">
+	    <title>Livraria</title>
+		<link rel="stylesheet" th:href="@{/style/categoria/crud-categoria.css}">
+</head>
+<body>
+    <header th:replace="~{index :: index-header}"></header>
+    <form th:replace="~{index :: index-form}"></form>
+    <script th:replace="~{index :: index-script}"></script>
+    <a th:replace="~{index :: index-carrinho}"></a>
+    
+	<main>
+		<h3>Gerenciamento de categorias</h3>
+    	<div class="main">    		
+    			<div>
+    				<form class="categoria-form" method="post" th:action="@{/adicionar-categoria}" th:object="${categoria}">
+				  		<div class="form-line">
+				        		<label for="nome" >Nome: </label>
+				        		<input class="campo" type="text" placeholder="Digite o nome do categoria" required id="nome" th:field="*{nome}" >
+				        </div>
+				      
+				        <button class="btn-adicionar" type="submit" value="adicionar">Adicionar</button>	
+			 		</form>
+    			</div>
+		            
+		        <div class="categoria" th:each="categoria: ${listaCategorias}">
+					<span class="categoria-id" th:text="${categoria.id}">ID da categoria</span>
+		            <span class="categoria-nome" th:text="${categoria.nome}">nome da categoria</span>
+		            <a class="alterar" href="" >Alterar</a>
+		            <a class="excluir" th:href="@{/excluir-categoria(id=${categoria.id})}">Excluir</a>
+		        </div> 
+    		</div>	
+	</main>
+	
+</body>
+</html>
