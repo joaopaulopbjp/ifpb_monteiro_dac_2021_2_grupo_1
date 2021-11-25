@@ -72,4 +72,13 @@ public class EstoqueService {
 		}
 	}
 
+	public Estoque findByLivro(Livro livro) {
+		List<Estoque> estoques = estoqueRepository.findByLivro(livro);
+		return estoques.isEmpty() ? null : estoques.get(0);
+	}
+
+	public void delete(Estoque estoque) {
+		estoqueRepository.delete(estoque);
+	}
+
 }

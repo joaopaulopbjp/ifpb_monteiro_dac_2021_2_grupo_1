@@ -30,7 +30,7 @@ public class UserController {
 		
 		if(!result.hasErrors()) {
 			
-			usuarioService.salvar(usuario.getNome(), usuario.getCPF(), usuario.getEmail(),usuario.getPassword()/*, "", "", "", "", 67, "", ""*/);
+			usuarioService.salvar(usuario);
 			
 			System.out.println("Post: cadastrado com sucesso");
 

@@ -149,6 +149,15 @@ public class LivroService {
     	livroRepository.delete(livro);
     }
 
+	/**
+     * Metódo que vai remover o livro que foi passado por parametro se ele existir na base de dados.
+     * 
+     * @param livro livro a ser removido
+     */
+	public void remover(Livro livro) {
+    	livroRepository.delete(livro);
+    }
+
     /**
      * Método usado para procurar um livro que pode existir ou não na base de dados.
      * 
