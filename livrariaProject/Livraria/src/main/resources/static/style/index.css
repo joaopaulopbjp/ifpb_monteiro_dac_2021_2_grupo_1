@@ -106,6 +106,10 @@ body{
 #pai {
     display: none;  
 }
+
+#mae{
+	display: none;
+}
 .submenu .active{
     display: block;
 }

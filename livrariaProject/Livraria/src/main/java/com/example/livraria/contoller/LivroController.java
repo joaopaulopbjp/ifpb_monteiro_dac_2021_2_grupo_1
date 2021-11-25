@@ -41,7 +41,7 @@ public class LivroController {
 	
     @GetMapping("/cadastrar-livro") 
     public String cadastrarLivro(Model model) {
-    	List<Autor> listaAutores = autorService.getAll();
+    	List<Autor> listaAutores = autorService.getAll(0);
 //    	List<Editora> listaEditoras = editoraService.getAll();
 //    	model.addAttribute("editoras",listaEditoras);
     	model.addAttribute("autores",listaAutores);

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.livraria.model.Autor;
@@ -67,8 +70,9 @@ public class AutorService {
      * 
      * @return Lista de todos os objetos de Autores
      */
-	public List<Autor> getAll() {
-        List<Autor> autores = autorRepository.findAll();
+	public List<Autor> getAll(Integer page) {
+		Pageable pageable = PageRequest.of(page, 20);
+        List<Autor> autores = autorRepository.findAll(pageable).getContent();
         return autores;
     }
 	
@@ -85,5 +89,7 @@ public class AutorService {
 		
 		autorRepository.save(existe);
 	}
+
+
     
 }

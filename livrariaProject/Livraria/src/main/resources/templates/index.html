@@ -30,6 +30,16 @@
                         </ul>
                     	</li>
                     	<li class="menu-nav"><a class="menu-nav" href="" >MEU PERFIL</a></li>
+                    	<span class="menu-nav"  onclick="mostrar('mae')" href="" >ADMINISTRAÇÃO</span>
+                    	<ul class="submenu" id="mae" >
+	                    	<li><a href="/gerenciar-autores">Gerenciar Autores</a></li>
+	                    	<li><a href="/">Gerenciar Livros</a></li>
+	                    	<li><a href="/">Gerenciar Categorias</a></li>
+	                    	<li><a href="/">Gerenciar Editoras</a></li>
+	                    	<li><a href="/">Gerenciar Estoque</a></li>
+	                    	<li><a href="/">Gerenciar Pedido</a></li>
+	                    	<li><a href="/">Gerenciar Forma de pagamento</a></li>
+                        </ul>
                 	</ul>
             	</div>
 			</div>
@@ -47,7 +57,7 @@
     	
     	<main> 
     		
-	    	<h3>Recentemente adicionados:</h3>
+	    	<h3>Últimos lancamentos:</h3>
     		<div class="main">    		
 		        <div class="livro" th:each="livro: ${livros}" th:title="${livro.titulo}">
 					<a th:href="@{/livro-info(ISBN=${livro.ISBN})}">
