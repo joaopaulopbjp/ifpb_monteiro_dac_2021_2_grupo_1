@@ -1,4 +1,4 @@
-package com.example.livraria.contoller;
+package com.example.livraria.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

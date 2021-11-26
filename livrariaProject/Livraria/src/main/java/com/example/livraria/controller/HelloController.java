@@ -1,4 +1,4 @@
-package com.example.livraria.contoller;
+package com.example.livraria.controller;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class HelloController {
 		autorService.salvar(autor.getNome());
 		List<Autor> autores = autorService.getAll(0);
 		model.addAttribute("listaAutores", autores);
-		return "redirect:gerenciar-autores";
+		return "redirect:/gerenciar-autores";
 	}
 	
 	@GetMapping("/excluir")
@@ -43,8 +43,10 @@ public class HelloController {
 		autorService.remover(autor);
 		List<Autor> autores = autorService.getAll(0);
 		model.addAttribute("listaAutores", autores);
+
 		model.addAttribute("autor", new Autor());
-		return "redirect:gerenciar-autores";
+
+		return "redirect:/gerenciar-autores";
 	}
 	
 	@GetMapping("/gerenciar-autores")

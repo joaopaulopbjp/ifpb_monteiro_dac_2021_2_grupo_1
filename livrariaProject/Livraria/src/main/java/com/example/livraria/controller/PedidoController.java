@@ -1,4 +1,4 @@
-package com.example.livraria.contoller;
+package com.example.livraria.controller;
 
 import com.example.livraria.model.Pedido;
 import com.example.livraria.service.PedidoService;

@@ -32,6 +32,11 @@ public class CategoriaService {
         Categoria categoria = categoriaRepository.findByName(nome);
         return categoria;
     }
+    
+    public Categoria getCategoriaID(Integer id) {
+    	Optional<Categoria> categoria = categoriaRepository.findById(id);
+        return categoria.isPresent() ? categoria.get() : null;
+    }
 
     public List<Categoria> obterCategorias() {
         return categoriaRepository.findAll();
