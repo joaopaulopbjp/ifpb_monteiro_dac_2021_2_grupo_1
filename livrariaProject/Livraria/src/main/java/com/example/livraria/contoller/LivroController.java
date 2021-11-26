@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.livraria.model.Autor;
 import com.example.livraria.model.Categoria;
+import com.example.livraria.model.Estoque;
 import com.example.livraria.model.Livro;
 import com.example.livraria.service.AutorService;
 import com.example.livraria.service.CategoriaService;
@@ -39,8 +40,18 @@ public class LivroController {
 //    @Autowired
 //    EditoraService editoraService;
 	
-    @GetMapping("/cadastrar-livro") 
+    @GetMapping("/livro/cadastrar") 
     public String cadastrarLivro(Model model) {
+    	List<Autor> listaAutores = autorService.getAll(0);
+//    	List<Editora> listaEditoras = editoraService.getAll();
+//    	model.addAttribute("editoras",listaEditoras);
+    	model.addAttribute("autores",listaAutores);
+    	model.addAttribute("livro", new Livro());
+        return "livro/cadastro_livro";
+    }
+
+    @GetMapping("/livro/alterar") 
+    public String alterarLivro(@RequestParam(name="ISBN") String ISBN, Model model) {
     	List<Autor> listaAutores = autorService.getAll(0);
 //    	List<Editora> listaEditoras = editoraService.getAll();
 //    	model.addAttribute("editoras",listaEditoras);
@@ -71,5 +82,30 @@ public class LivroController {
 		model.addAttribute("categorias",listaCategorias);
 		model.addAttribute("estoque", estoque);
 		return "livro/livro_info";
+	}
+
+    @GetMapping("/search-livro")
+    public String search(@RequestParam(name="titulo") String titulo, Model model) {
+        List<Livro> livros = livroService.findByTitulo(titulo, 0);
+        model.addAttribute("listaLivros", livros);
+		return "livro/crud-livro";
+    }
+
+    @GetMapping("/gerenciar-livros")
+	public String crudLivros(Model model){
+		List<Livro> livros = livroService.getAll();
+		model.addAttribute("listaLivros", livros);
+		return "livro/crud-livro";
+	}
+
+    @GetMapping("/livro/excluir")
+	public String RemoverLivro(@RequestParam(name="ISBN") String isbn, Model model){
+        Livro livro = livroService.getLivro(isbn);
+        Estoque estoque = estoqueService.findByLivro(livro);
+        if(estoque != null) {
+            estoqueService.delete(estoque);
+        }
+		livroService.remover(livro);
+		return "redirect:/gerenciar-livros";
 	}
 }

@@ -3,10 +3,8 @@ package com.example.livraria.model;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
@@ -15,7 +13,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.ISBN;
-import org.hibernate.validator.constraints.Length;
 
 /**
  * Classe Livro mapeada para a persistencia no banco de dados.
@@ -97,7 +94,7 @@ public class Livro {
 		this.editora = editora;
 	}
 	public BigDecimal getPreco() {
-		return preco.setScale(2);
+		return (preco != null ) ? preco.setScale(2): null;
 	}
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;

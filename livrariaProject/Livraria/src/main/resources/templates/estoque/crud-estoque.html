@@ -28,20 +28,20 @@
 				        		<label for="id" >ISBN: </label>
 				        		<input class="campo" type="number" placeholder="Digite o ISBN do livro" required id="id" th:field="*{id}" >
 				        		<label for="quantidade" >Quantidade: </label>
-				        		<input class="campo" type="number" placeholder="Digite a quantidade do livro" required id="quantidade" th:field="*{quantidade}" >
+				        		<input class="campo" type="number" name="quantidade" placeholder="Digite a quantidade do livro" required id="quantidade" th:field="*{quantidade}" >
 				        </div>
 				      
 				        <button class="btn-adicionar" type="submit" value="adicionar">Adicionar</button>	
 			 		</form>
     			</div>
 		            
-<!--		        <div class="autor-lista" th:each="estoque: ${lista-estoques}">
+		        <div class="autor-lista" th:each="estoque: ${listaEstoques}">
 						<span class="autor-id" th:text="${estoque.livro.ISBN}" >ISBN do livro</span>
 			            <span class="autor-nome" th:text="${estoque.quantidade}" >quantidade do livror</span>
 			            <a class="alterar" href="">Alterar</a>
 			            <a class="excluir" th:href="@{/excluir-estoque(id=${estoque.id})}">Excluir</a>
 			    </div> 
-	    	</div>  -->
+	    	</div>  
 	</main>
 	
 </body>

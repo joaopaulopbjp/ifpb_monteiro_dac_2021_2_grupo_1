@@ -28,7 +28,7 @@ public class EstoqueController {
 	public String crudEstoque(Model model) {
 		Estoque estoque = new Estoque();
 		List<Estoque> estoques = estoqueService.findAll(0);
-		model.addAttribute("lista-estoques", estoques);
+		model.addAttribute("listaEstoques", estoques);
 		model.addAttribute(estoque);
 		return "estoque/crud-estoque";
 	}
@@ -37,7 +37,7 @@ public class EstoqueController {
 	public String adicionarEstoque(@ModelAttribute(name="estoque") Estoque estoque, Model model){
 		estoqueService.criarEstoque(estoque.getId().toString(), estoque.getQuantidade());
 		List<Estoque> estoques = estoqueService.findAll(0);
-		model.addAttribute("lista-estoques", estoques);
+		model.addAttribute("listaEstoques", estoques);
 		return "redirect:gerenciar-estoque";
 	}
 	
@@ -45,7 +45,7 @@ public class EstoqueController {
 	public String RemoverAutor(@RequestParam(name="id") Integer id, Model model){ 
 		estoqueService.deleteById(id);
 		List<Estoque> estoques = estoqueService.findAll(0);
-		model.addAttribute("lista-estoques", estoques);
+		model.addAttribute("listaEstoques", estoques);
 		model.addAttribute("estoque", new Estoque());
 		return "redirect:gerenciar-estoque";
 	}

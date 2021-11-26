@@ -42,7 +42,7 @@ public class EstoqueService {
 			
 		}
 		
-		estoque.setQuantidade(estoque.getQuantidade()+quantidade);
+		estoque.setQuantidade(quantidade);
 		estoqueRepository.save(estoque);
 		
 	}
@@ -81,6 +81,15 @@ public class EstoqueService {
 			
 			
 		return estoqueRepository.findAll(pageable).getContent();
+	}
+
+	public Estoque findByLivro(Livro livro) {
+		List<Estoque> estoques = estoqueRepository.findByLivro(livro);
+		return estoques.isEmpty() ? null : estoques.get(0);
+	}
+
+	public void delete(Estoque estoque) {
+		estoqueRepository.delete(estoque);
 	}
 
 }
