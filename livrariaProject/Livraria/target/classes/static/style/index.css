@@ -161,6 +161,42 @@ body{
     box-shadow: 0px 0px 0.3em #666;
 }
 
+.promo{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+	margin-left: 295px;
+	margin-top: 50px;
+	padding-right: 30px;
+	background-color: yellow;
+	box-shadow: 0px 0px 0.8em #dedede;
+	padding-bottom: 30px;
+	border-radius: 25px;
+}
+
+.livros .titulo{
+	color: white;
+}
+
+.livros .preco{
+	color: chartreuse;
+}
+
+
+.livros{
+	display: flex;
+}
+
+.livros .livro{
+	background-color: #17394a;
+	box-shadow: 0px 0px 3em #000;
+	margin-left: 50px;
+	margin-right: 50px;
+	border-style: none;
+}
+
 .main{
 	display: flex;
     flex-wrap: wrap;

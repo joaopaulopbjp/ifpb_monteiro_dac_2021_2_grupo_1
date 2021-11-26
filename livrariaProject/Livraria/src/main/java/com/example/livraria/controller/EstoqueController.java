@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.livraria.model.Autor;
+import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Estoque;
+import com.example.livraria.service.CategoriaService;
 import com.example.livraria.service.EstoqueService;
 import com.example.livraria.service.LivroService;
 
@@ -24,12 +26,17 @@ public class EstoqueController {
 	@Autowired
 	EstoqueService estoqueService;
 	
+	@Autowired
+	CategoriaService categoriaService;
+	
 	@GetMapping("/gerenciar-estoque")
 	public String crudEstoque(Model model) {
 		Estoque estoque = new Estoque();
 		List<Estoque> estoques = estoqueService.findAll(0);
 		model.addAttribute("listaEstoques", estoques);
 		model.addAttribute(estoque);
+		List<Categoria> listaCategorias = categoriaService.obterCategorias();
+		model.addAttribute("categorias",listaCategorias);
 		return "estoque/crud-estoque";
 	}
 	

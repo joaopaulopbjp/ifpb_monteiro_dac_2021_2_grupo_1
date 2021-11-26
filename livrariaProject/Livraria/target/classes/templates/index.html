@@ -55,6 +55,24 @@
             	</li>
     	</form>
     	
+    	<div class="promo" th:if="${livrosMaisBaratos != null}">
+    		<div class="promo-titulo">
+    			<h2>Livros Mais Baratos disponíveis</h2>
+    		</div>
+    		<div class="livros">
+    			<div class="livro" th:each="livro: ${livrosMaisBaratos}" th:title="${livro.titulo}">
+					<a th:href="@{/livro-info(ISBN=${livro.ISBN})}">
+						<img class="capa" th:src="${livro.capa}" alt="">
+					</a>
+		            <span class="titulo"th:text="${livro.titulo}" >Titulo do Livro</span>
+		            <div class="preco">
+		            	<span class="rs">R$</span>
+		            	<span class="preco" th:text="${livro.preco}">RS:00.00</span>
+		            </div>
+		        </div> 
+    		</div>
+    	</div>
+    	
     	<main> 
     		
 	    	<h3>Últimos lancamentos:</h3>
