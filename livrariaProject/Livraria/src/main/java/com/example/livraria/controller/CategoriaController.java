@@ -1,4 +1,4 @@
-package com.example.livraria.contoller;
+package com.example.livraria.controller;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class CategoriaController {
 	CategoriaService categoriaService;
 	
 	@GetMapping("/gerenciar-categorias")
-	public String crudAutores(Model model){
+	public String crudCategoria(Model model){
 		Categoria categoria = new Categoria();
 		List<Categoria> categorias = categoriaService.obterCategorias();
 		model.addAttribute("listaCategorias", categorias);
@@ -29,7 +29,7 @@ public class CategoriaController {
 	}
 	
 	@PostMapping("/adicionar-categoria")
-	public String adicionarAutor(@ModelAttribute(name="categoria") Categoria categoria, Model model){
+	public String adicionarCategoria(@ModelAttribute(name="categoria") Categoria categoria, Model model){
 		categoriaService.salvar(categoria);
 		List<Categoria> categorias = categoriaService.obterCategorias();
 		model.addAttribute("listaCategorias", categorias);
@@ -37,7 +37,7 @@ public class CategoriaController {
 	}
 
 	@GetMapping("/excluir-categoria")
-	public String RemoverEditora(@RequestParam(name="id") Integer id, Model model){
+	public String RemoverCategoria(@RequestParam(name="id") Integer id, Model model){
 		Categoria categoria = categoriaService.getCategoriaID(id);
 		categoriaService.deletarCategoria(categoria);
 		List<Categoria> categorias = categoriaService.obterCategorias();

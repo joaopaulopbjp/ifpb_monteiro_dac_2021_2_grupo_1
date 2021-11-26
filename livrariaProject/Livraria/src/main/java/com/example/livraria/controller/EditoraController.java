@@ -1,4 +1,4 @@
-package com.example.livraria.contoller;
+package com.example.livraria.controller;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class EditoraController {
 	EditoraService editoraService;
 	
 	@GetMapping("/gerenciar-editoras")
-	public String crudAutores(Model model){
+	public String crudEditoras(Model model){
 		Editora categoria = new Editora();
 		List<Editora> editoras = editoraService.getAll();
 		model.addAttribute("listaEditoras", editoras);
@@ -29,7 +29,7 @@ public class EditoraController {
 	}
 	
 	@PostMapping("/adicionar-editora")
-	public String adicionarAutor(@ModelAttribute(name="editora") Editora editora, Model model){
+	public String adicionarEditora(@ModelAttribute(name="editora") Editora editora, Model model){
 		editoraService.salvar(editora);
 		List<Editora> editoras = editoraService.getAll();
 		model.addAttribute("listaEditoras", editoras);

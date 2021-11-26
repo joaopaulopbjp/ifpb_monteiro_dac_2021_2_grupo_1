@@ -1,4 +1,4 @@
-package com.example.livraria.contoller;
+package com.example.livraria.controller;
 
 import java.util.List;
 
