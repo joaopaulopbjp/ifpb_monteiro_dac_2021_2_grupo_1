@@ -95,6 +95,8 @@ public class LivroController {
 	public String crudLivros(Model model){
 		List<Livro> livros = livroService.getAll();
 		model.addAttribute("listaLivros", livros);
+		List<Categoria> listaCategorias = categoriaService.obterCategorias();
+		model.addAttribute("categorias",listaCategorias);
 		return "livro/crud-livro";
 	}
 

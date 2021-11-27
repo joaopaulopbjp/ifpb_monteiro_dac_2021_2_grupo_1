@@ -15,6 +15,7 @@ import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Livro;
 import com.example.livraria.service.AutorService;
 import com.example.livraria.service.CategoriaService;
+import com.example.livraria.service.EstoqueService;
 import com.example.livraria.service.LivroService;
 
 @Controller
@@ -28,6 +29,9 @@ public class HelloController {
 	
 	@Autowired
 	AutorService autorService;
+	
+	@Autowired
+	EstoqueService estoqueService;
 	
 	@PostMapping("/adicionar-autor")
 	public String adicionarAutor(@ModelAttribute(name="autor") Autor autor, Model model){
@@ -49,6 +53,9 @@ public class HelloController {
 		autorService.remover(autor);
 		List<Autor> autores = autorService.getAll(0);
 		model.addAttribute("listaAutores", autores);
+
+		model.addAttribute("autor", new Autor());
+
 		return "redirect:/gerenciar-autores";
 	}
 	
@@ -58,15 +65,20 @@ public class HelloController {
 		List<Autor> autores = autorService.getAll(0);
 		model.addAttribute("listaAutores", autores);
 		model.addAttribute(autor);
+		List<Categoria> listaCategorias = categoriaService.obterCategorias();
+		model.addAttribute("categorias",listaCategorias);
 		return "Autor/crud-autor";
 	}
 	
 	@GetMapping("/home")
 	public String hello(Model model) {
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
+		model.addAttribute("categorias",listaCategorias);
 		List<Livro> listaLivros = livroService.consultarPorPaginaAleatoria(0);
 		model.addAttribute("livros", listaLivros);
-		model.addAttribute("categorias",listaCategorias);
+		List<Livro> listaLivrosMaisBaratos = estoqueService.consultarLivrosBaratos();
+		model.addAttribute("livrosMaisBaratos", listaLivrosMaisBaratos);
+		
 		return "index";
 	}
 

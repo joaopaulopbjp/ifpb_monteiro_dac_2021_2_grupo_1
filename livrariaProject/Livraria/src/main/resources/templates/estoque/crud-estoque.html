@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <script>src="https://kit.fontawesome.com/le592b5726.js"</script>
+	    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+	    <link rel="stylesheet" th:href="@{/style/index.css}">
+	    <title>Livraria</title>
+		<link rel="stylesheet" th:href="@{/style/autor/crud-autor.css}">
+</head>
+<body>
+    <header th:replace="~{index :: index-header}"></header>
+    <form th:replace="~{index :: index-form}"></form>
+    <script th:replace="~{index :: index-script}"></script>
+    <a th:replace="~{index :: index-carrinho}"></a>
+    
+	<main>
+		<h3>Gerenciamento de estoque</h3>
+    		<div class="main">    		
+    			<div>
+    				<form class="autor-form" method="post" th:action="@{/adicionar-estoque}" th:object="${estoque}">
+				  		<div class="form-line">
+				        		<label for="id" >ISBN: </label>
+				        		<input class="campo" type="number" placeholder="Digite o ISBN do livro" required id="id" th:field="*{id}" >
+				        		<label for="quantidade" >Quantidade: </label>
+				        		<input class="campo" type="number" name="quantidade" placeholder="Digite a quantidade do livro" required id="quantidade" th:field="*{quantidade}" >
+				        </div>
+				      
+				        <button class="btn-adicionar" type="submit" value="adicionar">Adicionar</button>	
+			 		</form>
+    			</div>
+		            
+		        <div class="autor-lista" th:each="estoque: ${listaEstoques}">
+						<span class="autor-id" th:text="${estoque.livro.ISBN}" >ISBN do livro</span>
+			            <span class="autor-nome" th:text="${estoque.quantidade}" >quantidade do livror</span>
+			            <a class="alterar" href="">Alterar</a>
+			            <a class="excluir" th:href="@{/excluir-estoque(id=${estoque.id})}">Excluir</a>
+			    </div> 
+	    	</div>  
+	</main>
+	
+</body>
+</html>

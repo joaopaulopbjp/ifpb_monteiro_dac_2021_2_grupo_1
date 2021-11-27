@@ -165,18 +165,7 @@ public class ApplicationConsole implements CommandLineRunner {
 	 				break;
 	 			//Alterar autor
 	 			case 4:
-	 				System.out.println("Todos os autores: ");
-	 				for(int i = 0; i < autorService.getAll().size(); i++) {
-	 					System.out.println(autorService.getAll().get(i).toString());
-	 				}
-	 				System.out.print("Digite o ID do autor que quer alterar: ");
- 		    		autorID = entrada.nextInt();
- 		    		
- 		    		System.out.print("Digite o nome: ");
-	 				entrada.nextLine();
-	 		    	nome = entrada.nextLine();
-	 		    	
-	 		    	autorService.update(autorID, nome); 		    		
+	 					    		
 	 				break;
 	 			//Cadastrar livro
 	 			case 5:

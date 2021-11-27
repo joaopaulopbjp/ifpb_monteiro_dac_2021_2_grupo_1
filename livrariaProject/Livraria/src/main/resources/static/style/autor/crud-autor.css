@@ -5,7 +5,7 @@
 	align-items: center;
 }
 
-.autor{
+.autor-lista{
 	display: flex;
 	justify-content: start;
 	width: 600px;

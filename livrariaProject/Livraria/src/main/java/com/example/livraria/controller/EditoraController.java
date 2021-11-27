@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Editora;
+import com.example.livraria.service.CategoriaService;
 import com.example.livraria.service.EditoraService;
 
 @Controller
@@ -19,12 +21,17 @@ public class EditoraController {
 	@Autowired
 	EditoraService editoraService;
 	
+	@Autowired
+	CategoriaService categoriaService;
+	
 	@GetMapping("/gerenciar-editoras")
 	public String crudEditoras(Model model){
 		Editora categoria = new Editora();
 		List<Editora> editoras = editoraService.getAll();
 		model.addAttribute("listaEditoras", editoras);
 		model.addAttribute(categoria);
+		List<Categoria> listaCategorias = categoriaService.obterCategorias();
+		model.addAttribute("categorias",listaCategorias);
 		return "editora/crud-editora";
 	}
 	

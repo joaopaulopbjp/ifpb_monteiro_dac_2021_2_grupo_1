@@ -21,7 +21,7 @@ public class Estoque {
 	private Integer id;
 	@OneToOne
 	private Livro livro;
-	private Integer quantidade;
+	private Integer quantidade = 0;
 	
 	public Livro getLivro() {
 		return livro;
@@ -33,7 +33,7 @@ public class Estoque {
 		return quantidade;
 	}
 	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+		this.quantidade = this.quantidade + quantidade;
 	}
 	public Integer getId() {
 		return id;

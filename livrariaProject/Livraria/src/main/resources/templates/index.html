@@ -34,9 +34,9 @@
                     	<ul class="submenu" id="mae" >
 	                    	<li><a href="/gerenciar-autores">Gerenciar Autores</a></li>
 	                    	<li><a href="/gerenciar-livros">Gerenciar Livros</a></li>
+	                    	<li><a href="/gerenciar-estoque">Gerenciar Estoque</a></li>
 	                    	<li><a href="/gerenciar-categorias">Gerenciar Categorias</a></li>
 	                    	<li><a href="/gerenciar-editoras">Gerenciar Editoras</a></li>
-	                    	<li><a href="/">Gerenciar Estoque</a></li>
 	                    	<li><a href="/">Gerenciar Pedido</a></li>
 	                    	<li><a href="/">Gerenciar Forma de pagamento</a></li>
                         </ul>
@@ -54,6 +54,24 @@
                 	<a href="/cadastrar-usuario" class="entrar-button"><i class="fal fa-sign-in"></i> Entrar</a>
             	</li>
     	</form>
+    	
+    	<div class="promo" th:if="${livrosMaisBaratos != null}">
+    		<div class="promo-titulo">
+    			<h2>Livros Mais Baratos disponíveis</h2>
+    		</div>
+    		<div class="livros">
+    			<div class="livro" th:each="livro: ${livrosMaisBaratos}" th:title="${livro.titulo}">
+					<a th:href="@{/livro-info(ISBN=${livro.ISBN})}">
+						<img class="capa" th:src="${livro.capa}" alt="">
+					</a>
+		            <span class="titulo"th:text="${livro.titulo}" >Titulo do Livro</span>
+		            <div class="preco">
+		            	<span class="rs">R$</span>
+		            	<span class="preco" th:text="${livro.preco}">RS:00.00</span>
+		            </div>
+		        </div> 
+    		</div>
+    	</div>
     	
     	<main> 
     		

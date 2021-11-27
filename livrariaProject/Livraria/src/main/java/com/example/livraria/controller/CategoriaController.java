@@ -25,6 +25,8 @@ public class CategoriaController {
 		List<Categoria> categorias = categoriaService.obterCategorias();
 		model.addAttribute("listaCategorias", categorias);
 		model.addAttribute(categoria);
+		List<Categoria> listaCategorias = categoriaService.obterCategorias();
+		model.addAttribute("categorias",listaCategorias);
 		return "categoria/crud-categoria";
 	}
 	

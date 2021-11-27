@@ -42,9 +42,13 @@ public class EstoqueService {
 			
 		}
 		
-		estoque.setQuantidade(estoque.getQuantidade()+quantidade);
+		estoque.setQuantidade(quantidade);
 		estoqueRepository.save(estoque);
 		
+	}
+	
+	public void deleteById(Integer id) {
+		estoqueRepository.deleteById(id);
 	}
 
 	/**
@@ -70,6 +74,13 @@ public class EstoqueService {
 			}
 			return quantidade <= quantEstoque;
 		}
+	}
+	
+	public List<Estoque> findAll(Integer page) {
+		Pageable pageable = PageRequest.of(page, 21, Sort.by("id").descending());
+			
+			
+		return estoqueRepository.findAll(pageable).getContent();
 	}
 
 	public Estoque findByLivro(Livro livro) {
