@@ -12,6 +12,7 @@
 	    <link rel="stylesheet" th:href="@{/style/index.css}">
 	    <title>Livraria</title>
 		<link rel="stylesheet" th:href="@{/style/autor/crud-autor.css}">
+		<script type="text/javascript" th:src="@{/script/autor/crud-autor.js}" src="/script/autor/crud-autor.js"></script>
 </head>
 <body>
     <header th:replace="~{index :: index-header}"></header>
@@ -33,10 +34,12 @@
 			 		</form>
     			</div>
 		            
-		        <div class="autor" th:each="autor: ${listaAutores}">
-					<span class="autor-id" th:text="${autor.id}" >ID do autor</span>
-		            <span class="autor-nome" th:text="${autor.nome}" >nome do autor</span>
-		            <a class="alterar" href="">Alterar</a>
+		        <div class="autor" th:each="item: ${listaAutores}">
+					<span class="autor-id" th:text="${item.id}" >ID do autor</span>
+					<form th:id="'form-autor-' + ${item.id}" class="autor-nome" method="post" th:action="@{/alterar-autor(id=${item.id})}" th:object="${autor}">
+						<span th:id="'span-autor-' + ${item.id}" th:id-autor="${item.id}" th:text="${item.nome}" th:onclick="alterarNomeAutor(this.getAttribute('id-autor'))">nome do autor</span>
+					</form>
+		            <a class="alterar" th:id-autor="${item.id}" th:onclick="alterarNomeAutor(this.getAttribute('id-autor'))">Alterar</a>
 		            <a class="excluir" th:href="@{/excluir(id=${autor.id})}">Excluir</a>
 		        </div> 
     		</div>

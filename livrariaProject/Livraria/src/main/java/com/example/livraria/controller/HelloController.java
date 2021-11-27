@@ -36,7 +36,13 @@ public class HelloController {
 		model.addAttribute("listaAutores", autores);
 		return "redirect:/gerenciar-autores";
 	}
-	
+
+	@PostMapping("/alterar-autor")
+	public String alterarAutor(@ModelAttribute(name="autor") Autor autor, Model model){
+		autorService.update(autor);
+		return "redirect:/gerenciar-autores";
+	}
+
 	@GetMapping("/excluir")
 	public String RemoverAutor(@RequestParam(name="id") Integer id, Model model){
 		Autor autor = autorService.getAutor(id);

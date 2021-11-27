@@ -113,37 +113,37 @@ public class ApplicationConsole implements CommandLineRunner {
 	 				entrada.nextLine();
 	 		    	String nome = entrada.nextLine();
 	 		    	
-	 		    	System.out.print("Digite o CPF: ");
-	 		    	String cpf = entrada.nextLine();
+	 		    	// System.out.print("Digite o CPF: ");
+	 		    	// String cpf = entrada.nextLine();
 
-	 		    	System.out.print("Digite o email: ");
-	 		    	email = entrada.nextLine();
+	 		    	// System.out.print("Digite o email: ");
+	 		    	// email = entrada.nextLine();
 
-	 		    	System.out.print("Digite o senha: ");
-	 		    	String senha = entrada.nextLine();
+	 		    	// System.out.print("Digite o senha: ");
+	 		    	// String senha = entrada.nextLine();
 	 		    	
-	 		    	//Endereço
-	 		    	System.out.print("Digite o CEP: ");
-	 		    	String cep = entrada.nextLine();
+	 		    	// //Endereço
+	 		    	// System.out.print("Digite o CEP: ");
+	 		    	// String cep = entrada.nextLine();
 	 		    	
-	 		    	System.out.print("Digite o estado: ");
-	 		    	String estado = entrada.nextLine();
+	 		    	// System.out.print("Digite o estado: ");
+	 		    	// String estado = entrada.nextLine();
 	 		    	
-	 		    	System.out.print("Digite a cidade: ");
-	 		    	String cidade = entrada.nextLine();
+	 		    	// System.out.print("Digite a cidade: ");
+	 		    	// String cidade = entrada.nextLine();
 	 		    	
-	 		    	System.out.print("Digite a rua: ");
-	 		    	String rua = entrada.nextLine();
+	 		    	// System.out.print("Digite a rua: ");
+	 		    	// String rua = entrada.nextLine();
 	 		    	
-	 		    	System.out.print("Digite o número: ");
-	 		    	Integer numero = entrada.nextInt();
+	 		    	// System.out.print("Digite o número: ");
+	 		    	// Integer numero = entrada.nextInt();
 	 		    	
-	 		    	System.out.print("Digite o bairro: ");
-	 				entrada.nextLine();
-	 		    	String bairro = entrada.nextLine();
+	 		    	// System.out.print("Digite o bairro: ");
+	 				// entrada.nextLine();
+	 		    	// String bairro = entrada.nextLine();
 	 		    	
-	 		    	System.out.print("Digite o complemento (opcional): ");
-	 		    	String complemento = entrada.nextLine();
+	 		    	// System.out.print("Digite o complemento (opcional): ");
+	 		    	// String complemento = entrada.nextLine();
 	 			
 	 				//usuarioService.salvar(nome, cpf, email, senha, cep, estado, cidade, rua, numero, bairro, complemento);
 	 				break;

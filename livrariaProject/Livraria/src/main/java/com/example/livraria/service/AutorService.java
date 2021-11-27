@@ -85,14 +85,18 @@ public class AutorService {
 	 * @param id do autor
 	 * @param nome do autor
 	 */
-	public void update (Integer id, String nome) {	
+	public Autor update (Integer id, String nome) {	
 		Optional<Autor> autor = autorRepository.findById(id);
 		Autor existe = autor.isPresent() ? autor.get() : null;
 		
 		existe.setNome(nome);
 		
-		autorRepository.save(existe);
+		return update(existe);
 	}
+
+    public Autor update(Autor autor) {
+        return autorRepository.save(autor);
+    }
 
 
     

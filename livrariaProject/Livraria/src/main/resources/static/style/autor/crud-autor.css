@@ -33,6 +33,10 @@
 	width: 20%;
 	color: #fff;
 }
+
+.alterar:hover {
+	cursor: pointer;
+}
 .excluir{
 	width: 20%;
 	color: #fff;
