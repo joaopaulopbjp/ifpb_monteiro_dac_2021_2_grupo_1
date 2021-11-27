@@ -34,7 +34,7 @@
 			 		</form>
     			</div>
 		            
-		        <div class="autor" th:each="item: ${listaAutores}">
+		        <div class="autor-lista" th:each="item: ${listaAutores}">
 					<span class="autor-id" th:text="${item.id}" >ID do autor</span>
 					<form th:id="'form-autor-' + ${item.id}" class="autor-nome" method="post" th:action="@{/alterar-autor(id=${item.id})}" th:object="${autor}">
 						<span th:id="'span-autor-' + ${item.id}" th:id-autor="${item.id}" th:text="${item.nome}" th:onclick="alterarNomeAutor(this.getAttribute('id-autor'))">nome do autor</span>
