@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.livraria.model.Autor;
 import com.example.livraria.model.Categoria;
+import com.example.livraria.model.Editora;
 import com.example.livraria.model.Estoque;
 import com.example.livraria.model.Livro;
 import com.example.livraria.service.AutorService;
@@ -93,6 +94,14 @@ public class LivroController {
 
     @GetMapping("/gerenciar-livros")
 	public String crudLivros(Model model){
+    	Categoria categoria = new Categoria();
+    	model.addAttribute(categoria);
+    	Editora editora = new Editora();
+    	model.addAttribute(editora);
+    	Autor autor = new Autor();
+    	model.addAttribute(autor);
+    	Livro livro = new Livro();
+    	model.addAttribute(livro);
 		List<Livro> livros = livroService.getAll();
 		model.addAttribute("listaLivros", livros);
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
