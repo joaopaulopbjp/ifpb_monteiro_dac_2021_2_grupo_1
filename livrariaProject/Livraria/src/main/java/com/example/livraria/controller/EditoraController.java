@@ -52,4 +52,10 @@ public class EditoraController {
 		return "redirect:/gerenciar-editoras";
 	}
 	
+	@PostMapping("/alterar-editora")
+	public String alterarEditora(@ModelAttribute(name="editora") Editora editora, Model model){
+		editoraService.alterarEditora(editora);
+		return "redirect:/gerenciar-editoras";
+	}
+	
 }

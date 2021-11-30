@@ -47,4 +47,10 @@ public class CategoriaController {
 		return "redirect:/gerenciar-categorias";
 	}
 	
+	@PostMapping("/alterar-categoria")
+	public String alterarCategoria(@ModelAttribute(name="categoria") Categoria categoria, Model model){
+		categoriaService.alterarCategoria(categoria);
+		return "redirect:/gerenciar-categorias";
+	}
+	
 }
