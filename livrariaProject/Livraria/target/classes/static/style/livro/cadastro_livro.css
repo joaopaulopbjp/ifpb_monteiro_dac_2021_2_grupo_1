@@ -1,0 +1,46 @@
+.search-autor {
+    display: inline;
+}
+
+.search-content {
+    display: block;
+    background-color: #a0bdc9;
+    width: min-content;
+    height: auto;
+}
+
+.form-control {
+    width: 200px;
+}
+
+.search-hidden { 
+    overflow: auto;
+    height: 170px;
+    align-items: start;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.remove {
+    display: none;
+}
+
+#close-result-search-autor {
+    display: flex;
+    margin-left: 170px;
+    margin-top: 8px;
+    position: absolute;
+}
+
+#close-result-search-autor:hover {
+    cursor: pointer;
+}
+
+#ul-lista-autores {
+    margin-top: 2%;
+    margin-left: -20%;
+}
+
+.search-options {
+    margin-bottom: auto;
+}

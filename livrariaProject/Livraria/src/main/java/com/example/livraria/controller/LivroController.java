@@ -1,6 +1,5 @@
 package com.example.livraria.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.livraria.model.Autor;
 import com.example.livraria.model.Categoria;
+import com.example.livraria.model.Editora;
 import com.example.livraria.model.Estoque;
 import com.example.livraria.model.Livro;
 import com.example.livraria.service.AutorService;
 import com.example.livraria.service.CategoriaService;
+import com.example.livraria.service.EditoraService;
 import com.example.livraria.service.EstoqueService;
 import com.example.livraria.service.LivroService;
 
@@ -37,14 +38,16 @@ public class LivroController {
     @Autowired
     AutorService autorService;
     
-//    @Autowired
-//    EditoraService editoraService;
+   @Autowired
+   EditoraService editoraService;
 	
     @GetMapping("/livro/cadastrar") 
     public String cadastrarLivro(Model model) {
     	List<Autor> listaAutores = autorService.getAll(0);
-//    	List<Editora> listaEditoras = editoraService.getAll();
-//    	model.addAttribute("editoras",listaEditoras);
+        List<Editora> listaEditoras = editoraService.getAll();
+        model.addAttribute("editoras",listaEditoras);
+        List<Categoria> listaCategorias = categoriaService.obterCategorias();
+        model.addAttribute("listaCategorias", listaCategorias);
     	model.addAttribute("autores",listaAutores);
     	model.addAttribute("livro", new Livro());
         return "livro/cadastro_livro";
@@ -53,21 +56,21 @@ public class LivroController {
     @GetMapping("/livro/alterar") 
     public String alterarLivro(@RequestParam(name="ISBN") String ISBN, Model model) {
     	List<Autor> listaAutores = autorService.getAll(0);
-//    	List<Editora> listaEditoras = editoraService.getAll();
-//    	model.addAttribute("editoras",listaEditoras);
-    	model.addAttribute("autores",listaAutores);
-    	model.addAttribute("livro", new Livro());
+        List<Editora> listaEditoras = editoraService.getAll();
+        model.addAttribute("editoras",listaEditoras);
+        List<Categoria> listaCategorias = categoriaService.obterCategorias();
+        model.addAttribute("listaCategorias", listaCategorias);
+    	model.addAttribute("listaAutores",listaAutores);
+        model.addAttribute("livro", livroService.getLivro(ISBN));
         return "livro/cadastro_livro";
     }
-    
+
     @PostMapping("/adicionar-livro")
     public String adicionarLivro(@ModelAttribute("livro") Livro livro, BindingResult result, Model modelo) {
     	
     	if(!result.hasErrors()) {
-			
-			livroService.salvar("","","","","",1,Float.parseFloat("0.1"),"","",new ArrayList<Integer>());
-			return "redirect:/cadastrar-livro";
-			
+			livroService.salvar(livro);
+			return "redirect:/gerenciar-livros";
 		}
     	
         return "livro/cadastro_livro";

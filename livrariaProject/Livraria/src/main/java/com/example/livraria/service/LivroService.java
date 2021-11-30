@@ -139,6 +139,10 @@ public class LivroService {
         livroRepository.save(livro);
     }
 
+	public Livro salvar(Livro livro) {
+		return livroRepository.save(livro);
+	}
+
     /**
      * Metódo que vai remover um livro quando for passado o 'isbn' por parametro existente na base de dados.
      * 
