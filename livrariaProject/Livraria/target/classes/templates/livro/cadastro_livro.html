@@ -18,25 +18,25 @@
 			<form class="form-cadastro" method="post" th:action="@{/adicionar-livro}" th:object="${livro}">
 				<div class="form-line">
 					<label for="nome" >ISBN: </label>
-					<input type="text" required id="isbn" th:field="*{ISBN}" th:name="ISBN"> <br/>
+					<input type="text" required id="isbn" th:field="*{ISBN}" th:name="ISBN">
 	<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
 				</div>
 
 				<div class="form-line">
 					<label for="capa" >Capa: </label>
-					<input type="text" required id="capa" th:field="*{capa}" > <br/>
+					<input type="text" required id="capa" th:field="*{capa}" > 
 	<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
 				</div>
 
 				<div class="form-line">
 					<label for="titulo" >Titulo: </label>
-					<input type="text" required id="titulo" th:field="*{titulo}" > <br/>
+					<input type="text" required id="titulo" th:field="*{titulo}" > 
 	<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
 				</div>
 				
 				<div class="form-line">
 					<label for="descricao" >Descrição: </label>
-					<input type="text" required id="descricao" th:field="*{descricao}" > <br/>
+					<input type="text" required id="descricao" th:field="*{descricao}" > 
 	<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
 				</div>
 
@@ -52,13 +52,13 @@
 				
 				<div class="form-line">
 					<label for="edicao" >Edição: </label>
-					<input type="text" required th:field="*{edicao}"> <br/>
+					<input type="text" required th:field="*{edicao}"> 
 	<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
 				</div>
 				
 				<div class="form-line">
 					<label for="ano" >Ano: </label>
-					<input type="number" required  th:field="*{ano}" > <br/>
+					<input type="number" required  th:field="*{ano}" > 
 	<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
 				</div>
 				
@@ -90,7 +90,7 @@
 				
 				<div class="form-line">
 					<label for="preco" >Preço: </label>
-					<input type="number" required id="preco" th:field="*{preco}" step="0.01"> <br/>
+					<input type="number" required id="preco" th:field="*{preco}" step="0.01"> 
 	<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}">Erros</div> -->
 				</div>
 				
@@ -103,8 +103,9 @@
 	
 	<!--        		<div class="invalid-feedback" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}">Erros</div> -->
 	<!-- </div> -->
-
-				<button class="btn-cadastrar" type="submit" value="Salvar" onclick=render()>Salvar</button>
+	       		<div class="button">
+					<button class="btn-cadastrar" type="submit" value="Salvar" onclick=render()>Salvar</button>
+	       		</div>
 			</form>
 	</main>
 

@@ -32,8 +32,6 @@ public class UserController {
 			
 			usuarioService.salvar(usuario);
 			
-			System.out.println("Post: cadastrado com sucesso");
-
 			return "redirect:/home";
 		}
 		

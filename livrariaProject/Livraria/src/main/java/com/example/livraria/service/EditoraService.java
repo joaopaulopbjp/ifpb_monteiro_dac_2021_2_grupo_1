@@ -31,5 +31,9 @@ public class EditoraService {
     	Optional<Editora> editora = editoraRepository.findById(id);
         return editora.isPresent() ? editora.get() : null;
     }
+	
+	public Editora alterarEditora(Editora editora) {
+        return editoraRepository.save(editora);
+    }
 
 }

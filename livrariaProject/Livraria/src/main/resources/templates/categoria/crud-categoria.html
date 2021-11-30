@@ -12,6 +12,7 @@
 	    <link rel="stylesheet" th:href="@{/style/index.css}">
 	    <title>Livraria</title>
 		<link rel="stylesheet" th:href="@{/style/categoria/crud-categoria.css}">
+	    <script type="text/javascript" th:src="@{/script/categoria/crud-categoria.js}" src="/script/categoria/crud-categoria.js"></script>
 </head>
 <body>
     <header th:replace="~{index :: index-header}"></header>
@@ -33,10 +34,12 @@
 			 		</form>
     			</div>
 		            
-		        <div class="categoria" th:each="categoria: ${listaCategorias}">
+		        <div class="categoria-lista" th:each="categoria: ${listaCategorias}">
 					<span class="categoria-id" th:text="${categoria.id}">ID da categoria</span>
-		            <span class="categoria-nome" th:text="${categoria.nome}">nome da categoria</span>
-		            <a class="alterar" href="" >Alterar</a>
+					<form th:id="'form-categoria-' + ${categoria.id}" class="categoria-nome" method="post" th:action="@{/alterar-categoria(id=${categoria.id})}" th:object="${categoria}">
+		            	<span th:id="'span-categoria-' + ${categoria.id}" th:id-categoria="${categoria.id}" th:text="${categoria.nome}" th:onclick="alterarNomeCategoria(this.getAttribute('id-categoria'))">nome da categoria</span>
+					</form>
+		            <a class="alterar" th:id-categoria="${categoria.id}" th:onclick="alterarNomeCategoria(this.getAttribute('id-categoria'))">Alterar</a>
 		            <a class="excluir" th:href="@{/excluir-categoria(id=${categoria.id})}">Excluir</a>
 		        </div> 
     		</div>	
