@@ -12,6 +12,7 @@
 	    <link rel="stylesheet" th:href="@{/style/index.css}">
 	    <title>Livraria</title>
 		<link rel="stylesheet" th:href="@{/style/editora/crud-editora.css}">
+	    <script type="text/javascript" th:src="@{/script/editora/crud-editora.js}" src="/script/editora/crud-editora.js"></script>
 </head>
 <body>
     <header th:replace="~{index :: index-header}"></header>
@@ -35,11 +36,14 @@
 			 		</form>
     			</div>
 		            
-		        <div class="editora" th:each="editora: ${listaEditoras}">
+		        <div class="editora-lista" th:each="editora: ${listaEditoras}">
 					<span class="editora-id" th:text="${editora.id}" >ID da editora</span>
-		            <span class="editora-nome" th:text="${editora.nome}" >nome da editora</span>
-		            <span class="editora-cidade" th:text="${editora.cidade}">cidade da editora</span>
-		            <a class="alterar" href="">Alterar</a>
+					<form th:id="'form-editora1-' + ${editora.id}" class="editora-nome" method="post" th:action="@{/alterar-editora(id=${editora.id}, cidade=${editora.cidade})}" th:object="${editora}">
+		            	<span th:id="'span-editora-nome-' + ${editora.id}" th:id-editora="${editora.id}" th:text="${editora.nome}" th:onclick="alterarNomeEditora(this.getAttribute('id-editora'))">nome da editora</span>
+					</form>
+		            <form th:id="'form-editora2-' + ${editora.id}" class="editora-cidade" method="post" th:action="@{/alterar-editora(id=${editora.id}, nome=${editora.nome})}" th:object="${editora}">
+		            	<span th:id="'span-editora-cidade-' + ${editora.id}" th:id-editora="${editora.id}" th:text="${editora.cidade}" th:onclick="alterarCidadeEditora(this.getAttribute('id-editora'))">cidade da editora</span>
+					</form>
 		            <a class="excluir" th:href="@{/excluir-editora(id=${editora.id})}">Excluir</a>
 		        </div>
     	</div>	
