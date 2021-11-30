@@ -12,7 +12,8 @@
     <a th:replace="~{index :: index-carrinho}"></a>
     <main>
 		<div>
-			<h1>Cadastro de Livro</h1>
+			<h1 th:if="${livro.ISBN == null}">Cadastro de Livro</h1>
+			<h1 th:if="${livro.ISBN != null}">Editar Livro</h1>
 		</div>
 			<form class="form-cadastro" method="post" th:action="@{/adicionar-livro}" th:object="${livro}">
 				<div class="form-line">
