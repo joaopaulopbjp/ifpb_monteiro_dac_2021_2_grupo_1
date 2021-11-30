@@ -5,7 +5,7 @@
 	align-items: center;
 }
 
-.categoria{
+.categoria-lista{
 	display: flex;
 	justify-content: start;
 	width: 600px;
@@ -33,6 +33,11 @@
 	width: 20%;
 	color: #fff;
 }
+
+.alterar:hover {
+	cursor: pointer;
+}
+
 .excluir{
 	width: 20%;
 	color: #fff;
