@@ -3,8 +3,6 @@ package com.example.livraria.repository;
 import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Livro;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,6 +24,5 @@ public interface LivroRepository extends JpaRepository<Livro, String>{
 	Page<Livro> findByTitulo(@Param("titulo") Pageable pageable, String titulo);
 	
 	
-	
-	List<Livro> findByCategoria(Categoria categoria);
+	Page<Livro> findByCategoria(Categoria categoria, Pageable pageable);
 }

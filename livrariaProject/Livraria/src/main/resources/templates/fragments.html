@@ -1,0 +1,25 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria</title>
+</head>
+<body>
+    <div th:if="${totalPages > 1}" th:fragment="pagination(url, pesquisa)">
+        <link rel="stylesheet" th:href="@{/style/pagination.css}">
+        <div class="pagination">
+            <a th:if="${pageAtual > 0}" th:href="@{${url}(pesquisa=${pesquisa}, page=${pageAtual - 1})}" class="back">&laquo;</a>
+            <div class="pages"
+                th:each="pageNumber : ${numPages}">
+                <a th:href="@{${url}(pesquisa=${pesquisa}, page=${pageNumber -1})}"
+                    th:text=${pageNumber}
+                    th:class="${pageNumber==pageAtual + 1} ? active">
+                </a>
+            </div>
+            <a th:if="${totalPages > pageAtual+1}" th:href="@{${url}(pesquisa=${pesquisa}, page=${pageAtual + 1})}" class="next">&raquo;</a>
+        </div>
+    </div>
+    <!-- git commit -m "add paginação na pesquisa do livro pelo titulo e pela categoria" -->
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.example.livraria.service;
 
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -76,9 +77,9 @@ public class LivroService {
 		return livros;
 	}
 	
-	public List<Livro> findByTitulo(String titulo,Integer page){
+	public Page<Livro> findByTitulo(String titulo,Integer page){
 		Pageable pageable = PageRequest.of(page, 21, Sort.by("titulo"));
-		List<Livro> livros = livroRepository.findByTitulo(pageable, titulo).getContent();
+		Page<Livro> livros = livroRepository.findByTitulo(pageable, titulo);
 		return livros;
 	}
 
@@ -274,9 +275,10 @@ public class LivroService {
 
 	}
 	
-	public List<Livro> findByCategoria(String nome){
-		Categoria categoria =categoriaService.buscarCategoriaPorNome(nome);
-		return livroRepository.findByCategoria(categoria);
+	public Page<Livro> findByCategoria(String nome, int page){
+		Pageable pageable = PageRequest.of(page, 21);
+		Categoria categoria = categoriaService.buscarCategoriaPorNome(nome);
+		return livroRepository.findByCategoria(categoria, pageable);
 	}
     
 }

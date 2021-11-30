@@ -21,34 +21,38 @@
     
 	<main>
 		<h3>Gerenciamento de Livros</h3>
-    		<div class="main">    
-				<div>
-					<a class="btn-pesquisar" href="/livro/cadastrar" value="Adicionar">Adicionar Livro</a>	
-				</div>		
-    			<div>
-    				<form class="livro-form" method="get" action="/search-livro">
-    					<h3>Pesquisar Livro</h3>
+		<div class="main">    
+			<div>
+				<a class="btn-pesquisar" href="/livro/cadastrar" value="Adicionar">Adicionar Livro</a>	
+			</div>		
+			<div>
+				<form class="livro-form" method="get" action="/search-livro">
+					<h3>Pesquisar Livro</h3>
 
-				  		<div class="form-line">
-				        		<label for="nome" >Título: </label>
-				        		<input class="campo" type="text" name="titulo" placeholder="Digite o titulo do Livro" required id="titulo-livro-crud" >
-				        </div>
-				        <button class="btn-pesquisar" type="submit" value="Pesquisar">Pesquisar</button>	
-			 		</form>
-    			</div>
-				<div class="livro-center">
-			        <div class="list-livro" th:each="livro: ${listaLivros}">
-						<span class="livro-isbn" th:text="${livro.ISBN}" >ID do livro</span>
-			            <span class="livro-titulo" th:text="${livro.titulo}" >titulo do livro</span>
-	                    <div class="alterar">
-	                        <a class="alterar" th:href="@{/livro/alterar(ISBN=${livro.ISBN})}">Alterar</a>
-	                    </div>
-	                    <div class="excluir">
-	                        <a class="excluir" th:href="@{/livro/excluir(ISBN=${livro.ISBN})}">Excluir</a>
-	                    </div>
-			        </div> 
-				</div>
-    		</div>
+					<div class="form-line">
+							<label for="nome" >Título: </label>
+							<input class="campo" type="text" name="pesquisa" placeholder="Digite o titulo do Livro" required id="titulo-livro-crud" >
+					</div>
+					<button class="btn-pesquisar" type="submit" value="Pesquisar">Pesquisar</button>	
+				</form>
+			</div>
+			<div class="livro-center">
+				<div class="list-livro" th:each="livro: ${listaLivros}">
+					<span class="livro-isbn" th:text="${livro.ISBN}" >ID do livro</span>
+					<span class="livro-titulo" th:text="${livro.titulo}" >titulo do livro</span>
+					<div class="alterar">
+						<a class="alterar" th:href="@{/livro/alterar(ISBN=${livro.ISBN})}">Alterar</a>
+					</div>
+					<div class="excluir">
+						<a class="excluir" th:href="@{/livro/excluir(ISBN=${livro.ISBN})}">Excluir</a>
+					</div>
+				</div> 
+			</div>
+		</div>
+		<div th:replace="~{fragments :: pagination(
+			'/search-livro',
+			${pesquisa}
+		)}"></div>
 	</main>
 	
 </body>

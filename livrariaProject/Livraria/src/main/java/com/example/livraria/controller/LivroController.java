@@ -1,8 +1,11 @@
 package com.example.livraria.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -88,22 +91,30 @@ public class LivroController {
 	}
 
     @GetMapping("/search-livro")
-    public String search(@RequestParam(name="titulo") String titulo, Model model) {
-        List<Livro> livros = livroService.findByTitulo(titulo, 0);
-        model.addAttribute("listaLivros", livros);
+    public String search(@RequestParam(name="pesquisa") String titulo, @RequestParam(name="page", required = false) Integer page, Model model) {
+        if(page == null) {
+			page = 0;
+		}
+        List<Categoria> listaCategorias = categoriaService.obterCategorias();
+		Page<Livro> listaLivros = livroService.findByTitulo(titulo,page);
+		model.addAttribute("pageAtual", listaLivros.getNumber());
+		model.addAttribute("listaLivros", listaLivros.getContent());
+		model.addAttribute("categorias",listaCategorias);
+		model.addAttribute("pesquisa", titulo);
+		
+		int totalPages = listaLivros.getTotalPages();
+		model.addAttribute("totalPages", totalPages);
+		if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                .boxed()
+                .collect(Collectors.toList());
+            
+			model.addAttribute("numPages", pageNumbers);
+        }
 		return "livro/crud-livro";
     }
-
     @GetMapping("/gerenciar-livros")
 	public String crudLivros(Model model){
-    	Categoria categoria = new Categoria();
-    	model.addAttribute(categoria);
-    	Editora editora = new Editora();
-    	model.addAttribute(editora);
-    	Autor autor = new Autor();
-    	model.addAttribute(autor);
-    	Livro livro = new Livro();
-    	model.addAttribute(livro);
 		List<Livro> livros = livroService.getAll();
 		model.addAttribute("listaLivros", livros);
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();

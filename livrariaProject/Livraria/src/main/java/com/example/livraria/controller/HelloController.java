@@ -1,8 +1,11 @@
 package com.example.livraria.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -88,20 +91,52 @@ public class HelloController {
 	}
 	
 	@GetMapping("/search")
-	public String search(@RequestParam(name="pesquisa") String pesquisa, Model model) {
+	public String search(@RequestParam(name="pesquisa") String pesquisa,@RequestParam(name="page", required = false) Integer page, Model model) {
+		if(page == null) {
+			page = 0;
+		}
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
-		List<Livro> listaLivros = livroService.findByTitulo(pesquisa,0);
-		model.addAttribute("livros", listaLivros);
+		Page<Livro> listaLivros = livroService.findByTitulo(pesquisa,page);
+		model.addAttribute("pageAtual", listaLivros.getNumber());
+		model.addAttribute("livros", listaLivros.getContent());
 		model.addAttribute("categorias",listaCategorias);
+		model.addAttribute("pesquisa", pesquisa);
+		
+		int totalPages = listaLivros.getTotalPages();
+		model.addAttribute("totalPages", totalPages);
+		if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                .boxed()
+                .collect(Collectors.toList());
+            
+			model.addAttribute("numPages", pageNumbers);
+        }
 		return "livro-search";
 	}
 	
 	@GetMapping("/search/categoria")
-	public String categoria(@RequestParam(name="categoria") String pesquisa, Model model) {
+	public String categoria(@RequestParam(name="pesquisa") String pesquisa, @RequestParam(name="page", required = false) Integer page, Model model) {
+		if(page == null) {
+			page = 0;
+		}
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
-		List<Livro> listaLivros = livroService.findByCategoria(pesquisa);
+		Page<Livro> listaLivros = livroService.findByCategoria(pesquisa, page);
+		model.addAttribute("pageAtual", listaLivros.getNumber());
+		model.addAttribute("livros", listaLivros.getContent());
+		model.addAttribute("categorias",listaCategorias);
+		model.addAttribute("pesquisa", pesquisa);
+		
+		int totalPages = listaLivros.getTotalPages();
+		model.addAttribute("totalPages", totalPages);
+		if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                .boxed()
+                .collect(Collectors.toList());
+            
+			model.addAttribute("numPages", pageNumbers);
+        }
 		model.addAttribute("livros", listaLivros);
 		model.addAttribute("categorias",listaCategorias);
-		return "index";
+		return "categoria/categoria-search";
 	}
 }
