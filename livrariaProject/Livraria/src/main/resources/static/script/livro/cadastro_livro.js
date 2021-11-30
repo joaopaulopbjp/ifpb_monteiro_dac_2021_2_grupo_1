@@ -47,10 +47,11 @@ const render = (word = "") => {
 function addLista(list) {
     let lista = "";
     list.forEach(element => {
+        console.log(JSON.stringify(element));
         lista = lista 
         +   `<li>
                 <label class='checkbox'>
-                    <input id='input-autor-${element.id}' type='checkbox' value='${element.id}' field='*{autores}' name='autores' onchange=alterAutor(${JSON.stringify(element)})>
+                    <input id='input-autor-${element.id}' type='checkbox' value='${element.id}' field='*{autores}' name='autores' onchange='alterAutor(${JSON.stringify(element)})'>
                     <span th:text='${element.nome}'>${element.nome}</span>
                 </label>
             </li>`;
@@ -67,6 +68,7 @@ function addLista(list) {
 
 
 function alterAutor(autor) {
+    console.log(autor);
     let input = document.getElementById(`input-autor-${autor.id}`);
     if(input.checked) {
         autoresLivro.push(autor);
