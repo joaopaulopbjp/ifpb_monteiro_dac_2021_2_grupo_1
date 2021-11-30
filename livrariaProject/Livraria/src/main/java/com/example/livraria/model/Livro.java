@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.ISBN;
  */
 @Entity
 public class Livro {
-	@ISBN(message = "ISBN invalido")
+	// @ISBN(message = "ISBN invalido")
 	@Id
 	@Column(length = 50)
 	private String ISBN;

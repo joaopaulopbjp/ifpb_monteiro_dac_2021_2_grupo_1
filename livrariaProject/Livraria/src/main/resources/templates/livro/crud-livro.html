@@ -21,31 +21,10 @@
     
 	<main>
 		<h3>Gerenciamento de Livros</h3>
-    		<div class="main">
-    		
-    			<div>
-    				<form class="livro-form" method="post" action="/cadastrar-livro" th:object="${livro}">
-				  				<h3>Adicionar Livro</h3>
-				  		<div class="form-line">
-				        		<label for="ISBN" >ISBN: </label>
-			        			<input class="campo" type="text" placeholder="Digite o ISBN do livro" required id="ISBN" th:field="*{ISBN}" >
-				        		<label for="capa" >Capa do Livro: </label>
-				        		<input class="campo" type="text" name="capa" placeholder="Digite a quantidade do livro" required id="capa" th:field="*{capa}" >
-				        		<label for="titulo" >Título: </label>
-				        		<input class="campo" type="text" placeholder="Digite o ISBN do livro" required id="titulo" th:field="*{titulo}" >
-				        		<label for="descricao" >Descrição: </label>
-				        		<input class="campo" type="text" placeholder="Digite o ISBN do livro" required id="descricao" th:field="*{descricao}" >
-				        		<label for="ano" >Ano: </label>
-				        		<input class="campo" type="number" placeholder="Digite o ISBN do livro" required id="ano" th:field="*{ano}" >
-				        		<label for="preco" >Preço: </label>
-				        		<input class="campo" type="number" placeholder="Digite o ISBN do livro" required id="preco" th:field="*{preco}" > 
-				       	</div>
-				        <button class="btn-pesquisar" type="submit" value="adicionar">Adicionar</button>	
-			 		</form>
-    				</div>
-    			</div>  
-    			
-    			  		
+    		<div class="main">    
+				<div>
+					<a class="btn-adicionar" href="/livro/cadastrar" value="Adicionar">Adicionar Livro</a>	
+				</div>		
     			<div>
     				<form class="livro-form" method="get" action="/search-livro">
     					<h3>Pesquisar Livro</h3>

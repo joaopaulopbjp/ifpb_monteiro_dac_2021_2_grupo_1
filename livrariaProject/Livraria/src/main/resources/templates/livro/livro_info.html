@@ -28,7 +28,14 @@
 				<h1>Detalhes do livro:</h1>
 				<span th:inline="text">Descrição: [[${livro.descricao}]]</span><br/>
 				<span th:inline="text">Categoria: [[${livro.categoria.nome}]]</span><br/>
-				<span th:inline="text">Autor(es): [[${livro.autores}]]</span><br/>
+				<div class="div-autores">
+					<span th:inline="text">Autor(es): </span>
+					<div th:each="autor : ${livro.autores}">
+						<span th:text="${autor.nome}"></span>
+						<span> &nbsp; &nbsp;</span>
+					</div>
+				</div>
+				<br/>
 				<span th:inline="text">Edição: [[${livro.edicao}]]</span><br/>
 				<span th:inline="text">Ano: [[${livro.ano}]]</span><br/>
 				<span th:inline="text">Editora: [[${livro.editora.nome}]]</span><br/>

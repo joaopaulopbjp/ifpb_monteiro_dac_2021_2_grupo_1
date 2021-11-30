@@ -5,6 +5,9 @@
 	padding-top: 30px;
 }
 
+.div-autores {
+	display: flex;
+}
 
 .livro-base{
 	width: 320px;

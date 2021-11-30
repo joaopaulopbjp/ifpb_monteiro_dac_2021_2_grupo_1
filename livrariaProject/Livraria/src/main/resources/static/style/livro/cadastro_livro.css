@@ -1,0 +1,80 @@
+.search-autor {
+    display: inline;
+}
+
+.form-cadastro{
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.form-line{
+	width: 200px;
+
+	margin: 2px;
+}
+
+.form-cadastro .button{
+	
+	display: flex;
+	align-items: center;
+	
+}
+
+.form-cadastro .button button{
+	background-color: yellow;
+	border-style: none;
+	padding: 10px;
+	padding-left: 70px;
+	padding-right: 70px;
+	margin-top: 30px;
+	box-shadow: 0px 0px 0.2em #666;
+}
+
+.form-cadastro .button button:hover{
+	background-color: rgb(202, 202, 0);
+}
+
+.search-content {
+    display: block;
+    background-color: #a0bdc9;
+    width: min-content;
+    height: auto;
+}
+
+.form-control {
+    width: 200px;
+}
+
+.search-hidden { 
+    overflow: auto;
+    height: 170px;
+    align-items: start;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.remove {
+    display: none;
+}
+
+#close-result-search-autor {
+    display: flex;
+    margin-left: 170px;
+    margin-top: 8px;
+    position: absolute;
+}
+
+#close-result-search-autor:hover {
+    cursor: pointer;
+}
+
+#ul-lista-autores {
+    margin-top: 2%;
+    margin-left: -20%;
+}
+
+.search-options {
+    margin-bottom: auto;
+}
