@@ -1,6 +1,7 @@
 package com.example.livraria.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,8 @@ public class UserController {
 
 	@Autowired
 	UsuarioService usuarioService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping("/login") 
 	public String cadastrarUsuario(Model model) {
@@ -28,6 +31,8 @@ public class UserController {
 	@PostMapping("/adicionar-usuario") 
 	public String cadastrarUsuario(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model modelo) {
 		if(!result.hasErrors()) {
+			
+			usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 			
 			usuarioService.salvar(usuario);
 			

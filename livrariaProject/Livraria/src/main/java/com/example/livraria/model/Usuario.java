@@ -57,6 +57,7 @@ public class Usuario implements UserDetails {
 			referencedColumnName = "papel"
 		)
 	)
+	
 	private List<Role> papeis = new ArrayList<Role>();
 	
 	/*

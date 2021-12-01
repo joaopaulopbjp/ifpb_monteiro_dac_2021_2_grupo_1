@@ -3,6 +3,7 @@ package com.example.livraria.security;
 // import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -22,8 +24,9 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
-			.antMatchers(HttpMethod.GET, "/home").permitAll()
-			.antMatchers("/cadastrar-livro").hasRole("ADMIN")
+			.antMatchers(HttpMethod.GET, "/home","/search/**","/livro-info").permitAll()
+			.antMatchers(HttpMethod.POST, "/adicionar-usuario").permitAll()
+			.antMatchers("/gerencia**").hasRole("ADMIN")
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
@@ -44,6 +47,11 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/style/**", "/script/**");
+	}
+	
+	@Bean
+	public PasswordEncoder encoder() {
+	    return new BCryptPasswordEncoder();
 	}
 	
 	

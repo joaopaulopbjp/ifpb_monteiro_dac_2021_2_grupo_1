@@ -5,6 +5,8 @@ import com.example.livraria.service.PedidoService;
 import com.example.livraria.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +21,18 @@ public class PedidoController {
 
     @GetMapping("/carrinho-compras")
     public String carrinhoCompras(Model model) {
+    	
+    	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Pedido pedido = pedidoService.consultarCarrinhoCompras(usuarioService.getUsuario("victor.macedo110697@gmail.com"));
+    	String nome;    
+
+    	if (principal instanceof UserDetails) {
+    	    nome = ((UserDetails)principal).getUsername();
+    	} else {
+    	    nome = principal.toString();
+    	}
+
+        Pedido pedido = pedidoService.consultarCarrinhoCompras(usuarioService.getUsuario(nome));
         model.addAttribute("pedido", pedido);
         return "pedido/carrinho_compra";
     }

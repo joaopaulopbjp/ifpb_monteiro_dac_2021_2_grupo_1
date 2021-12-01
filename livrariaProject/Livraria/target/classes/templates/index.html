@@ -30,7 +30,7 @@
                         </ul>
                     	</li>
                     	<li class="menu-nav"><a class="menu-nav" href="" >MEU PERFIL</a></li>
-                    	<span class="menu-nav"  onclick="mostrar('mae')" href="" >ADMINISTRAÇÃO</span>
+                    	<span sec:authorize="hasAuthority('ROLE_ADMIN')" class="menu-nav"  onclick="mostrar('mae')" href="" >ADMINISTRAÇÃO</span>
                     	<ul class="submenu" id="mae" >
 	                    	<li><a href="/gerenciar-autores">Gerenciar Autores</a></li>
 	                    	<li><a href="/gerenciar-livros">Gerenciar Livros</a></li>
@@ -51,7 +51,8 @@
 	            <button class="search-button" type="submit" ><i class="fas fa-search"></i></button>
 	        </div>
 	        <li class="login">
-                	<a href="/cadastrar-usuario" class="entrar-button"><i class="fal fa-sign-in"></i> Entrar</a>
+	        		<a sec:authorize="isAuthenticated()" href="/logout" class="entrar-button"><i class="fal fa-sign-in"></i> Sair</a>
+                	<a sec:authorize="!isAuthenticated()"  href="/login" class="entrar-button"><i class="fal fa-sign-in"></i> Entrar</a>
             	</li>
     	</form>
     	
