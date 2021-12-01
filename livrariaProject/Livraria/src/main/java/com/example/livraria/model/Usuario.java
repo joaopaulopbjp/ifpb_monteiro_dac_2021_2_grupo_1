@@ -42,7 +42,7 @@ public class Usuario implements UserDetails {
 	@Size(min = 6, message = "A senha deve possuir mais 6 caracteres")
 	private String senha;
 
-	@CPF(message = "cpf invalido!")
+	// @CPF(message = "cpf invalido!")
 	@Column(length = 20)
 	private String CPF;
 

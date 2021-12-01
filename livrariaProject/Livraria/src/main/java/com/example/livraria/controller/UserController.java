@@ -17,7 +17,7 @@ public class UserController {
 	@Autowired
 	UsuarioService usuarioService;
 	
-	@GetMapping("/cadastrar-usuario") 
+	@GetMapping("/login") 
 	public String cadastrarUsuario(Model model) {
 		
 		model.addAttribute("usuario", new Usuario());
@@ -27,7 +27,6 @@ public class UserController {
 	
 	@PostMapping("/adicionar-usuario") 
 	public String cadastrarUsuario(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model modelo) {
-		
 		if(!result.hasErrors()) {
 			
 			usuarioService.salvar(usuario);
