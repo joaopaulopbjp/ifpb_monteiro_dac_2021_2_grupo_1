@@ -29,7 +29,7 @@
 	                    	<li><a  th:href="@{/search/categoria(pesquisa=${categoria.nome})}" th:each="categoria: ${categorias}" th:text="${categoria.nome}">categoria A</a></li>
                         </ul>
                     	</li>
-                    	<li class="menu-nav"><a class="menu-nav" href="" >MEU PERFIL</a></li>
+                    	<li class="menu-nav"><a class="menu-nav" href="/perfil">MEU PERFIL</a></li>
                     	<span sec:authorize="hasAuthority('ROLE_ADMIN')" class="menu-nav"  onclick="mostrar('mae')" href="" >ADMINISTRAÇÃO</span>
                     	<ul class="submenu" id="mae" >
 	                    	<li><a href="/gerenciar-autores">Gerenciar Autores</a></li>
