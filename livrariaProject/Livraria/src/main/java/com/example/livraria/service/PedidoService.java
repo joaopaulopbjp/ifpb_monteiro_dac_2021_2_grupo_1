@@ -81,7 +81,16 @@ public class PedidoService {
 			adicionarLivroNoPedido(email, pedido.getId(), ISBN, quantidade);
 			
 		}
-			
+	}
+
+	public void adicionarLivroAoPedido(Livro livro, Usuario user) {
+		Pedido pedido = consultarCarrinhoCompras(user);
+		if (pedido == null) {
+			adicionarLivroNoPedido(user.getEmail(), 0, livro.getISBN(), 1);			
+		} else {
+			adicionarLivroNoPedido(user.getEmail(), pedido.getId(), livro.getISBN(), 1);			
+		}
+
 	}
 
 	public List<Pedido> obterPedidos(Usuario user) {

@@ -25,8 +25,6 @@ import com.example.livraria.service.EditoraService;
 import com.example.livraria.service.EstoqueService;
 import com.example.livraria.service.LivroService;
 
-
-
 @Controller
 public class LivroController {
     @Autowired
@@ -70,7 +68,6 @@ public class LivroController {
 
     @PostMapping("/adicionar-livro")
     public String adicionarLivro(@ModelAttribute("livro") Livro livro, BindingResult result, Model modelo) {
-    	
     	if(!result.hasErrors()) {
 			livroService.salvar(livro);
 			return "redirect:/gerenciar-livros";

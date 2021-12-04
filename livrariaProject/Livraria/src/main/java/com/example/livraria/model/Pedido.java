@@ -106,9 +106,14 @@ public class Pedido {
 		ItemPedido ip = null;
 		for( ItemPedido i: this.itemPedido) {
 			if(i.getLivro().getISBN().equals(itemPedido.getLivro().getISBN())) {
-				i.setQuantidade(i.getQuantidade()+itemPedido.getQuantidade());
+				if(i.getQuantidade()+itemPedido.getQuantidade() > 10) {
+					i.setQuantidade(10);
+				} else {
+					i.setQuantidade(i.getQuantidade()+itemPedido.getQuantidade());
+				}
 				ip = i;
 				adicionado = true;
+				break;
 			}
 		}
 		if(!adicionado) {
