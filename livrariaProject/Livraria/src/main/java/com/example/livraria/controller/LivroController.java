@@ -49,7 +49,7 @@ public class LivroController {
         model.addAttribute("editoras",listaEditoras);
         List<Categoria> listaCategorias = categoriaService.obterCategorias();
         model.addAttribute("listaCategorias", listaCategorias);
-    	model.addAttribute("autores",listaAutores);
+    	model.addAttribute("listaAutores",listaAutores);
     	model.addAttribute("livro", new Livro());
         return "livro/cadastro_livro";
     }

@@ -1,6 +1,7 @@
 package com.example.livraria.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class Pedido {
 	@ManyToOne
 	private Usuario usuario;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
-	private List<ItemPedido> itemPedido;
+	private List<ItemPedido> itemPedido = new ArrayList<ItemPedido>();
 	private BigDecimal valorTotal = new BigDecimal(0);
 	@ManyToOne
 	private FormaDePagamento formaDePagamento; 
