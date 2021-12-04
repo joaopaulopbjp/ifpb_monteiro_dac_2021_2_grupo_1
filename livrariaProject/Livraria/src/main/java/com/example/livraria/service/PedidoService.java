@@ -135,6 +135,25 @@ public class PedidoService {
 	}
 
 	public Pedido alterarPedido(Pedido pedido) {
+		Pedido pedidoAntigo = pedidoRepository.findById(pedido.getId()).get();
+		Estoque estoque;
+		List<ItemPedido> itens = pedido.getItemPedido();
+		Integer quantidade=0;
+		
+		for (ItemPedido ip : itens) {
+			estoque = estoqueRepository.findByLivro(ip.getLivro()).get(0);
+			for(ItemPedido ipAntigo : pedidoAntigo.getItemPedido()) {
+				if(ip.equals(ipAntigo)) {
+					
+					quantidade =ip.getQuantidade() - ipAntigo.getQuantidade();
+				}
+			}
+//			quantidade = ip.getQuantidade() - pedidoAntigo.getItemPedido().stream().filter(item -> item.getId()==ip.getId()).findFirst().orElse(null).getQuantidade();
+			estoque.setQuantidade(-quantidade);
+			estoqueRepository.save(estoque);
+		}
+		
+		pedido.atualizarValorTotal();
 		return pedidoRepository.save(pedido);
 	}
 

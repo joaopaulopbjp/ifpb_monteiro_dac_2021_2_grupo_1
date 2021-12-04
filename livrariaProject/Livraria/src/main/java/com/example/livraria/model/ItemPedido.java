@@ -81,6 +81,11 @@ public class ItemPedido {
 		valorUnidade = livro.getPreco();
 	}
 	
-	
+	@Override
+		public boolean equals(Object obj) {
+			ItemPedido p = (ItemPedido)obj;
+			
+			return p.getId()==this.id;
+		}
 	
 }
