@@ -11,7 +11,7 @@
 	    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
 	    <link rel="stylesheet" th:href="@{/style/index.css}">
 	    <title>Livraria</title>
-		<link rel="stylesheet" th:href="@{/style/livro/crud-livro.css}">
+		<link rel="stylesheet" th:href="@{/style/pedido/cancelar-pedido.css}">
 </head>
 <body>
     <header th:replace="~{index :: index-header}"></header>
@@ -39,7 +39,7 @@
 					<span class="pedido-user" th:text="${pedido.usuario.nome}" >usuario</span>
 					<span class="pedido-valor" th:text="${pedido.valorTotal}" >valor</span>
 					<div class="cancelar">
-						<a class="cancelar" th:href="@{/pedido/cancelar(id=${pedido.id})}">Cancelar</a>
+						<a class="cancelar" th:href="@{/cancelar(id=${pedido.id})}">Cancelar</a>
 					</div>
 				</div> 
 			</div>

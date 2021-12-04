@@ -7,6 +7,7 @@ import com.example.livraria.model.Pedido;
 import com.example.livraria.service.CategoriaService;
 import com.example.livraria.service.ItemPedidoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
@@ -23,6 +24,7 @@ import com.example.livraria.service.UsuarioService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -90,7 +92,24 @@ public class PedidoController {
    		return "redirect:/cancelar-pedido";
    	}
     
+    @GetMapping("/search-pedido")
+    public String search(@RequestParam(name="pesquisa") Integer id, Model model) {
+        
+		
+    	List<Pedido> listaPedidos = new ArrayList<Pedido>();
+		Pedido pedido = pedidoService.findById(id);
+		if(pedido != null) {
+			listaPedidos.add(pedido);
+		}
+		model.addAttribute("listaPedidos", listaPedidos);
+		
+		List<Categoria> listaCategorias = categoriaService.obterCategorias();
+   		model.addAttribute("categorias",listaCategorias);
 
+		return "pedido/cancelar-pedido";
+    }
+    
+    
     @PostMapping("/atualizar-pedido")
     public String createItemPedido(@ModelAttribute("pedido") Pedido pedido, BindingResult result, Model modelo) {
         if(!result.hasErrors()) {
