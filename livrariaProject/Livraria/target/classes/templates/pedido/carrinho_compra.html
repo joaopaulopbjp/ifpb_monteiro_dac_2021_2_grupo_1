@@ -12,7 +12,7 @@
     <script th:replace="~{index :: index-script}"></script>
     <a th:replace="~{index :: index-carrinho}"></a>
 	<main>
-        <h1>Carrinho de Compras</h1>
+        <h1>Carrinho de Compras - ID da compra: [[${pedido.id}]]</h1>
 
         <form class="form-atualizar-pedido" method="post" th:action="@{/atualizar-pedido(id=${pedido.id}, usuario=${pedido.usuario.email})}" th:object="${pedido}">
             <div class="itens" th:each="item, itemStat: *{itemPedido}">
