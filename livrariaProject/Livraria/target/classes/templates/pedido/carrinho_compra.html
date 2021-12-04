@@ -14,21 +14,34 @@
 	<main>
         <h1>Carrinho de Compras</h1>
 
-        <div class="itens" th:each="item: ${pedido.itemPedido}">
-            <a th:href="@{/livro-info(ISBN=${item.livro.ISBN})}">
-                <img class="capa" th:src="${item.livro.capa}" alt="">
-            </a>
-            <div class="details">
-                <span class="titulo" th:text="${item.livro.titulo}" id="titulo-livro">Titulo do Livro</span>
-                <div class="preco">
-                    <p> R$: <span th:text="${item.livro.preco}" ></span></p>
-                    
+        <form class="form-atualizar-pedido" method="post" th:action="@{/atualizar-pedido(id=${pedido.id}, usuario=${pedido.usuario.email})}" th:object="${pedido}">
+            <div class="itens" th:each="item, itemStat: *{itemPedido}">
+                <a th:href="@{/livro-info(ISBN=${item.livro.ISBN})}">
+                    <img class="capa" th:src="${item.livro.capa}" alt="">
+                </a>
+                <input hidden th:field="*{itemPedido[__${itemStat.index}__].id}" th:value="${item.id}"/>
+                <input hidden th:field="*{itemPedido[__${itemStat.index}__].livro}" th:value="${item.livro}"/>
+                <input hidden th:field="*{itemPedido[__${itemStat.index}__].pedido}" th:value="${item.pedido}"/>
+                <input hidden th:field="*{itemPedido[__${itemStat.index}__].valorUnidade}" th:value="${item.livro.preco}"/>
+                <div class="details">
+                    <span class="titulo" th:text="${item.livro.titulo}" id="titulo-livro">Titulo do Livro</span>
+                    <div class="preco">
+                        <p> R$: <span th:text="${item.livro.preco}" ></span></p>  
+                    </div>
+                        <div class="qtd">
+                            <span>Quantidade: </span>
+                            <select id="qtd-item-pedido" th:name="item-pedido"
+                                th:field="*{itemPedido[__${itemStat.index}__].quantidade}">
+                                <option
+                                    th:value="${qtd}" th:text="${qtd}" 
+                                    th:each="qtd: ${qtdNum}">
+                                </option>
+                            </select>
+                        </div>
                 </div>
-                <div class="qtd">
-                    <p>Quantidade: <span th:text="${item.quantidade}"></span></p>
-                </div>
-            </div>
-        </div> 
-	</main>
+            </div> 
+            <button type="submit"> Salvar</button>
+        </form>
+    </main>
 </body>
 </html>

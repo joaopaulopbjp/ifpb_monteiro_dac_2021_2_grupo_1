@@ -47,7 +47,7 @@
 					<span th:if="${estoque == true}" class="estoque">Em estoque</span>
 					<span th:if="${estoque == false}" class="estoque-zero">Sem estoque</span>
 		        </div>
-	            <button th:if="${estoque == true}" class="btn-compra" th:href="@{/adicionar-ao-pedido}" type="submit" > Adicionar ao Pedido</button>
+	            <a th:if="${estoque == true}" class="btn-compra"th:href="@{/adicionar-ao-pedido(livro=${livro.ISBN})}" type="submit" > Adicionar ao Pedido</a>
 	            <button th:if="${estoque == false}" class="btn-compra-block" type="submit" > Adicionar ao Pedido</button>
 	        </div>
 		</div>
