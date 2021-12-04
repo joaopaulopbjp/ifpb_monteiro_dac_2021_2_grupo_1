@@ -114,6 +114,23 @@ public class PedidoService {
 		pedido2.setData(new Date());
 		pedido2.setUsuario(user);
 		pedidoRepository.save(pedido2);
+		
+		List<ItemPedido> itens = pedido.getItemPedido();
+		for (ItemPedido ip : itens) {
+			Integer quantidade = 0;
+			quantidade+=ip.getQuantidade();
+			Estoque estoque;
+			if(estoqueRepository.findByLivro(ip.getLivro()).size() == 0){
+				estoque = new Estoque();
+				estoque.setLivro(ip.getLivro());
+				estoque.setQuantidade(ip.getQuantidade());
+				estoqueRepository.save(estoque);
+			}else {
+				estoque = estoqueRepository.findByLivro(ip.getLivro()).get(0);
+				estoque.setQuantidade(quantidade);
+				estoqueRepository.save(estoque);
+			}
+		}
 			
 	}
 
