@@ -35,6 +35,16 @@ public class UserController {
 	public String cadastrarUsuario(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model modelo) {
 		if(!result.hasErrors()) {
 			
+			Usuario usuarioJaExisteEmail = usuarioService.getUsuario(usuario.getEmail());
+			if(usuarioJaExisteEmail != null) {
+				
+				usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+				
+				usuarioService.alterar(usuario, usuarioJaExisteEmail.getPapelUsuario());
+				
+				return "redirect:/perfil";
+			}
+			
 			usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 			
 			usuarioService.salvar(usuario);

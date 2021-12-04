@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.livraria.model.Role;
 import com.example.livraria.model.Usuario;
 import com.example.livraria.repository.RoleRepository;
 import com.example.livraria.repository.UsuarioRepository;
@@ -50,11 +51,17 @@ public class UsuarioService {
      * @param complemento
      */
     public void salvar(Usuario usuario) {
-        usuario.addPapel(roleRepository.findById("ROLE_USER").get());
-        
-        usuarioRepository.save(usuario);
+    	usuario.addPapel(roleRepository.findById("ROLE_USER").get());
+    	
+	    usuarioRepository.save(usuario);
     }
- 
+    
+    public void alterar(Usuario usuario, List<Role> papelUsuarioAntigo) {
+    	usuario.addPapel(roleRepository.findById(papelUsuarioAntigo.get(0).getPapel()).get());
+    	
+    	usuarioRepository.save(usuario);
+    }
+  
     /**
      * Método feito para verificar se o email passado por parametro existe na base de dados,
      * podendo returnar true ou false.
@@ -95,4 +102,5 @@ public class UsuarioService {
         List<Usuario> usuarios = usuarioRepository.findAll();
         return usuarios;
     }
+
 }
