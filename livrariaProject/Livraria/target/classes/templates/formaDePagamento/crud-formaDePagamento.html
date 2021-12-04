@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <script>src="https://kit.fontawesome.com/le592b5726.js"</script>
+	    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+	    <link rel="stylesheet" th:href="@{/style/index.css}">
+	    <title>Livraria</title>
+		<link rel="stylesheet" th:href="@{/style/formaDePagamento/crud-formaDePagamento.css}">
+	    <script type="text/javascript" th:src="@{/script/formaDePagamento/cruf-forma-de-pagamento.js}" src="/script/formaDePagamento/cruf-forma-de-pagamento.js"></script>
+</head>
+<body>
+    <header th:replace="~{index :: index-header}"></header>
+    <form th:replace="~{index :: index-form}"></form>
+    <script th:replace="~{index :: index-script}"></script>
+    <a th:replace="~{index :: index-carrinho}"></a>
+    
+	<main>
+		<h3>Gerenciamento de Formas de Pagamento</h3>
+    	<div class="main">    		
+    			<div>
+    				<form class="pagamento-form" method="post" th:action="@{/adicionar-pagamento}" th:object="${formaDePagamento}">
+				  		<div class="form-line">
+				        		<label for="nome" >Nome: </label>
+				        		<input class="campo" type="text" placeholder="Digite o nome da forma de pagamento" required id="nome" th:field="*{nome}" >
+				        </div>
+				      
+				        <button class="btn-adicionar" type="submit" value="adicionar">Adicionar</button>	
+			 		</form>
+    			</div>
+		            
+		        <div class="pagamento-lista" th:each="formaDePagamento: ${listaPagamento}">
+					<span class="pagamento-id" th:text="${formaDePagamento.id}">ID da forma de pagamento</span>
+					<form th:id="'form-formaDePagamento-' + ${formaDePagamento.id}" class="pagamento-nome" method="post" th:action="@{/alterar-pagamento(id=${formaDePagamento.id})}" th:object="${formaDePagamento}">
+		            	<span th:id="'span-formaDePagamento-' + ${formaDePagamento.id}" th:id-categoria="${formaDePagamento.id}" th:text="${formaDePagamento.nome}" th:onclick="alterarNomeFormaDePagamento(this.getAttribute('id-formaDePagamento'))">nome da forma de pagamento</span>
+					</form>
+		            <a class="alterar" th:id-formaDePagamento="${formaDePagamento.id}" th:onclick="alterarNomeFormaDePagamento(this.getAttribute('id-formaDePagamento'))">Alterar</a>
+		            <a class="excluir" th:href="@{/excluir-pagamento(id=${formaDePagamento.id})}">Excluir</a>
+		        </div> 
+    		</div>	
+	</main>
+	
+</body>
+</html>

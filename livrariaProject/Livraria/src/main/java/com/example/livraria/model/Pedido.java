@@ -34,7 +34,8 @@ public class Pedido {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
 	private List<ItemPedido> itemPedido;
 	private BigDecimal valorTotal = new BigDecimal(0);
-	private String formaDePagamento; 
+	@ManyToOne
+	private FormaDePagamento formaDePagamento; 
 	@ManyToOne
 	private Endereco localDeEntrega; 
 	@Temporal(TemporalType.DATE)
@@ -70,10 +71,10 @@ public class Pedido {
 	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-	public String getFormaDePagamento() {
+	public FormaDePagamento getFormaDePagamento() {
 		return formaDePagamento;
 	}
-	public void setFormaDePagamento(String formaDePagamento) {
+	public void setFormaDePagamento(FormaDePagamento formaDePagamento) {
 		this.formaDePagamento = formaDePagamento;
 	}
 	public Endereco getLocalDeEntrega() {
