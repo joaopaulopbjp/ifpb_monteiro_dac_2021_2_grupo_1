@@ -58,7 +58,7 @@ public class PedidoService {
 			Estoque estoque = estoqueRepository.findByLivro(livroO.get()).get(0);
 			
 			if(estoqueService.verificarLivroEstoque(ISBN, quantidade)) {
-				estoque.setQuantidade(estoque.getQuantidade() - quantidade);
+				estoque.setQuantidade(-quantidade);
 				
 				ItemPedido ip = new ItemPedido();
 				ip.setLivro(livroO.get());
