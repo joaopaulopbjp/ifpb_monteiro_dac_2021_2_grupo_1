@@ -63,8 +63,15 @@ public class PedidoController {
     	} else {
     	    nome = principal.toString();
     	}
+        Usuario usuario = usuarioService.getUsuario(nome);
 
-        Pedido pedido = pedidoService.consultarCarrinhoCompras(usuarioService.getUsuario(nome));
+        List<Categoria> listaCategorias = categoriaService.obterCategorias();
+   		model.addAttribute("categorias",listaCategorias);
+        Pedido pedido = pedidoService.consultarCarrinhoCompras(usuario);
+        
+        if(pedido == null) {
+            pedido = new Pedido(usuario);
+        }
         model.addAttribute("pedido", pedido);
 
         List<Integer> qtdNum = IntStream.rangeClosed(0, 10)
@@ -99,8 +106,6 @@ public class PedidoController {
     
     @GetMapping("/search-pedido")
     public String search(@RequestParam(name="pesquisa") Integer id, Model model) {
-        
-		
     	List<Pedido> listaPedidos = new ArrayList<Pedido>();
 		Pedido pedido = pedidoService.findById(id);
 		if(pedido != null) {

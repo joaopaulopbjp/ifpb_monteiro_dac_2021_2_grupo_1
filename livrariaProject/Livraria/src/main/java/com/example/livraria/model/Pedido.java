@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -95,7 +96,6 @@ public class Pedido {
 		return dataDefechamento == null;
 	}
 	
-	
 	public void finalizar() {
 		this.dataDefechamento = new Date();
 		for (ItemPedido ip : itemPedido) {
@@ -141,5 +141,96 @@ public class Pedido {
 		for (ItemPedido ip : itemPedido) {
 			this.valorTotal = this.valorTotal.add(ip.obterValorTotal());
 		}
+	}
+
+	public Pedido() {
+	}
+
+	public Pedido(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public PedidoStatus getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(PedidoStatus status) {
+		this.status = status;
+	}
+
+	public Pedido id(Integer id) {
+		setId(id);
+		return this;
+	}
+
+	public Pedido data(Date data) {
+		setData(data);
+		return this;
+	}
+
+	public Pedido usuario(Usuario usuario) {
+		setUsuario(usuario);
+		return this;
+	}
+
+	public Pedido itemPedido(List<ItemPedido> itemPedido) {
+		setItemPedido(itemPedido);
+		return this;
+	}
+
+	public Pedido valorTotal(BigDecimal valorTotal) {
+		setValorTotal(valorTotal);
+		return this;
+	}
+
+	public Pedido formaDePagamento(FormaDePagamento formaDePagamento) {
+		setFormaDePagamento(formaDePagamento);
+		return this;
+	}
+
+	public Pedido localDeEntrega(Endereco localDeEntrega) {
+		setLocalDeEntrega(localDeEntrega);
+		return this;
+	}
+
+	public Pedido dataDefechamento(Date dataDefechamento) {
+		setDataDefechamento(dataDefechamento);
+		return this;
+	}
+
+	public Pedido status(PedidoStatus status) {
+		setStatus(status);
+		return this;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof Pedido)) {
+			return false;
+		}
+		Pedido pedido = (Pedido) o;
+		return Objects.equals(id, pedido.id) && Objects.equals(data, pedido.data) && Objects.equals(usuario, pedido.usuario) && Objects.equals(itemPedido, pedido.itemPedido) && Objects.equals(valorTotal, pedido.valorTotal) && Objects.equals(formaDePagamento, pedido.formaDePagamento) && Objects.equals(localDeEntrega, pedido.localDeEntrega) && Objects.equals(dataDefechamento, pedido.dataDefechamento) && Objects.equals(status, pedido.status);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, data, usuario, itemPedido, valorTotal, formaDePagamento, localDeEntrega, dataDefechamento, status);
+	}
+
+	@Override
+	public String toString() {
+		return "{" +
+			" id='" + getId() + "'" +
+			", data='" + getData() + "'" +
+			", usuario='" + getUsuario() + "'" +
+			", itemPedido='" + getItemPedido() + "'" +
+			", valorTotal='" + getValorTotal() + "'" +
+			", formaDePagamento='" + getFormaDePagamento() + "'" +
+			", localDeEntrega='" + getLocalDeEntrega() + "'" +
+			", dataDefechamento='" + getDataDefechamento() + "'" +
+			", status='" + getStatus() + "'" +
+			"}";
 	}
 }

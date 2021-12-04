@@ -28,19 +28,19 @@
                     <div class="preco">
                         <p> R$: <span th:text="${item.livro.preco}" ></span></p>  
                     </div>
-                        <div class="qtd">
-                            <span>Quantidade: </span>
-                            <select id="qtd-item-pedido" th:name="item-pedido"
-                                th:field="*{itemPedido[__${itemStat.index}__].quantidade}">
-                                <option
-                                    th:value="${qtd}" th:text="${qtd}" 
-                                    th:each="qtd: ${qtdNum}">
-                                </option>
-                            </select>
-                        </div>
+                    <div class="qtd">
+                        <span>Quantidade: </span>
+                        <select id="qtd-item-pedido" th:name="item-pedido"
+                            th:field="*{itemPedido[__${itemStat.index}__].quantidade}">
+                            <option
+                                th:value="${qtd}" th:text="${qtd}" 
+                                th:each="qtd: ${qtdNum}">
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div> 
-            <button type="submit"> Salvar</button>
+            <button type="submit" th:if="${pedido.getItemPedido().size() > 0}"> Salvar</button>
         </form>
     </main>
 </body>
