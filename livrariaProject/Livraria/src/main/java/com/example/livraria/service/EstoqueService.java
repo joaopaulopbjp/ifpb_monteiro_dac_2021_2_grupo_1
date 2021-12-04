@@ -92,4 +92,22 @@ public class EstoqueService {
 		estoqueRepository.delete(estoque);
 	}
 
+	public void alterarEstoque(Livro livro, int quantidade) {
+		Estoque estoque;
+		List<Estoque> list = estoqueRepository.findByLivro(livro);
+		if(list.size() == 0){
+			estoque = new Estoque();
+			estoque.setLivro(livro);
+		}else {
+			estoque = list.get(0);
+		}
+
+		estoque.setQuantidade(quantidade);
+		if(estoque.getQuantidade()==0) {
+			estoqueRepository.delete(estoque);
+		}else {
+			estoqueRepository.save(estoque);
+		}
+	}
+
 }

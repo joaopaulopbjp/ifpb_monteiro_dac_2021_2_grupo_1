@@ -41,6 +41,7 @@
                 </div>
             </div> 
             <button type="submit" th:if="${pedido.getItemPedido().size() > 0}"> Salvar</button>
+            <span th:inline="text">Valor total: R$ [[${pedido.valorTotal}]]</span><br/>
         </form>
     </main>
 </body>

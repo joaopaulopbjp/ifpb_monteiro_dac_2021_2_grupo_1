@@ -2,6 +2,7 @@ package com.example.livraria.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class PedidoService {
 	EstoqueRepository estoqueRepository;
 	@Autowired
 	EstoqueService estoqueService;
+    @Autowired
+    ItemPedidoService itemPedidoService;
 	
 	/**
 	 *Retorna um novo pedido para o usuário
@@ -119,38 +122,47 @@ public class PedidoService {
 		for (ItemPedido ip : itens) {
 			Integer quantidade = 0;
 			quantidade+=ip.getQuantidade();
-			Estoque estoque;
-			if(estoqueRepository.findByLivro(ip.getLivro()).size() == 0){
-				estoque = new Estoque();
-				estoque.setLivro(ip.getLivro());
-				estoque.setQuantidade(ip.getQuantidade());
-				estoqueRepository.save(estoque);
-			}else {
-				estoque = estoqueRepository.findByLivro(ip.getLivro()).get(0);
-				estoque.setQuantidade(quantidade);
-				estoqueRepository.save(estoque);
-			}
+			// Estoque estoque;
+			// if(estoqueRepository.findByLivro(ip.getLivro()).size() == 0){
+			// 	estoque = new Estoque();
+			// 	estoque.setLivro(ip.getLivro());
+			// 	estoque.setQuantidade(ip.getQuantidade());
+			// 	estoqueRepository.save(estoque);
+			// }else {
+			// 	estoque = estoqueRepository.findByLivro(ip.getLivro()).get(0);
+			// 	estoque.setQuantidade(quantidade);
+			// 	estoqueRepository.save(estoque);
+			// }
+			estoqueService.alterarEstoque(ip.getLivro(), quantidade);
 		}
 			
 	}
 
 	public Pedido alterarPedido(Pedido pedido) {
 		Pedido pedidoAntigo = pedidoRepository.findById(pedido.getId()).get();
-		Estoque estoque;
-		List<ItemPedido> itens = pedido.getItemPedido();
 		Integer quantidade=0;
+		ListIterator<ItemPedido> itens = pedido.getItemPedido().listIterator();
 		
-		for (ItemPedido ip : itens) {
-			estoque = estoqueRepository.findByLivro(ip.getLivro()).get(0);
-			for(ItemPedido ipAntigo : pedidoAntigo.getItemPedido()) {
-				if(ip.equals(ipAntigo)) {
-					
-					quantidade =ip.getQuantidade() - ipAntigo.getQuantidade();
+		while (itens.hasNext()) {
+			ItemPedido ip = itens.next();
+			ItemPedido ipAntigo = null;
+			for(ItemPedido ipAnt : pedidoAntigo.getItemPedido()) {
+				if(ip.equals(ipAnt)) {
+					quantidade = ip.getQuantidade() - ipAnt.getQuantidade();
+					ipAntigo = ipAnt;
 				}
 			}
-//			quantidade = ip.getQuantidade() - pedidoAntigo.getItemPedido().stream().filter(item -> item.getId()==ip.getId()).findFirst().orElse(null).getQuantidade();
-			estoque.setQuantidade(-quantidade);
-			estoqueRepository.save(estoque);
+			if(estoqueService.verificarLivroEstoque(ip.getLivro().getISBN(), quantidade)) {
+				estoqueService.alterarEstoque(ip.getLivro(), -quantidade);
+				if (ip.getQuantidade() == 0) {
+					itens.remove();
+					itemPedidoService.deletar(ip);
+				} else {
+					itemPedidoService.alterar(ip);
+				}
+			} else {
+				ip.setQuantidade(ipAntigo.getQuantidade());
+			}
 		}
 		
 		pedido.atualizarValorTotal();

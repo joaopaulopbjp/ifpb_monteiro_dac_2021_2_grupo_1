@@ -1,30 +1,22 @@
 package com.example.livraria.controller;
 
 import com.example.livraria.model.Categoria;
-import com.example.livraria.model.Estoque;
 import com.example.livraria.model.Livro;
 import com.example.livraria.model.Pedido;
 import com.example.livraria.service.CategoriaService;
-import com.example.livraria.service.ItemPedidoService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.example.livraria.model.ItemPedido;
-import com.example.livraria.model.Livro;
-import com.example.livraria.model.Pedido;
 import com.example.livraria.model.Usuario;
 
 import com.example.livraria.service.PedidoService;
 import com.example.livraria.service.UsuarioService;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,8 +39,6 @@ public class PedidoController {
     PedidoService pedidoService;
     @Autowired
     CategoriaService categoriaService;
-    @Autowired
-    ItemPedidoService itemPedidoService;
 
 
     @GetMapping("/carrinho-compras")
@@ -123,17 +113,6 @@ public class PedidoController {
     @PostMapping("/atualizar-pedido")
     public String createItemPedido(@ModelAttribute("pedido") Pedido pedido, BindingResult result, Model modelo) {
         if(!result.hasErrors()) {
-            ListIterator<ItemPedido> items = pedido.getItemPedido().listIterator();
-            while (items.hasNext()) {
-                ItemPedido itemPedido = items.next();
-                if (itemPedido.getQuantidade() == 0) {
-                    items.remove();
-                    itemPedidoService.deletar(itemPedido);
-                } else {
-                    itemPedidoService.alterar(itemPedido);
-                }
-                
-            }
             pedidoService.alterarPedido(pedido);
         }
         return "redirect:/carrinho-compras";
