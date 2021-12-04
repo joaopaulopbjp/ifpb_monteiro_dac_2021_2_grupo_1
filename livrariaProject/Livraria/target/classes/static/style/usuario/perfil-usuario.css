@@ -1,0 +1,24 @@
+.dados-usuario{
+	display: flex;
+	justify-content: center;
+	border: thin;
+	border-color: black;
+	border-style: ridge;
+	width: 40%;
+}
+.div-flex{
+	display: flex;
+	justify-content: center;
+}
+
+.linha-span{
+	padding-top: 100px;
+}
+
+.alterar-usuario{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 50px;
+	
+}

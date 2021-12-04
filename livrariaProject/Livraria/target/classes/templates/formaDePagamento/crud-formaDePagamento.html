@@ -37,7 +37,7 @@
 		        <div class="pagamento-lista" th:each="formaDePagamento: ${listaPagamento}">
 					<span class="pagamento-id" th:text="${formaDePagamento.id}">ID da forma de pagamento</span>
 					<form th:id="'form-formaDePagamento-' + ${formaDePagamento.id}" class="pagamento-nome" method="post" th:action="@{/alterar-pagamento(id=${formaDePagamento.id})}" th:object="${formaDePagamento}">
-		            	<span th:id="'span-formaDePagamento-' + ${formaDePagamento.id}" th:id-categoria="${formaDePagamento.id}" th:text="${formaDePagamento.nome}" th:onclick="alterarNomeFormaDePagamento(this.getAttribute('id-formaDePagamento'))">nome da forma de pagamento</span>
+		            	<span th:id="'span-formaDePagamento-' + ${formaDePagamento.id}" th:id-formaDePagamento="${formaDePagamento.id}" th:text="${formaDePagamento.nome}" th:onclick="alterarNomeFormaDePagamento(this.getAttribute('id-formaDePagamento'))">nome da forma de pagamento</span>
 					</form>
 		            <a class="alterar" th:id-formaDePagamento="${formaDePagamento.id}" th:onclick="alterarNomeFormaDePagamento(this.getAttribute('id-formaDePagamento'))">Alterar</a>
 		            <a class="excluir" th:href="@{/excluir-pagamento(id=${formaDePagamento.id})}">Excluir</a>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <script>src="https://kit.fontawesome.com/le592b5726.js"</script>
+	    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+	    <link rel="stylesheet" th:href="@{/style/index.css}">
+	    <title>Livraria</title>
+		<link rel="stylesheet" th:href="@{/style/livro/crud-livro.css}">
+</head>
+<body>
+    <header th:replace="~{index :: index-header}"></header>
+    <form th:replace="~{index :: index-form}"></form>
+    <script th:replace="~{index :: index-script}"></script>
+    <a th:replace="~{index :: index-carrinho}"></a>
+    
+	<main>
+		<h3>Cancelar pedidos</h3>
+		<div class="main">		
+			<div>
+				<form class="pedido-form" method="get" action="/search-pedido">
+					<h3>Pesquisar pedido</h3>
+
+					<div class="form-line">
+							<label for="id" >ID: </label>
+							<input class="campo" type="number" name="pesquisa" placeholder="Digite o ID do pedido" required id="id-pedido" >
+					</div>
+					<button class="btn-pesquisar" type="submit" value="Pesquisar">Pesquisar</button>	
+				</form>
+			</div>
+			<div class="pedido-center">
+				<div class="list-pedido" th:each="pedido: ${listaPedidos}">
+					<span class="pedido-id" th:text="${pedido.id}" >ID do pedido</span>
+					<span class="pedido-user" th:text="${pedido.usuario.nome}" >usuario</span>
+					<span class="pedido-valor" th:text="${pedido.valorTotal}" >valor</span>
+					<div class="cancelar">
+						<a class="cancelar" th:href="@{/pedido/cancelar(id=${pedido.id})}">Cancelar</a>
+					</div>
+				</div> 
+			</div>
+		</div>
+		<div th:replace="~{fragments :: pagination(
+			'/search-pedido',
+			${pesquisa}
+		)}"></div>
+	</main>
+	
+</body>
+</html>

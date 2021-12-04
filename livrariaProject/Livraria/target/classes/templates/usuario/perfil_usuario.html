@@ -10,6 +10,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{/style/index.css}">
+	<link rel="stylesheet" th:href="@{/style/usuario/perfil-usuario.css}">
     <title>Livraria - Perfil</title>
 </head>
 <body>
@@ -20,22 +21,25 @@
     
     <main>
     	<h3>Olá, <span th:text="${usuario.nome}"></span></h3>
-    	<div class="dados-usuario">
-        	<div sec:authorize="hasAuthority('ROLE_ADMIN')"> 
-        		Nome: <span th:text="${usuario.nome}"></span></br>
-        		E-mail: <span th:text="${usuario.email}"></span></br>
-        		CPF: <span th:text="${usuario.CPF}"></span></br>
-            </div>
-            
-            <div sec:authorize="hasAuthority('ROLE_USER')"> 
-        		Nome: <span th:text="${usuario.nome}"></span></br>
-        		E-mail: <span th:text="${usuario.email}"></span></br>
-        		CPF: <span th:text="${usuario.CPF}"></span></br>
-        		<div class="alterar-usuario">
+    	<div class="div-flex">
+	    	<div class="dados-usuario">
+	        	<div class="dados" sec:authorize="hasAuthority('ROLE_ADMIN')"> 
+	        		Nome: <span th:text="${usuario.nome}"></span><br/>
+	        		E-mail: <span th:text="${usuario.email}"></span><br/>
+	        		CPF: <span th:text="${usuario.CPF}"></span><br/>
+	            </div>
+	            
+	            <div class="dados" sec:authorize="hasAuthority('ROLE_USER')"> 
+	        		<span class="linha-span">Nome: <span th:text="${usuario.nome}"></span></span><br/>
+	        		<span class="linha-span">E-mail: <span th:text="${usuario.email}"></span></span><br/>
+	        		<span class="linha-span">CPF: <span th:text="${usuario.CPF}"></span></span><br/>
+	        	</div>
+	        	
+	        	<div class="alterar-usuario">
 					<a class="alterar-usuario" th:href="@{/usuario/alterar(email=${usuario.email})}">Alterar dados</a>
 				</div>
-        	</div>
-            
-        </div>
+	            
+	        </div>
+    	</div>
     </main>
 </body>

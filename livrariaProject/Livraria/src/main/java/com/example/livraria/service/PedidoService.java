@@ -87,9 +87,13 @@ public class PedidoService {
 	public List<Pedido> obterPedidos(Usuario user) {
 		return pedidoRepository.findByUsuario(user);
 	}
+	
+	public List<Pedido> getAll(){
+		return pedidoRepository.findAll();
+	}
 
 	public void cancelarPedido(Pedido pedido) {
-
+		pedidoRepository.delete(pedido);
 	}
 
 	public Pedido alterarPedido(Pedido pedido) {
@@ -109,6 +113,14 @@ public class PedidoService {
 	public Pedido fecharPedido(Pedido pedido) {
 		pedido.finalizar();
 		return pedidoRepository.save(pedido);
+	}
+
+	public Pedido findById(Integer id) {
+		if(pedidoRepository.findById(id).isPresent())
+			return pedidoRepository.findById(id).get();
+		else {
+			return null;
+		}
 	}
 
 }
