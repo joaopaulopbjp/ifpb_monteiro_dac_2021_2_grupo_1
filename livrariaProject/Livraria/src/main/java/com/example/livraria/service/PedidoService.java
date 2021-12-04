@@ -1,5 +1,6 @@
 package com.example.livraria.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,7 +103,18 @@ public class PedidoService {
 	}
 
 	public void cancelarPedido(Pedido pedido) {
-		pedidoRepository.delete(pedido);
+		pedido.cancelar();
+		Usuario user = usuarioRepository.findByEmail(pedido.getUsuario().getEmail());
+		List<Pedido> pedidos = user.getHistoricoDePedidos();
+		pedidos.add(pedido);
+		user.setHistoricoDePedidos(pedidos);
+		usuarioRepository.save(user);
+		
+		Pedido pedido2 = new Pedido();
+		pedido2.setData(new Date());
+		pedido2.setUsuario(user);
+		pedidoRepository.save(pedido2);
+			
 	}
 
 	public Pedido alterarPedido(Pedido pedido) {

@@ -79,7 +79,12 @@ public class PedidoController {
     @GetMapping("/cancelar-pedido")
    	public String cancelarPedidos(Model model){
    		List<Pedido> pedidos = pedidoService.getAll();
-   		model.addAttribute("listaPedidos", pedidos);
+   		List<Pedido> pedidosEmAberto = new ArrayList<>();
+   		for(Pedido pedido: pedidos) {
+   			if(pedido.isAberto())
+   				pedidosEmAberto.add(pedido);
+   		}
+   		model.addAttribute("listaPedidos", pedidosEmAberto);
    		List<Categoria> listaCategorias = categoriaService.obterCategorias();
    		model.addAttribute("categorias",listaCategorias);
    		return "pedido/cancelar-pedido";

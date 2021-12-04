@@ -41,6 +41,7 @@ public class Pedido {
 	private Endereco localDeEntrega; 
 	@Temporal(TemporalType.DATE)
 	private Date dataDefechamento;
+	private PedidoStatus status;
 	
 	public Integer getId() {
 		return id;
@@ -93,13 +94,23 @@ public class Pedido {
 	public boolean isAberto() {
 		return dataDefechamento == null;
 	}
+	
+	
 	public void finalizar() {
 		this.dataDefechamento = new Date();
 		for (ItemPedido ip : itemPedido) {
 			ip.finalizar();
 			this.valorTotal.add(ip.obterValorTotal());
 		}
+		this.status = PedidoStatus.FINALIZADO;
 	}
+	
+	public void cancelar() {
+		this.dataDefechamento = new Date();
+		this.status = PedidoStatus.CANCELADO;
+	}
+	
+	
 	public ItemPedido adicionarItem(ItemPedido itemPedido) {
 		if (!isAberto()) {
 			throw new RuntimeException("Pedido esta fechado!");

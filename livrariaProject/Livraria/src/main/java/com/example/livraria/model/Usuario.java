@@ -67,6 +67,15 @@ public class Usuario implements UserDetails {
 	@OneToMany(cascade = {CascadeType.MERGE})
 	private List<Endereco> endereco = new ArrayList<>();
 	
+	@OneToMany(cascade = {CascadeType.MERGE})
+	private List<Pedido> historicoDePedidos = new ArrayList<>();
+	
+	public List<Pedido> getHistoricoDePedidos() {
+		return historicoDePedidos;
+	}
+	public void setHistoricoDePedidos(List<Pedido> historicoDePedidos) {
+		this.historicoDePedidos = historicoDePedidos;
+	}
 	public String getEmail() {
 		return email;
 	}
