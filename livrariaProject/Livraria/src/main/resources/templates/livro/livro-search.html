@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <script>src="https://kit.fontawesome.com/le592b5726.js"</script>
+	    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+	    <link rel="stylesheet" th:href="@{/style/index.css}">
+	    <title>Livraria</title>
+</head>
+<body>
+    <header th:replace="~{index :: index-header}"></header>
+    <form th:replace="~{index :: index-form}"></form>
+    <script th:replace="~{index :: index-script}"></script>
+    <a th:replace="~{index :: index-carrinho}"></a>
+    
+	<main>
+		<h3>Resultados da pesquisa:</h3>
+    		<div class="main">    		
+		        <div class="livro" th:each="livro: ${livros}" th:title="${livro.titulo}">
+					<a th:href="@{/livro-info(ISBN=${livro.ISBN})}">
+						<img class="capa" th:src="${livro.capa}" alt="">
+					</a>
+		            <span class="titulo"th:text="${livro.titulo}" >Titulo do Livro</span>
+		            <div class="preco">
+		            	<span class="rs">R$</span>
+		            	<span class="preco" th:text="${livro.preco}">RS:00.00</span>
+		            </div>
+		        </div> 
+    		</div>
+			<br>
+			<div th:replace="~{fragments :: pagination(
+				'/search',
+				${pesquisa}
+			)}"></div>
+			</main>
+	
+</body>
+</html>

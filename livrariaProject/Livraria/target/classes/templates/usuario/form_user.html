@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/style/usuario/cadastro_user.css}">
+    <link rel="stylesheet" th:href="@{/style/index.css}">
+    <script>src="https://kit.fontawesome.com/le592b5726.js"</script>
+	<link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+    <title>Livraria - Entrar</title>
+</head>
+<body>
+	
+	<div class="btn-titulo">
+		<div class="titulo">
+			<i class="fas fa-book-open" ></i>
+			<a href="/home">Livraria</a>
+		</div>
+	</div>
+	<div class="campo-form">
+		<div class="form">
+			<div class="area-cadastro">
+			
+				<h1 th:if="${usuario.email == null}">Cadastrar-se</h1>
+				<h1 th:if="${usuario.email != null}">Editar usuário</h1>
+				
+			  	<form method="post" th:action="@{/adicionar-usuario}" th:object="${usuario}">
+			  		<div class="form-line">
+			        		<label for="nome" >Nome: </label>
+			        		<input class="campo" type="text" placeholder="Digite seu nome" required id="nome" th:field="*{nome}" th:errorclass="is-invalid">
+			        		<!--<div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erros</div>-->
+			        </div>
+			        <div class="form-line">
+			        		<label for="CPF" >CPF: </label>
+			        		<input class="campo" placeholder="Digite seu CPF" type="text" required id="CPF" th:field="*{CPF}" th:errorclass="is-invalid">
+			        		<!--<div class="invalid-feedback" th:if="${#fields.hasErrors('CPF')}" th:errors="*{CPF}">Erros</div>-->
+			        </div>
+			        <div class="form-line" th:if="${usuario.email == null}">
+			        		<label for="email" >Email: </label>
+			        		<input name="username" class="campo" placeholder="Digite seu email" type="text" required id="email" th:field="*{email}" th:errorclass="is-invalid">
+			        </div>
+			        <div class="form-line" th:if="${usuario.email != null}">
+			        		<label for="email" >Email: </label>
+			        		<input name="username" class="campo" type="text" readonly="readonly" required id="email" th:field="*{email}" th:errorclass="is-invalid">
+			        </div>
+			        <div class="form-line" th:if="${usuario.email == null}" th>
+			        		<label for="senha" >Senha: </label>
+			        		<input name="password" class="campo" placeholder="Digite sua senha" type="text" required id="senha" th:field="*{senha}" th:errorclass="is-invalid">
+			        </div>
+			         <div class="form-line" th:if="${usuario.email != null}">
+			        		<label for="senha" >Nova senha: </label>
+			        		<input name="password" class="campo" placeholder="Sua nova senha" type="text" required id="senha" th:value="${usuario.senha=null}" th:field="*{senha}" th:errorclass="is-invalid">
+			        </div>
+			        <button class="btn-cadastrar" th:if="${usuario.email == null}" type="submit" value="Cadastrar">Cadastrar</button>
+			        <button class="btn-cadastrar" th:if="${usuario.email != null}" type="submit" value="Alterar">Alterar</button>		
+			 	</form>
+			 	
+		 	</div>
+		 	
+		 	<div class="area-login" th:if="${usuario.email == null}">
+		 		<h1>Entrar</h1>
+			 	<form method="post" th:action="@{/login}" th:object="${usuario}">
+			        <div class="form-line">
+			        		<label for="email" >Email: </label>
+			        		<input name="username" class="campo" placeholder="Digite seu email" type="text" required id="email" th:errorclass="is-invalid">
+			        		<!--<div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Erros</div>-->
+			        </div>
+			        <div class="form-line">
+			        		<label for="senha" >Senha: </label>
+			        		<input name="password" class="campo" placeholder="Digite sua senha" type="password" required id="senha" th:errorclass="is-invalid">
+			        		<!--<div class="invalid-feedback" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}">Erros</div>-->
+			        </div>
+			        <div class="form-line">
+				  		<button class="btn-login" type="submit" value="Cadastrar">Login</button>
+			        </div>
+			
+			 	</form>
+		 	</div>
+			 <!-- <form th:action="@{/login}" method="post">
+				<input name="username" class="form-control" placeholder="Usuário"/>
+				 
+				<input type="password" name="password" class="form-control" placeholder="Senha"/>
+			   
+				<button class="btn btn-primary btn-block">Entrar</button>
+			  </form> -->
+		</div>
+	</div>
+</body>
+</html>
