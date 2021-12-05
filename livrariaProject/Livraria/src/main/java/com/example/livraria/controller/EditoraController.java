@@ -15,15 +15,29 @@ import com.example.livraria.model.Editora;
 import com.example.livraria.service.CategoriaService;
 import com.example.livraria.service.EditoraService;
 
+/**
+ * Controller de editora
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
 @Controller
 public class EditoraController {
 
+	//Classe que contém os serviços de editora, onde o mesmo faz referência ao repository específico. 
 	@Autowired
 	EditoraService editoraService;
 	
+	//Classe que contém os serviços de categoria, onde o mesmo faz referência ao repository específico. 
 	@Autowired
 	CategoriaService categoriaService;
 	
+	/**
+	 * Método que mostra a tela de CRUD de editora.
+	 * @param model
+	 * @return tela de crud de editora
+	 */
 	@GetMapping("/gerenciar-editoras")
 	public String crudEditoras(Model model){
 		Editora categoria = new Editora();
@@ -35,6 +49,12 @@ public class EditoraController {
 		return "editora/crud-editora";
 	}
 	
+	/**
+	 * Método que salva a editora
+	 * @param editora
+	 * @param model
+	 * @return retorna um redirecionamento para o método que tem a anotação gerenciar-editoras
+	 */
 	@PostMapping("/adicionar-editora")
 	public String adicionarEditora(@ModelAttribute(name="editora") Editora editora, Model model){
 		editoraService.salvar(editora);
@@ -43,6 +63,12 @@ public class EditoraController {
 		return "redirect:/gerenciar-editoras";
 	}
 	
+	/**
+	 * Método que exclui a editora.
+	 * @param id
+	 * @param model
+	 * @return retorna um redirecionamento para o método que tem a anotação gerenciar-editoras
+	 */
 	@GetMapping("/excluir-editora")
 	public String RemoverEditora(@RequestParam(name="id") Integer id, Model model){
 		Editora editora = editoraService.getEditora(id);
@@ -52,6 +78,12 @@ public class EditoraController {
 		return "redirect:/gerenciar-editoras";
 	}
 	
+	/**
+	 * 
+	 * @param Método de alterar editora
+	 * @param model
+	 * @return retorna um redirecionamento para o método que tem a anotação gerenciar-editoras
+	 */
 	@PostMapping("/alterar-editora")
 	public String alterarEditora(@ModelAttribute(name="editora") Editora editora, Model model){
 		editoraService.alterarEditora(editora);

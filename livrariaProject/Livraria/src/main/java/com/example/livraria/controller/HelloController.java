@@ -9,70 +9,42 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.livraria.model.Autor;
 import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Livro;
-import com.example.livraria.service.AutorService;
 import com.example.livraria.service.CategoriaService;
 import com.example.livraria.service.EstoqueService;
 import com.example.livraria.service.LivroService;
 
+/**
+ * Controller hello que basicamente serve para exibir tudo que é publico. 
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
 @Controller
 public class HelloController {
 
+	//Classe que contém os serviços de livro, onde o mesmo faz referência ao repository específico. 
 	@Autowired
 	LivroService livroService;
 	
+	//Classe que contém os serviços de categoria, onde o mesmo faz referência ao repository específico. 
 	@Autowired
 	CategoriaService categoriaService;
 	
-	@Autowired
-	AutorService autorService;
-	
+	//Classe que contém os serviços de estoque, onde o mesmo faz referência ao repository específico. 
 	@Autowired
 	EstoqueService estoqueService;
 	
-	@PostMapping("/adicionar-autor")
-	public String adicionarAutor(@ModelAttribute(name="autor") Autor autor, Model model){
-		autorService.salvar(autor.getNome());
-		List<Autor> autores = autorService.getAll(0);
-		model.addAttribute("listaAutores", autores);
-		return "redirect:/gerenciar-autores";
-	}
-
-	@PostMapping("/alterar-autor")
-	public String alterarAutor(@ModelAttribute(name="autor") Autor autor, Model model){
-		autorService.update(autor);
-		return "redirect:/gerenciar-autores";
-	}
-
-	@GetMapping("/excluir")
-	public String RemoverAutor(@RequestParam(name="id") Integer id, Model model){
-		Autor autor = autorService.getAutor(id);
-		autorService.remover(autor);
-		List<Autor> autores = autorService.getAll(0);
-		model.addAttribute("listaAutores", autores);
-
-		model.addAttribute("autor", new Autor());
-
-		return "redirect:/gerenciar-autores";
-	}
 	
-	@GetMapping("/gerenciar-autores")
-	public String crudAutores(Model model){
-		Autor autor = new Autor();
-		List<Autor> autores = autorService.getAll(0);
-		model.addAttribute("listaAutores", autores);
-		model.addAttribute(autor);
-		List<Categoria> listaCategorias = categoriaService.obterCategorias();
-		model.addAttribute("categorias",listaCategorias);
-		return "Autor/crud-autor";
-	}
-	
+	/**
+	 * Método que chama o index básico da interface com tudo que deve conter, inclusive os livros.
+	 * @param model
+	 * @return index
+	 */
 	@GetMapping("/home")
 	public String hello(Model model) {
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
@@ -85,11 +57,22 @@ public class HelloController {
 		return "index";
 	}
 
+	/**
+	 * Método de cadastrar endereço
+	 * @return cadastro_endereco
+	 */
 	@GetMapping("/cadastrar-endereco")
 	public String cadastrarEndereco() {
 		return "cadastro_endereco";
 	}
 	
+	/**
+	 * Método de pesquisa um livro pelo título.
+	 * @param pesquisa
+	 * @param page
+	 * @param model
+	 * @return livro-search
+	 */
 	@GetMapping("/search")
 	public String search(@RequestParam(name="pesquisa") String pesquisa,@RequestParam(name="page", required = false) Integer page, Model model) {
 		if(page == null) {
@@ -114,6 +97,13 @@ public class HelloController {
 		return "livro-search";
 	}
 	
+	/**
+	 * Método que pesquisa pela categoria do livro
+	 * @param pesquisa
+	 * @param page
+	 * @param model
+	 * @return página com os livros pela categoria escolhida.
+	 */
 	@GetMapping("/search/categoria")
 	public String categoria(@RequestParam(name="pesquisa") String pesquisa, @RequestParam(name="page", required = false) Integer page, Model model) {
 		if(page == null) {

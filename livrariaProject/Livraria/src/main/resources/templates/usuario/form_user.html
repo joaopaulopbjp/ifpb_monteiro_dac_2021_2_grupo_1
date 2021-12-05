@@ -11,7 +11,6 @@
     <title>Livraria - Entrar</title>
 </head>
 <body>
-	<!--<header th:replace="index :: index-header"></header>-->
 	
 	<div class="btn-titulo">
 		<div class="titulo">
@@ -37,9 +36,13 @@
 			        		<input class="campo" placeholder="Digite seu CPF" type="text" required id="CPF" th:field="*{CPF}" th:errorclass="is-invalid">
 			        		<!--<div class="invalid-feedback" th:if="${#fields.hasErrors('CPF')}" th:errors="*{CPF}">Erros</div>-->
 			        </div>
-			        <div class="form-line">
+			        <div class="form-line" th:if="${usuario.email == null}">
 			        		<label for="email" >Email: </label>
 			        		<input name="username" class="campo" placeholder="Digite seu email" type="text" required id="email" th:field="*{email}" th:errorclass="is-invalid">
+			        </div>
+			        <div class="form-line" th:if="${usuario.email != null}">
+			        		<label for="email" >Email: </label>
+			        		<input name="username" class="campo" type="text" readonly="readonly" required id="email" th:field="*{email}" th:errorclass="is-invalid">
 			        </div>
 			        <div class="form-line" th:if="${usuario.email == null}" th>
 			        		<label for="senha" >Senha: </label>
