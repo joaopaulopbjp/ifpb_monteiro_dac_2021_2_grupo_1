@@ -5,6 +5,10 @@
 	align-items: center;
 }
 
+h4{
+	font-size: 20px;
+}
+
 .list-pedido{
 	display: flex;
 	justify-content: center;

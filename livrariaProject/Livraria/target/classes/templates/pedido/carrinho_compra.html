@@ -12,7 +12,10 @@
     <script th:replace="~{index :: index-script}"></script>
     <a th:replace="~{index :: index-carrinho}"></a>
 	<main>
-        <h1>Carrinho de Compras - ID da compra: [[${pedido.id}]]</h1>
+		<div class="head-carrinho">
+	        <h1>Carrinho de Compras - ID da compra: [[${pedido.id}]]</h1>
+	        <span class="valor-total" th:inline="text">Valor total: R$ [[${pedido.valorTotal}]]</span><br/>
+		</div>
 
         <form class="form-atualizar-pedido" method="post" th:action="@{/atualizar-pedido(id=${pedido.id}, usuario=${pedido.usuario.email})}" th:object="${pedido}">
             <div class="itens" th:each="item, itemStat: *{itemPedido}">
@@ -40,8 +43,9 @@
                     </div>
                 </div>
             </div> 
-            <button type="submit" th:if="${pedido.getItemPedido().size() > 0}"> Salvar</button>
-            <span th:inline="text">Valor total: R$ [[${pedido.valorTotal}]]</span><br/>
+            <div class="btn">
+            	<button class="btn-salvar" type="submit" th:if="${pedido.getItemPedido().size() > 0}"> Salvar alterações</button>
+            </div>
         </form>
     </main>
 </body>
