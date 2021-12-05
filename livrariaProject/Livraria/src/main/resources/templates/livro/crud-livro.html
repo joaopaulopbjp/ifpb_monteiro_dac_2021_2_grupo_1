@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div th:replace="~{fragments :: pagination(
-			'/search-livro',
+			${#httpServletRequest.requestURI},
 			${pesquisa}
 		)}"></div>
 	</main>

@@ -94,7 +94,7 @@ public class HelloController {
             
 			model.addAttribute("numPages", pageNumbers);
         }
-		return "livro-search";
+		return "livro/livro-search";
 	}
 	
 	/**

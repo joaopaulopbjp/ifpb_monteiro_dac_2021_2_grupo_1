@@ -183,6 +183,17 @@ public class LivroService {
         List<Livro> livros = livroRepository.findAll();
         return livros;
     }
+
+	/**
+	 * Método usado para retornar os livros existentes na base de dados de forma paginada.
+     * @param page pagina a ser retornada
+     * @return pagina de livro
+	 */
+	public Page<Livro> getAll(int page) {
+		Pageable pageable = PageRequest.of(page, 21, Sort.by("titulo"));
+        Page<Livro> livros = livroRepository.findAll(pageable);
+        return livros;
+    }
 	
 	/**
 	 * Método utilizado para editar/atualizar dado da categoria de um determindado livro.

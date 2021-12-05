@@ -33,7 +33,7 @@ import com.example.livraria.service.LivroService;
  * @author Jordielson Silva
  * @author Victor Macêdo
  */
-@Controller()
+@Controller
 public class LivroController {
     //Classe que contém os serviços de Livro.
     @Autowired
@@ -161,9 +161,25 @@ public class LivroController {
      * @return página de gerenciar livro
      */
     @GetMapping("/gerenciar-livros")
-	public String crudLivros(Model model){
-		List<Livro> livros = livroService.getAll();
-		model.addAttribute("listaLivros", livros);
+	public String crudLivros(Model model, @RequestParam(name="page", required = false) Integer page){
+        if(page == null) {
+			page = 0;
+		}
+		Page<Livro> livros = livroService.getAll(page);
+
+        model.addAttribute("pageAtual", livros.getNumber());
+		model.addAttribute("listaLivros", livros.getContent());
+
+        int totalPages = livros.getTotalPages();
+		model.addAttribute("totalPages", totalPages);
+		if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                .boxed()
+                .collect(Collectors.toList());
+            
+			model.addAttribute("numPages", pageNumbers);
+        }
+		// model.addAttribute("listaLivros", livros);
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
 		model.addAttribute("categorias",listaCategorias);
 		return "livro/crud-livro";
