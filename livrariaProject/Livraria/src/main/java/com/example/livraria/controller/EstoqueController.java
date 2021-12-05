@@ -14,20 +14,29 @@ import com.example.livraria.model.Categoria;
 import com.example.livraria.model.Estoque;
 import com.example.livraria.service.CategoriaService;
 import com.example.livraria.service.EstoqueService;
-import com.example.livraria.service.LivroService;
 
+/**
+ * Controller de Estoque que possui os metodos para fazer o CRUD de estoque.
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
 @Controller
 public class EstoqueController {
-
-	@Autowired
-	LivroService livroService;
-	
+	//Classe que contém os serviços de Estoque.
 	@Autowired
 	EstoqueService estoqueService;
 	
+	//Classe que contém os serviços da Categoria. Usado para listar as categorias no menu.
 	@Autowired
 	CategoriaService categoriaService;
 	
+	/**
+	 * Método para obter a página de gereciamento de estoque 
+	 * @param model
+	 * @return página de gereciamento de estoque
+	 */
 	@GetMapping("/gerenciar-estoque")
 	public String crudEstoque(Model model) {
 		Estoque estoque = new Estoque();
@@ -39,6 +48,12 @@ public class EstoqueController {
 		return "estoque/crud-estoque";
 	}
 	
+	/**
+	 * Método para adicionar ou alterar estoque
+	 * @param estoque estoque a ser adicionado ou alterado
+	 * @param model
+	 * @return redirecionamento para página de gerenciamento de estoque
+	 */
 	@PostMapping("/adicionar-estoque")
 	public String adicionarEstoque(@ModelAttribute(name="estoque") Estoque estoque, Model model){
 		estoqueService.criarEstoque(estoque.getId().toString(), estoque.getQuantidade());
@@ -47,6 +62,12 @@ public class EstoqueController {
 		return "redirect:gerenciar-estoque";
 	}
 	
+	/**
+	 * Método para excluir estoque
+	 * @param id id do estoque a ser excluído
+	 * @param model
+	 * @return redirecionamento para página de gerenciamento de estoque
+	 */
 	@GetMapping("/excluir-estoque")
 	public String RemoverAutor(@RequestParam(name="id") Integer id, Model model){ 
 		estoqueService.deleteById(id);

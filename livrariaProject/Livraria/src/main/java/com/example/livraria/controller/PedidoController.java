@@ -29,18 +29,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
+/**
+ * Controller de Pedido que retorna as paginas html referente ao pedido
+ *  e os metodos para cancelar, alterar e pesquisar um pedido.
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
 @Controller
 public class PedidoController {
-    
+    //Classe que contém os serviços de usuario. Para obter o pedido do usuário.
     @Autowired
     UsuarioService usuarioService;
+
+    //Classe que contém os serviços de pedido.
     @Autowired
     PedidoService pedidoService;
+
+    //Classe que contém os serviços de categoria. Usado para listar as categorias no menu.
     @Autowired
     CategoriaService categoriaService;
 
-
+    /**
+     * Metodo para exibir a página de carrinho de compras
+     * @param model
+     * @return a página de carrinho de compras com o pedido o usuário.
+     */
     @GetMapping("/carrinho-compras")
     public String carrinhoCompras(Model model) {
     	
@@ -72,7 +87,12 @@ public class PedidoController {
         return "pedido/carrinho_compra";
     }
 
-    
+    /**
+     * Método usado apenas pelo adiministrador que lista todos 
+     * os pedido abertos que permite ao administrador cancelar um pedido.
+     * @param model
+     * @return página html de cancelar o pedido
+     */
     @GetMapping("/cancelar-pedido")
    	public String cancelarPedidos(Model model){
    		List<Pedido> pedidos = pedidoService.getAll();
@@ -87,6 +107,12 @@ public class PedidoController {
    		return "pedido/cancelar-pedido";
    	}
     
+    /**
+     * Método para cancelar um pedido de um cliente
+     * @param id id do pedido a ser cancelado
+     * @param model
+     * @return redirecionamento para a página de cancelar pedido
+     */
     @GetMapping("/cancelar")
    	public String cancelar(@RequestParam(name="id") Integer id, Model model){
         Pedido pedido = pedidoService.findById(id);
@@ -94,6 +120,12 @@ public class PedidoController {
    		return "redirect:/cancelar-pedido";
    	}
     
+    /**
+     * Pesquisa de um pedido pelo id dele.
+     * @param id id do pedido a ser retornado
+     * @param model
+     * @return página de cancelar-pedido com apenas o pedido pesquisado
+     */
     @GetMapping("/search-pedido")
     public String search(@RequestParam(name="pesquisa") Integer id, Model model) {
     	List<Pedido> listaPedidos = new ArrayList<Pedido>();
@@ -109,7 +141,13 @@ public class PedidoController {
 		return "pedido/cancelar-pedido";
     }
     
-    
+    /**
+     * Alteração de um pedido, permitindo também alterar os itens do pedido.
+     * @param pedido pedido com os novos dados a serem atualizados
+     * @param result
+     * @param modelo
+     * @return redirecionamento para o carrinho de compras
+     */
     @PostMapping("/atualizar-pedido")
     public String createItemPedido(@ModelAttribute("pedido") Pedido pedido, BindingResult result, Model modelo) {
         if(!result.hasErrors()) {
@@ -118,6 +156,12 @@ public class PedidoController {
         return "redirect:/carrinho-compras";
     }
 
+    /**
+     * Método para adicionar um livro no pedido
+     * @param livro livro a ser adicionado
+     * @param model
+     * @return redirecionamento para o carrinho de compras
+     */
     @GetMapping("/adicionar-ao-pedido")
     public String adicionarAoPedido(@ModelAttribute(name="livro") Livro livro , Model model) {
         Authentication autenticado = SecurityContextHolder.getContext().getAuthentication();

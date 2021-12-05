@@ -25,26 +25,44 @@ import com.example.livraria.service.EditoraService;
 import com.example.livraria.service.EstoqueService;
 import com.example.livraria.service.LivroService;
 
-@Controller
+/**
+ * Controller de Livro que retorna as paginas html referente aos livros
+ *  e os metodos para fazer o CRUD do livro.
+ * 
+ * @author Agemiro Neto
+ * @author Jordielson Silva
+ * @author Victor Macêdo
+ */
+@Controller()
 public class LivroController {
+    //Classe que contém os serviços de Livro.
     @Autowired
 	LivroService livroService;
     
+    //Classe que contém os serviços da Categoria. Usado para listar as categorias no menu.
     @Autowired
     CategoriaService categoriaService;
     
+    //Classe que contém os serviços de Estoque. Usado para obter a quantidade de livro no estoque.
     @Autowired
     EstoqueService estoqueService;
 
+    //Classe que contém os serviços de Autor. Usado para obter os autores e listar eles nas páginas html.
     @Autowired
     AutorService autorService;
     
+    //Classe que contém os serviços de Editora. Usado para obter as edidoras e listar nas páginas html.
    @Autowired
    EditoraService editoraService;
 	
+   /**
+    * Cadastro do livro pelo adminstrador
+    * @param model
+    * @return página de cadastro do livro
+    */
     @GetMapping("/livro/cadastrar") 
     public String cadastrarLivro(Model model) {
-    	List<Autor> listaAutores = autorService.getAll(0);
+    	List<Autor> listaAutores = autorService.getAll();
         List<Editora> listaEditoras = editoraService.getAll();
         model.addAttribute("editoras",listaEditoras);
         List<Categoria> listaCategorias = categoriaService.obterCategorias();
@@ -54,9 +72,15 @@ public class LivroController {
         return "livro/cadastro_livro";
     }
 
+    /**
+    * Alteração da informações do livro pelo adminstrador
+    * @param ISBN isbn do livro aser alterado
+    * @param model
+    * @return página de atualização do livro
+    */
     @GetMapping("/livro/alterar") 
     public String alterarLivro(@RequestParam(name="ISBN") String ISBN, Model model) {
-    	List<Autor> listaAutores = autorService.getAll(0);
+    	List<Autor> listaAutores = autorService.getAll();
         List<Editora> listaEditoras = editoraService.getAll();
         model.addAttribute("editoras",listaEditoras);
         List<Categoria> listaCategorias = categoriaService.obterCategorias();
@@ -66,6 +90,13 @@ public class LivroController {
         return "livro/cadastro_livro";
     }
 
+    /**
+     * Médoto para salvar um livro
+     * @param livro livro a ser salvo
+     * @param result
+     * @param modelo
+     * @return
+     */
     @PostMapping("/adicionar-livro")
     public String adicionarLivro(@ModelAttribute("livro") Livro livro, BindingResult result, Model modelo) {
     	if(!result.hasErrors()) {
@@ -76,6 +107,12 @@ public class LivroController {
         return "livro/cadastro_livro";
     }
 
+    /**
+     * Página para ver as informações do livro e adicionar o livro ao pedido.
+     * @param ISBN isbn do livro a ver as informações
+     * @param model
+     * @return página com os detalhes do livro
+     */
     @GetMapping("/livro-info")
     public String findLivro(@RequestParam(name="ISBN") String ISBN, Model model) {
 		List<Categoria> listaCategorias = categoriaService.obterCategorias();
@@ -87,6 +124,13 @@ public class LivroController {
 		return "livro/livro_info";
 	}
 
+    /**
+     * Método para pesquisar um livro
+     * @param titulo titulo do livro usado como filtro na pesquisa
+     * @param page página
+     * @param model
+     * @return página com o resultado da pesquisa
+     */
     @GetMapping("/search-livro")
     public String search(@RequestParam(name="pesquisa") String titulo, @RequestParam(name="page", required = false) Integer page, Model model) {
         if(page == null) {
@@ -110,6 +154,12 @@ public class LivroController {
         }
 		return "livro/crud-livro";
     }
+
+    /**
+     * Método para obter a página que faz o gerenciamento dos livros
+     * @param model
+     * @return página de gerenciar livro
+     */
     @GetMapping("/gerenciar-livros")
 	public String crudLivros(Model model){
 		List<Livro> livros = livroService.getAll();
@@ -119,6 +169,12 @@ public class LivroController {
 		return "livro/crud-livro";
 	}
 
+    /**
+     * Método para excluir um livro
+     * @param isbn isbn do livro a ser excluído
+     * @param model
+     * @return redirecionamento para a página de gerenciamento de livros
+     */
     @GetMapping("/livro/excluir")
 	public String RemoverLivro(@RequestParam(name="ISBN") String isbn, Model model){
         Livro livro = livroService.getLivro(isbn);
