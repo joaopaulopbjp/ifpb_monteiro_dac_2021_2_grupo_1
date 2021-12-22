@@ -7,7 +7,7 @@
             <h1 class="display-4">Lista de Enderecos</h1>
             </div>
         </header>
-        <div class="listaLivros" v-for="endereco in enderecos" :key="endereco.nome">
+        <div class="listaLivros" v-for="(endereco, index) in enderecos" :key="endereco.nome">
             <div class="card">
             <div class="card-header">
             </div>
@@ -19,6 +19,12 @@
                 <div> rua: {{endereco.rua}}</div>
                 <div> numero: {{endereco.numero}}</div>
                 <div> complemento: {{endereco.complemento}}</div>
+            </div>
+            <div>
+                <button v-on:click="alterarEndereco({index})"> 
+                    Alterar
+                </button>
+                <button v-on:click="excluirEndereco(index)">Remover</button>
             </div>
             <br>
             </div>
@@ -47,6 +53,17 @@ export default {
         dado => {console.log( dado.data),
         this.$store.state.enderecos = dado.data,
         this.enderecos = this.$store.state.enderecos})
+    },
+    methods:{
+        alterarEndereco : function(element) {
+            let endereco = this.$store.state.enderecos[element.index];
+            this.$store.state.endereco = endereco;
+            this.$router.push({ path: 'add' })
+        },
+        excluirEndereco : function(element) {
+            let enderecos = this.$store.state.enderecos;
+            enderecos.splice(element.index, 1);
+        }
     },
     components: {
         navegacao

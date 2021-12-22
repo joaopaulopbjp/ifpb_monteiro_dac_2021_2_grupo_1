@@ -1,6 +1,7 @@
 export default{
   enderecos:[
     {
+      id: "1",
       cep: "3234738443",
       estado: "estado",
       cidade: "cidade",
@@ -10,6 +11,7 @@ export default{
       complemento: "complemento scf"
     },
     {
+      id: "2",
       cep: "3234738443",
       estado: "estado",
       cidade: "cidade",
@@ -19,6 +21,7 @@ export default{
       complemento: "complemento scf"
     },
     {
+      id: "3",
       cep: "3234738443",
       estado: "estado",
       cidade: "cidade",
@@ -27,6 +30,15 @@ export default{
       numero: 234,
       complemento: "complemento scf"
     }
-  ]
+  ],
+  endereco: {
+    cep:"",
+    estado:"",
+    cidade:"",
+    bairro:"",
+    rua:"",
+    numero:"",
+    complemento:""
+  }
 }
   

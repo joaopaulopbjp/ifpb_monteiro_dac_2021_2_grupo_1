@@ -21,6 +21,11 @@
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
+                    <label for="cidade" class="form-label">Cidade:</label>
+                    <input type="cidade" required id="cidade" class="form-control" v-model="endereco.cidade">
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
                     <label for="bairro" class="form-label">Bairro:</label>
                     <input type="bairro" required id="bairro" class="form-control" v-model="endereco.bairro">
                     <div class="invalid-feedback"></div>
@@ -57,21 +62,16 @@ export default {
     name: 'AdicionarEndereco',
     data() {
         return {
-            endereco:{
-            cep:"",
-            estado:"",
-            cidade:"",
-            bairro:"",
-            rua:"",
-            numero:"",
-            complemento:"",
-
-            }
+            endereco: this.$store.state.endereco
         }
-        },
+    },
     methods:{
-        enviarNovoAutor: function(endereco){
-        console.log("Endereco adicionado: "+endereco.nome);
+        enviarNovoEndereco: function(endereco){
+            let enderecos = this.$store.state.enderecos;
+            if(this.endereco.id === undefined) {
+                enderecos.push(endereco)
+            }
+            this.$router.push('/');
         }
     },
     components:{

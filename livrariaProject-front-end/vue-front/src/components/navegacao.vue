@@ -9,7 +9,7 @@
               <router-link class="nav-link" to="/"> Finalizar Pedido </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/add"> Adicionar Endereço </router-link>
+              <router-link v-on:click="adicionarEndereco()" class="nav-link" to="/add"> Adicionar Endereço </router-link>
             </li>
           </ul>
         </div>
@@ -23,6 +23,19 @@ export default {
   name: 'navegacao',
   data() {
       return {};
+  },
+  methods:{
+    adicionarEndereco : function() {
+      this.$store.state.endereco = {
+            cep:"",
+            estado:"",
+            cidade:"",
+            bairro:"",
+            rua:"",
+            numero:"",
+            complemento:""
+            }
+    }
   }
 }
 </script>
