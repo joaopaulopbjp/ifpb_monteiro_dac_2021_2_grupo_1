@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.example.livraria.model.Endereco;
 import com.example.livraria.model.Role;
 import com.example.livraria.model.Usuario;
 import com.example.livraria.repository.RoleRepository;
@@ -103,4 +106,17 @@ public class UsuarioService {
         return usuarios;
     }
 
+	public List<Endereco> getEndereco(){
+		Usuario user =(Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();	
+		return user.getEndereco();
+	}
+	
+	public void addEndereco(Endereco end){
+		Usuario user =(Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();	
+		user.addEndereco(end);
+		usuarioRepository.save(user);
+	}
+	
+	
+	
 }
