@@ -1,5 +1,6 @@
 <template>
     <main class="container">
+        <navegacao></navegacao>
         <div>
         <header>
             <div class="jumbotron mb-0">
@@ -29,6 +30,9 @@
 
 <script>
 import serviceEndereco from '../service/endereco-service'
+import navegacao from './navegacao.vue'
+
+
 
 export default {
     name: 'pedido',
@@ -43,6 +47,9 @@ export default {
         dado => {console.log( dado.data),
         this.$store.state.enderecos = dado.data,
         this.enderecos = this.$store.state.enderecos})
-    }
+    },
+    components: {
+        navegacao
+  }
 }
 </script>

@@ -1,10 +1,8 @@
 <template>
-  <navegacao></navegacao>
   <router-view/>
 </template>
 
 <script>
-import navegacao from './components/navegacao.vue'
 
 export default {
   name: 'App',
@@ -13,9 +11,7 @@ export default {
         msg:"Bem vindo ao Vue"
     }
   },
-  components: {
-    navegacao
-  }
+
 }
 </script>
 

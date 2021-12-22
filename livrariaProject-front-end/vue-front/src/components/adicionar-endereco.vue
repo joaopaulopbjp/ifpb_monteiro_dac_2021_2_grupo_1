@@ -1,4 +1,5 @@
 <template>
+    <navegacao></navegacao>
     <main class="container">
         <div>
             <header>
@@ -41,7 +42,7 @@
                 </div>
                 
                     
-                <button type="submit" value="Enviar" v-on:click="enviarNovoAutor(autor)">Enviar</button>
+                <button type="submit" value="Enviar" v-on:click="enviarNovoEndereco(endereco)">Enviar</button>
             </form>
             </div>
         </div>
@@ -50,6 +51,8 @@
 
 
 <script>
+import navegacao from './navegacao.vue'
+
 export default {
     name: 'AdicionarEndereco',
     data() {
@@ -70,6 +73,9 @@ export default {
         enviarNovoAutor: function(endereco){
         console.log("Endereco adicionado: "+endereco.nome);
         }
+    },
+    components:{
+        navegacao
     }
 }
 </script>
