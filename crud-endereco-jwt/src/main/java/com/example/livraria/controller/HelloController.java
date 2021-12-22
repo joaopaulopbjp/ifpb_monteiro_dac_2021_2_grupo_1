@@ -1,9 +1,20 @@
 package com.example.livraria.controller;
 
+import java.util.List;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+
+import com.example.livraria.model.Endereco;
+import com.example.livraria.service.EnderecoService;
 
 /**
  * Controller hello que basicamente serve para exibir tudo que é publico. 
@@ -12,20 +23,31 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author Jordielson Silva
  * @author Victor Macêdo
  */
-@Controller
+
+@CrossOrigin(origins = "http://localhost:8080/")
+@RestController
+@RequestMapping(value = "/endereco")
 public class HelloController {
-
-
-
-	/**
-	 * Método de cadastrar endereço
-	 * @return cadastro_endereco
-	 */
-	@GetMapping("/cadastrar-endereco")
-	public String cadastrarEndereco() {
-		return "cadastro_endereco";
+	
+	@Autowired
+	EnderecoService enderecoService;
+	
+	@PostMapping("/cadastrar-endereco")
+	public ResponseEntity<Endereco> cadastrarEndereco(@RequestBody Endereco endereco) {
+		return new ResponseEntity<Endereco>(enderecoService.adicionarEndereco(endereco), HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/enderecos")
+	public List<Endereco> getAll(){
+		
+		List<Endereco> listaEnderecos = enderecoService.listarEnderecos();
+		
+//		model.addAttribute("enderecos", listaEnderecos);
+//		model.addAttribute("endereco", endereco);
+//		model.addAttribute("endereco", new Endereco());
 
-	
+		return listaEnderecos;
+
+	}
+
 }
