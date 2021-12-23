@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.livraria.model.Endereco;
+import com.example.livraria.model.Usuario;
 import com.example.livraria.repository.EnderecoRepository;
 
 @Service
@@ -19,6 +20,10 @@ public class EnderecoService {
 	
 	public List<Endereco> listarEnderecos(){
 		return (List<Endereco>)enderecoRepository.findAll();
+	}
+
+	public List<Endereco> listarEnderecos(Usuario user){
+		return enderecoRepository.listarEnderecos(user.getEmail());
 	}
 
 	public Endereco adicionarEndereco(Endereco endereco) {

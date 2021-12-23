@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.livraria.model.Role;
@@ -103,4 +104,13 @@ public class UsuarioService {
         return usuarios;
     }
 
+    public Usuario login(String email, String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();  
+        Usuario user = usuarioRepository.findByEmail(email);
+        if(user == null || !encoder.matches(password, user.getPassword())) {
+            return null;
+        } else {
+            return user;
+        }
+    }
 }

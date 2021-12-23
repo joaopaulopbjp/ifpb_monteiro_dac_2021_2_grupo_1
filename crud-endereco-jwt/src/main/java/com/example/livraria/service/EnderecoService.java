@@ -33,7 +33,7 @@ public class EnderecoService {
 		return enderecoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Integer.toString(id)));
 	}
 	
-	public void atualizarEndereco(Integer id, Endereco endereco) {
+	public Endereco atualizarEndereco(Integer id, Endereco endereco) {
 		
 		Optional<Endereco> enderecoRecuperado = enderecoRepository.findById(id);
 		
@@ -48,9 +48,10 @@ public class EnderecoService {
 			e.setNumero(endereco.getNumero());
 			e.setComplemento(endereco.getComplemento());
 			
-			enderecoRepository.save(e);
+			return enderecoRepository.save(e);
 			
 		}
+		return null;
 		
 	}
 	

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.livraria.model.Endereco;
+import com.example.livraria.model.Usuario;
 import com.example.livraria.service.EnderecoService;
 
 /**
@@ -40,15 +41,10 @@ public class EnderecoRestController {
 		return new ResponseEntity<Endereco>(enderecoService.adicionarEndereco(endereco), HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/lista-enderecos")
+	@GetMapping("/lista")
 	public List<Endereco> getAll(){
 		
 		List<Endereco> listaEnderecos = enderecoService.listarEnderecos();
-		
-//		model.addAttribute("enderecos", listaEnderecos);
-//		model.addAttribute("endereco", endereco);
-//		model.addAttribute("endereco", new Endereco());
-
 		return listaEnderecos;
 
 	}

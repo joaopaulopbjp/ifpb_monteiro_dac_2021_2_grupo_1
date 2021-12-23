@@ -10,18 +10,18 @@
             <div class="card">
             <form class="card-body" @submit.prevent>
                 <div class="form-group">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="text" required id="email" class="form-control" v-model="login.email">
+                    <label for="login" class="form-label">Email:</label>
+                    <input type="text" required id="login" class="form-control" v-model="data.login">
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
                     <label for="senha" class="form-label">Senha:</label>
-                    <input type="password" required id="senha" class="form-control" v-model="login.senha">
+                    <input type="password" required id="senha" class="form-control" v-model="data.senha">
                     <div class="invalid-feedback"></div>
                 </div>
                 
                     
-                <button type="submit" value="Enviar" v-on:click="enviarLogin(login)">Entrar </button>
+                <button type="submit" value="Enviar" v-on:click="fazerLogin(data)">Entrar </button>
             </form>
             </div>
         </div>
@@ -30,19 +30,23 @@
 
 
 <script>
+    import userService from '../service/user-service'
+
 export default {
     name: 'Login',
     data() {
         return {
-            login:{
-                email:"",
+            data:{
+                login:"",
                 senha:"",
             }
         }
         },
     methods:{
-        enviarNovoAutor: function(endereco){
-        console.log("Endereco adicionado: "+endereco.nome);
+        fazerLogin: function(data){
+            console.log("Endereco adicionado: "+data);
+            userService.login(data);
+            // console.log("Usuario retornado: " + user.data.id);
         }
     }
 }

@@ -106,8 +106,7 @@ public class UsuarioService {
         return usuarios;
     }
 
-	public List<Endereco> getEndereco(){
-		Usuario user =(Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();	
+	public List<Endereco> getEndereco(Usuario user){
 		return user.getEndereco();
 	}
 	

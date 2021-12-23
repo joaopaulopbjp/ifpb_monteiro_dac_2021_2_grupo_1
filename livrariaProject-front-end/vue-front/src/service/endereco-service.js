@@ -1,5 +1,7 @@
 import {http, httpBanco} from './configuracoes'
 
+// const cors = require('cors');
+// httpBanco.use(cors());
 
 export default{
 	adicionarEndereco (endereco){
@@ -7,7 +9,7 @@ export default{
 		return httpBanco.post('/cadastrar-endereco', endereco)
 	},
 	listarEnderecos (){
-		return httpBanco.get('/lista-enderecos', endereco)
+		return httpBanco.get('/lista')
 	},
 	atualizarEndereco (endereco){
 		return httpBanco.post('/atualizar-endereco/' + endereco.id, endereco)
