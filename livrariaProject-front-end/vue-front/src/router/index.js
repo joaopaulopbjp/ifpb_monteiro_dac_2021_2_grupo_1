@@ -6,7 +6,7 @@ import login from '../components/login.vue'
 
 const routes = [
   {
-	path: '/',
+	path: '/endereco',
 	component: enderecos
   },
   {

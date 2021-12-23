@@ -49,6 +49,7 @@ public class SecurityController {
 				 userDetails.getNome(),
 				 userDetails.getUsername(), 
 				 userDetails.getEmail(), 
+				 userDetails.getEndereco(), 
 				 roles);
 		
 		return resposta;

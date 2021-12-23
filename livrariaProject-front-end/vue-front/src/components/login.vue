@@ -30,7 +30,7 @@
 
 
 <script>
-    import userService from '../service/user-service'
+    import userService from '../service/user-service' 
 
 export default {
     name: 'Login',
@@ -44,9 +44,15 @@ export default {
         },
     methods:{
         fazerLogin: function(data){
-            console.log("Endereco adicionado: "+data);
-            userService.login(data);
-            // console.log("Usuario retornado: " + user.data.id);
+            let resposta = userService.login(data);
+            resposta.then((response) => {
+                this.$store.state.usuario = response.data;
+
+                this.$store.state.enderecos = response.data.enderecos;
+
+                this.$router.push('/endereco');
+            });
+
         }
     }
 }

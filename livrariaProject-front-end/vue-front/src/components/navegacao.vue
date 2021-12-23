@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class="nav-link" to="/"> Finalizar Pedido </router-link>
+              <router-link class="nav-link" to="/endereco"> Finalizar Pedido </router-link>
             </li>
             <li class="nav-item">
               <router-link v-on:click="adicionarEndereco()" class="nav-link" to="/add"> Adicionar Endereço </router-link>

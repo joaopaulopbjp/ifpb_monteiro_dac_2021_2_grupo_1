@@ -8,16 +8,18 @@ public class JwtResposta {
 	private String id;
 	private String login;
 	private String email;
+	private List<Endereco> enderecos;
 	private String nome;
 	private List<String> roles;
 	
-	public JwtResposta(String token, String id, String nome, String username, String email, List<String> roles) {
+	public JwtResposta(String token, String id, String nome, String username, String email, List<Endereco> enderecos, List<String> roles) {
 		super();
 		this.token = token;
 		this.id = id;
 		this.nome = nome;
 		this.login = username;
 		this.email = email;
+		this.enderecos = enderecos;
 		this.roles = roles;
 	}
 
@@ -75,6 +77,13 @@ public class JwtResposta {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	

@@ -83,7 +83,7 @@ export default {
             }
             this.$router.push('/');*/
             enderecoService.adicionarEndereco(endereco).then(() => alert('Endereco criado com sucesso'))
-            this.$router.push('/');
+            this.$router.push('/endereco');
         }
     },
     components:{

@@ -1,23 +1,20 @@
-import {http, httpBanco} from './configuracoes'
-
-// const cors = require('cors');
-// httpBanco.use(cors());
+import {http} from './configuracoes'
 
 export default{
 	adicionarEndereco (endereco){
 		console.log("Chegou no service " + endereco.numero)
-		return httpBanco.post('/cadastrar-endereco', endereco)
+		return http.post('/endereco/cadastrar-endereco', endereco)
 	},
 	listarEnderecos (){
-		return httpBanco.get('/lista')
+		return http.get('/endereco/lista')
 	},
 	atualizarEndereco (endereco){
-		return httpBanco.post('/atualizar-endereco/' + endereco.id, endereco)
+		return http.post('/endereco/atualizar-endereco/' + endereco.id, endereco)
 	},
 	removerEndereco (endereco){
-		return httpBanco.delete('/remover-endereco/' + endereco.id, endereco)
+		return http.delete('/endereco/remover-endereco/' + endereco.id, endereco)
 	},
 
-	lista:() => {return http.get("lista-enderecos")},
-	adiciona:(endereco) => {return http.post("/cadastrar-endereco",endereco)}
+	lista:() => {return http.get("/endereco/lista")},
+	adiciona:(endereco) => {return http.post("/endereco/cadastrar-endereco",endereco)}
 }
