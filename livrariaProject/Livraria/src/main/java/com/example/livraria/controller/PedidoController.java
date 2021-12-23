@@ -107,6 +107,8 @@ public class PedidoController {
    		return "pedido/cancelar-pedido";
    	}
     
+    
+    
     /**
      * Método para cancelar um pedido de um cliente
      * @param id id do pedido a ser cancelado
@@ -119,7 +121,13 @@ public class PedidoController {
    		pedidoService.cancelarPedido(pedido);
    		return "redirect:/cancelar-pedido";
    	}
-    
+    @GetMapping("/finalizar")
+	public String finalizar(@RequestParam(name="id") Integer id, Model model){
+        Pedido pedido = pedidoService.findById(id);
+   		pedidoService.fecharPedido(pedido);
+   		System.out.println("chamou finalizar");
+   		return "redirect:/carrinho-compras";
+   	}
     /**
      * Pesquisa de um pedido pelo id dele.
      * @param id id do pedido a ser retornado
@@ -153,6 +161,7 @@ public class PedidoController {
         if(!result.hasErrors()) {
             pedidoService.alterarPedido(pedido);
         }
+        System.out.println("chamou atualizar");
         return "redirect:/carrinho-compras";
     }
 

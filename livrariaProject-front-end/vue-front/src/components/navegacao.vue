@@ -1,6 +1,6 @@
 <template>
-<div>
-  <h3>Menu de navegação</h3>
+<div class="nav">
+  <h3>Menu de navegação:</h3>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid"> 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -39,3 +39,6 @@ export default {
   }
 }
 </script>
+<style >
+  @import "./stylesheet/navegacao.css"
+</style>
