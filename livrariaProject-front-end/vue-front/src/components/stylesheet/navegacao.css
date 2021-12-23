@@ -1,0 +1,29 @@
+.nav{
+    display: flex;
+    justify-content: center;
+    background-color: yellow;
+}
+
+.navbar-nav{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-item{
+    margin-top: 2%;
+    margin-right: 5%;
+    text-decoration: none;
+}
+
+.nav-link{
+    text-decoration: none;
+    color: black;
+}
+
+.nav-link:hover{
+    
+    color: steelblue;
+}

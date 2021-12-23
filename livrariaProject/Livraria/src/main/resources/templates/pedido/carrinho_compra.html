@@ -45,8 +45,10 @@
             </div> 
             <div class="btn">
             	<button class="btn-salvar" type="submit" th:if="${pedido.getItemPedido().size() > 0}"> Salvar alterações</button>
+            	<a class="btn-salvar"th:if="${pedido.getItemPedido().size() > 0}"  th:href="@{/finalizar(id=${pedido.id})}">Finalizar pedido</a>
             </div>
         </form>
+        
     </main>
 </body>
 </html>

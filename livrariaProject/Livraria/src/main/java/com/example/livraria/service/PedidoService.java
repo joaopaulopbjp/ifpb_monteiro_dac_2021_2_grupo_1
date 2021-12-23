@@ -181,6 +181,17 @@ public class PedidoService {
 
 	public Pedido fecharPedido(Pedido pedido) {
 		pedido.finalizar();
+		Usuario user = usuarioRepository.findByEmail(pedido.getUsuario().getEmail());
+		List<Pedido> pedidos = user.getHistoricoDePedidos();
+		pedidos.add(pedido);
+		user.setHistoricoDePedidos(pedidos);
+		usuarioRepository.save(user);
+		
+		Pedido pedido2 = new Pedido();
+		pedido2.setData(new Date());
+		pedido2.setUsuario(pedido.getUsuario());
+		pedidoRepository.save(pedido2);
+		
 		return pedidoRepository.save(pedido);
 	}
 
