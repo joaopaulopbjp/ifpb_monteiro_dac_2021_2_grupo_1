@@ -23,9 +23,10 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
+		http.csrf().and().cors().disable().authorizeRequests()
 			.antMatchers(HttpMethod.GET, "/home","/search/**","/livro-info").permitAll()
-			.antMatchers(HttpMethod.POST, "/adicionar-usuario").permitAll()
+			.antMatchers(HttpMethod.GET, "/endereco/**").permitAll()
+			.antMatchers(HttpMethod.POST, "/adicionar-usuario", "/user-login", "/endereco/**").permitAll()
 			.antMatchers("/gerencia**").hasRole("ADMIN")
 			.anyRequest().authenticated()
 			.and()

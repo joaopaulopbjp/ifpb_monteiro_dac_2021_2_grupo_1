@@ -21,8 +21,8 @@ public class JwtErros implements AuthenticationEntryPoint {
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
 
-		logger.error("Não autorizado - error: {}", authException.getMessage());
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Login não autorizado");
+		logger.error("Nao autorizado - error: {}", authException.getMessage());
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Login nao autorizado");
 		
 	}
 

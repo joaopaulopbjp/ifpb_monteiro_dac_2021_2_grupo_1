@@ -48,7 +48,7 @@ public class TokenFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
 		} catch (Exception e) {
-			logger.error("Problema na autenticação: {}", e);
+			logger.error("Problema na autenticaï¿½ï¿½o: {}", e);
 		}
 
 		filterChain.doFilter(request, response);
