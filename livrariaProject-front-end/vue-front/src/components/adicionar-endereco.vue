@@ -57,20 +57,32 @@
 
 <script>
 import navegacao from './navegacao.vue'
+import enderecoService from '../service/endereco-service'
 
 export default {
     name: 'AdicionarEndereco',
     data() {
         return {
-            endereco: this.$store.state.endereco
+          //  endereco: this.$store.state.endereco
+            endereco: {
+                cep:"",
+                estado:"",
+                cidade:"",
+                bairro:"",
+                rua:"",
+                numero:"",
+                complemento:""
+            }
         }
     },
     methods:{
         enviarNovoEndereco: function(endereco){
-            let enderecos = this.$store.state.enderecos;
+           /* let enderecos = this.$store.state.enderecos;
             if(this.endereco.id === undefined) {
                 enderecos.push(endereco)
             }
+            this.$router.push('/');*/
+            enderecoService.adicionarEndereco(endereco).then(() => alert('Endereco criado com sucesso'))
             this.$router.push('/');
         }
     },
