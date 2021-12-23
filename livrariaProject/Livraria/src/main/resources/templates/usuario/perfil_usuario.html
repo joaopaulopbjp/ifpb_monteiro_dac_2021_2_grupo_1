@@ -20,8 +20,8 @@
     <a th:replace="~{index :: index-carrinho}"></a>
     
     <main>
-    	<h3>Olá, <span th:text="${usuario.nome}"></span></h3>
     	<div class="div-flex">
+	    	<h3>Olá, <span th:text="${usuario.nome}"></span></h3>
 	    	<div class="dados-usuario">
 	        	<div class="dados" sec:authorize="hasAuthority('ROLE_ADMIN')"> 
 	        		Nome: <span th:text="${usuario.nome}"></span><br/>
@@ -38,8 +38,19 @@
 	        	<div class="alterar-usuario">
 					<a class="alterar-usuario" th:href="@{/usuario/alterar(email=${usuario.email})}">Alterar dados</a>
 				</div>
+				
 	            
 	        </div>
     	</div>
+		<div class="div-flex">
+				<h3>Histórico de pedido</h3>
+			<div class="dados-usuarioo" id="historico">
+				 <div class="dados" th:each="pedido: ${historicoPedidos}">
+					<span class="linha-span">Id do Pedido: <span th:text="${pedido.id}"></span></span><br/>
+					<span class="linha-span">valor do Pedido: <span th:text="${pedido.valorTotal}"></span></span><br/>
+					<span class="linha-span">Status do Pedido: <span th:text="${pedido.status}"></span></span><br/>
+				</div>
+			</div>
+		</div>
     </main>
 </body>

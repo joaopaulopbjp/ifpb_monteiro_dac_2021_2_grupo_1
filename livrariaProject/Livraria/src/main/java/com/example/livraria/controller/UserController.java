@@ -94,6 +94,8 @@ public class UserController {
 		
 		model.addAttribute("usuario", usuario);
 		
+		model.addAttribute("historicoPedidos", usuario.getHistoricoDePedidos());
+		
 		return "usuario/perfil_usuario";
 		
 	}
