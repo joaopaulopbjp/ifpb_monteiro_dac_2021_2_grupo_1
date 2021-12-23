@@ -52,9 +52,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 		.authorizeRequests()
-		.antMatchers("/autores/publico/**").permitAll()
 		.antMatchers("/seguranca/login").permitAll()
-		.antMatchers("/autores/protegido/adicionaAutor").hasAuthority("USUARIO")
+		.antMatchers("/endereco/cadastrar-endereco").hasAuthority("ROLE_USER")
+		.antMatchers("/endereco/lista").hasAuthority("ROLE_USER")
 		.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
