@@ -8,9 +8,6 @@ export default{
     rua:"",
     numero:"",
     complemento:""
-  },
-  usuario: {
-
   }
 }
   

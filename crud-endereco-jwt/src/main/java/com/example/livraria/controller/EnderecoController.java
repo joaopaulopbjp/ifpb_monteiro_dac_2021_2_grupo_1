@@ -8,7 +8,6 @@ import com.example.livraria.model.Endereco;
 import com.example.livraria.security.TokenFilter;
 import com.example.livraria.security.util.JwtUtils;
 import com.example.livraria.service.EnderecoService;
-import com.example.livraria.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
