@@ -1,8 +1,8 @@
 import {http} from './configuracoes'
+import store from '@/store'
 
 export default{
 	adicionarEndereco (endereco){
-		console.log("Chegou no service " + endereco.numero)
 		return http.post('/endereco/cadastrar-endereco', endereco)
 	},
 	listarEnderecos (){
@@ -12,9 +12,8 @@ export default{
 		return http.post('/endereco/atualizar-endereco/' + endereco.id, endereco)
 	},
 	removerEndereco (endereco){
-		return http.delete('/endereco/remover-endereco/' + endereco.id, endereco)
+		return http.delete('/endereco/remover-endereco/' + endereco.id)
 	},
 
-	lista:() => {return http.get("/endereco/lista")},
-	adiciona:(endereco) => {return http.post("/endereco/cadastrar-endereco",endereco)}
+	lista:() => {return http.get("/endereco/lista", {headers: {Authorization: 'Bearer ' + store.state.usuario.token}})}
 }

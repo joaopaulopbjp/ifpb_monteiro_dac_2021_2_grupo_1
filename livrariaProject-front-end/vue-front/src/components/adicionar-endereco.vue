@@ -63,27 +63,24 @@ export default {
     name: 'AdicionarEndereco',
     data() {
         return {
-          //  endereco: this.$store.state.endereco
-            endereco: {
-                cep:"",
-                estado:"",
-                cidade:"",
-                bairro:"",
-                rua:"",
-                numero:"",
-                complemento:""
-            }
+           endereco: this.$store.state.endereco
         }
     },
     methods:{
         enviarNovoEndereco: function(endereco){
-           /* let enderecos = this.$store.state.enderecos;
-            if(this.endereco.id === undefined) {
-                enderecos.push(endereco)
-            }
-            this.$router.push('/');*/
-            enderecoService.adicionarEndereco(endereco).then(() => alert('Endereco criado com sucesso'))
-            this.$router.push('/endereco');
+            endereco.usuario = {
+                "email": this.$store.state.usuario.email
+            };
+            enderecoService.adicionarEndereco(endereco).then((response) => {
+                let enderecos = this.$store.state.enderecos;
+                if(this.endereco.id === "" || this.endereco.id === undefined) {
+                    enderecos.push(response.data);
+                } else {
+                    let index = enderecos.indexOf(this.$store.state.endereco);
+                    enderecos[index] = response.data;
+                }
+                this.$router.push('/endereco');
+            })
         }
     },
     components:{

@@ -2,7 +2,9 @@ package com.example.livraria.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -64,9 +66,75 @@ public class Usuario implements UserDetails {
 	 * Atributo de lista de endereços que usuário pode ter.
 	 * Anotação um para muitos com propriedade cascade usando o tipo Merge.
 	 */
-	@OneToMany(cascade = {CascadeType.MERGE})
+	@OneToMany(cascade = {CascadeType.MERGE}, mappedBy = "usuario")
 	private List<Endereco> endereco = new ArrayList<>();
 	
+
+	public Usuario() {
+	}
+
+	public Usuario(String email, String nome, String senha, String CPF, List<Role> papeis, List<Endereco> endereco) {
+		this.email = email;
+		this.nome = nome;
+		this.senha = senha;
+		this.CPF = CPF;
+		this.papeis = papeis;
+		this.endereco = endereco;
+	}
+
+	public List<Role> getPapeis() {
+		return this.papeis;
+	}
+
+	public void setPapeis(List<Role> papeis) {
+		this.papeis = papeis;
+	}
+
+	public Usuario email(String email) {
+		setEmail(email);
+		return this;
+	}
+
+	public Usuario nome(String nome) {
+		setNome(nome);
+		return this;
+	}
+
+	public Usuario senha(String senha) {
+		setSenha(senha);
+		return this;
+	}
+
+	public Usuario CPF(String CPF) {
+		setCPF(CPF);
+		return this;
+	}
+
+	public Usuario papeis(List<Role> papeis) {
+		setPapeis(papeis);
+		return this;
+	}
+
+	public Usuario endereco(List<Endereco> endereco) {
+		setEndereco(endereco);
+		return this;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof Usuario)) {
+			return false;
+		}
+		Usuario usuario = (Usuario) o;
+		return Objects.equals(email, usuario.email) && Objects.equals(nome, usuario.nome) && Objects.equals(senha, usuario.senha) && Objects.equals(CPF, usuario.CPF) && Objects.equals(papeis, usuario.papeis) && Objects.equals(endereco, usuario.endereco);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, nome, senha, CPF, papeis, endereco);
+	}
 
 	public String getEmail() {
 		return email;

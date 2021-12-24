@@ -2,7 +2,11 @@ package com.example.livraria.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.example.livraria.model.Endereco;
+import com.example.livraria.security.TokenFilter;
+import com.example.livraria.security.util.JwtUtils;
 import com.example.livraria.service.EnderecoService;
 import com.example.livraria.service.UsuarioService;
 
@@ -22,6 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/endereco")
 public class EnderecoController {
 
+	@Autowired
+	TokenFilter filter;
+
+	@Autowired
+	JwtUtils jwtUtils;
+
     @Autowired
 	EnderecoService enderecoService;
 
@@ -30,10 +40,14 @@ public class EnderecoController {
 		return new ResponseEntity<Endereco>(enderecoService.adicionarEndereco(endereco), HttpStatus.CREATED);
 	}
     @GetMapping("/lista")
-	public List<Endereco> getAll(){
-		
-		List<Endereco> listaEnderecos = enderecoService.listarEnderecos();
-		return listaEnderecos;
+	public List<Endereco> getAll(HttpServletRequest request){
+		String jwt = filter.parseJwt(request);
+		if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+			String userid = jwtUtils.getUserNameFromJwtToken(jwt);
+			List<Endereco> listaEnderecos = enderecoService.listarEnderecos(userid);
+			return listaEnderecos;
+		}
+		return null;
 
 	}
 	
@@ -45,7 +59,7 @@ public class EnderecoController {
 	@DeleteMapping("/remover-endereco/{id}")
 	public ResponseEntity<?> deleteEndereco(@PathVariable(value="id") Integer id) {
 		Endereco endereco = enderecoService.buscarPeloId(id);
-		if(endereco != null) {
+		if(endereco == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			enderecoService.removerEndereco(endereco);

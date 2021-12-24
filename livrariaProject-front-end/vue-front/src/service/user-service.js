@@ -2,8 +2,6 @@ import {http} from './configuracoes'
 
 export default{
 	async login (user){
-		console.log("Chegou no login " + user.login)
-
 		return await http.post('/seguranca/login', user);
 	},
     

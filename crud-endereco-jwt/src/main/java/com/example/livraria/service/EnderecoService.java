@@ -17,8 +17,8 @@ public class EnderecoService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
-	public List<Endereco> listarEnderecos(){
-		return (List<Endereco>)enderecoRepository.findAll();
+	public List<Endereco> listarEnderecos(String email){
+		return (List<Endereco>)enderecoRepository.listarEnderecos(email);
 	}
 
 	public Endereco adicionarEndereco(Endereco endereco) {

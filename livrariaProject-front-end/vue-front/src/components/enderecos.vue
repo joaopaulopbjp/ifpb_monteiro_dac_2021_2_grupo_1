@@ -24,7 +24,7 @@
                 <button v-on:click="alterarEndereco({index})"> 
                     Alterar
                 </button>
-                <button v-on:click="excluirEndereco(index)">Remover</button>
+                <button v-on:click="excluirEndereco({index})">Remover</button>
             </div>
             <br>
             </div>
@@ -48,9 +48,8 @@ export default {
         }
 	},
     created(){
-        console.log("Created.")
         serviceEndereco.lista().then(
-        dado => {console.log( dado.data),
+        dado => {
         this.$store.state.enderecos = dado.data,
         this.enderecos = this.$store.state.enderecos})
     },
@@ -62,7 +61,11 @@ export default {
         },
         excluirEndereco : function(element) {
             let enderecos = this.$store.state.enderecos;
-            enderecos.splice(element.index, 1);
+            serviceEndereco.removerEndereco(enderecos[element.index]).then((response) => {
+                if(response.status == 200) {
+                    enderecos.splice(element.index, 1);
+                }
+            })
         }
     },
     components: {

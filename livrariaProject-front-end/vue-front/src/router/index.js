@@ -3,8 +3,11 @@ import enderecos from '../components/enderecos.vue'
 import adicionarEndereco from '../components/adicionar-endereco.vue'
 import login from '../components/login.vue'
 
-
 const routes = [
+  {
+    path: '',
+    redirect: '/login'
+  },
   {
 	path: '/endereco',
 	component: enderecos
