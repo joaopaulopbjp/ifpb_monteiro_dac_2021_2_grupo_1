@@ -9,6 +9,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -48,7 +49,7 @@ public class Usuario implements UserDetails {
 	@Column(length = 20)
 	private String CPF;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "role_usuarios", 
 		joinColumns = @JoinColumn(
 			name = "usuario_id", 
